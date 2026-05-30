@@ -180,7 +180,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 
 /* ── MIJN RECHTSPRAAK ── */
 .login-box{background:#f5f3ee;border:1.5px solid var(--border);border-radius:16px;padding:2rem;text-align:center;margin-bottom:1rem;}
-.digid-btn{display:inline-flex;align-items:center;gap:8px;background:#154273;color:#fff;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;margin-top:12px;}
+.digid-btn{display:inline-flex;align-items:center;gap:8px;background:#154273;color:#fff;font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;padding:12px 24px;border-radius:10px;border:none;cursor:pointer;margin-top:12px;transition:all .15s;box-shadow:0 2px 8px rgba(21,66,115,.3);}
+.digid-btn:hover{background:#1a6fbf;transform:translateY(-1px);box-shadow:0 4px 12px rgba(21,66,115,.4);}
 .dossier{display:none;}
 .dossier.open{display:block;animation:fi .2s ease;}
 .dos-header{background:var(--purple);color:#fff;border-radius:14px;padding:1.25rem;margin-bottom:12px;display:flex;align-items:center;gap:14px;}
@@ -421,7 +422,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <div style="font-size:44px;margin-bottom:8px;"><i class="fa-solid fa-lock"></i></div>
           <div style="font-size:17px;font-weight:800;color:#1a1a18;margin-bottom:6px;">Inloggen vereist</div>
           <div style="font-size:14px;color:var(--gray);max-width:340px;margin:0 auto;line-height:1.7;">Je hebt DigiD nodig — hetzelfde account als voor MijnOverheid of de Belastingdienst. Nog geen DigiD? Vraag het gratis aan op <strong>digid.nl</strong>.</div>
-          <button class="digid-btn" onclick="doLogin()"><i class="fa-solid fa-key"></i> Inloggen met DigiD (simulatie)</button>
+          <button class="digid-btn" onclick="doLogin()"><i class="fa-solid fa-key"></i> Inloggen met DigiD</button>
+          <p style="font-size:12px;color:var(--gray);margin-top:8px;font-style:italic;">Dit is een demo — klik op de knop om een voorbeelddossier te bekijken</p>
         </div>
         <div class="dossier" id="dossier">
           <div class="dos-header"><div class="avatar">JD</div><div><div style="font-size:16px;font-weight:800;">Jan de Vries</div><div style="font-size:13px;opacity:.8;">Zaak AMS-24-1042 · Civiel recht</div></div></div>
