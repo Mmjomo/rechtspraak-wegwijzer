@@ -637,7 +637,9 @@ function vervangWoorden(container){
   const nodes=[];
   while(walker.nextNode())nodes.push(walker.currentNode);
   nodes.forEach(node=>{
-    if(node.parentElement&&(node.parentElement.classList.contains('w')||node.parentElement.tagName==='SCRIPT'||node.parentElement.tagName==='STYLE'))return;
+    const pe=node.parentElement;
+    if(!pe)return;
+    if(pe.classList.contains('w')||pe.tagName==='SCRIPT'||pe.tagName==='STYLE'||pe.tagName==='INPUT'||pe.tagName==='TEXTAREA'||pe.closest('.global-search')||pe.closest('.search-bar')||pe.closest('.postcode-bar'))return;
     let html=node.textContent;
     let changed=false;
     for(const[term,tip] of Object.entries(woordenboek)){
@@ -684,8 +686,8 @@ function go(id){
   if(id==='rechtbanken')renderRB();
   if(id==='checklist')renderChecklist();
   if(id==='home')renderHomeFAQ();
-  // VP2: woorden vervangen
-  setTimeout(()=>vervangWoorden(document.getElementById('page-'+id)),50);
+  // VP2: woorden vervangen (delay to let dynamic content render first)
+  setTimeout(()=>vervangWoorden(document.getElementById('page-'+id)),150);
   window.scrollTo(0,0);
 }
 
