@@ -553,7 +553,7 @@ function go(id){
   document.getElementById('page-'+id).classList.add('active');
   ['nav-'+id,'mnav-'+id].forEach(k=>{const el=document.getElementById(k);if(el)el.classList.add('on');});
   document.getElementById('bc').innerHTML='<b>'+bcMap[id]+'</b>';
-  document.getElementById('tb-url').textContent='<i class="fa-solid fa-globe"></i> '+urlMap[id];
+  document.getElementById('tb-url').innerHTML='<i class="fa-solid fa-globe"></i> '+urlMap[id];
   if(id==='uitspraken')renderU();
   if(id==='zittingen')renderZ();
   if(id==='faq')renderFAQ();
@@ -684,7 +684,7 @@ function selectZitRB(i){
   document.querySelectorAll('.rb-btn').forEach(el=>el.classList.remove('on'));
   document.getElementById('zitrb'+i).classList.add('on');
   const r=zitRB[i];
-  document.getElementById('zit-rb-naam').textContent='<i class="fa-solid fa-location-dot"></i> '+r.n;
+  document.getElementById('zit-rb-naam').innerHTML='<i class="fa-solid fa-location-dot"></i> '+r.n;
   document.getElementById('zit-rb-details').innerHTML=`<strong>Adres:</strong> ${r.adres} · <strong>Tel:</strong> ${r.tel}<br>${r.info}`;
   document.getElementById('zit-rb-link').href=r.url;
   document.getElementById('zit-rb-info').style.display='block';
