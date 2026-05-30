@@ -1034,15 +1034,31 @@ faqData.forEach((f,i)=>{
 uitspraken.forEach(u=>{
   zoekIndex.push({type:'uitspraak',titel:u.titel,pagina:'uitspraken',keywords:[u.ecli.toLowerCase(),u.g.toLowerCase(),u.inst.toLowerCase()].concat(u.titel.toLowerCase().split(/\s+/))});
 });
-function globaalZoeken(query){
+const gsIcons={home:'ti-home',keuzehulp:'ti-compass',uitspraken:'ti-file-text',zittingen:'ti-calendar',mijn:'ti-lock',tijdlijn:'ti-clock',rechtbanken:'ti-map-pin',checklist:'ti-circle-check',faq:'ti-help-circle'};
+const typeKleur={pagina:'background:var(--purple-light);color:var(--purple)',faq:'background:var(--green-light);color:var(--green)',uitspraak:'background:var(--kleur-civiel-bg);color:var(--kleur-civiel)'};
+function gsRender(hits){
   const el=document.getElementById('gs-results');
-  if(!query||query.length<2){el.classList.remove('open');return;}
-  const q=query.toLowerCase();
-  const hits=zoekIndex.filter(item=>item.titel.toLowerCase().includes(q)||item.keywords.some(k=>k.includes(q))).slice(0,6);
   if(!hits.length){el.classList.remove('open');return;}
-  const typeKleur={pagina:'background:var(--purple-light);color:var(--purple)',faq:'background:var(--green-light);color:var(--green)',uitspraak:'background:var(--kleur-civiel-bg);color:var(--kleur-civiel)'};
-  el.innerHTML=hits.map(h=>'<div class="gs-item" onmousedown="go(\''+h.pagina+'\');document.getElementById(\'global-zoek\').value=\'\';document.getElementById(\'gs-results\').classList.remove(\'open\');"><span class="gs-type" style="'+typeKleur[h.type]+'">'+h.type+'</span>'+h.titel+'</div>').join('');
+  el.innerHTML=hits.map(h=>{
+    const ic=gsIcons[h.pagina]||'ti-arrow-right';
+    return '<div class="gs-item" onmousedown="gsNavigeer(\''+h.pagina+'\')"><i class="ti '+ic+'" style="font-size:16px;color:var(--purple);flex-shrink:0;"></i><div style="flex:1;">'+h.titel+'</div><span class="gs-type" style="'+typeKleur[h.type]+'">'+h.type+'</span></div>';
+  }).join('');
   el.classList.add('open');
+}
+function gsNavigeer(pagina){
+  go(pagina);
+  document.getElementById('global-zoek').value='';
+  document.getElementById('gs-results').classList.remove('open');
+}
+function globaalZoeken(query){
+  if(!query||query.length<1){
+    // Toon alle pagina's als dropdown
+    gsRender(zoekIndex.filter(i=>i.type==='pagina'));
+    return;
+  }
+  const q=query.toLowerCase();
+  const hits=zoekIndex.filter(item=>item.titel.toLowerCase().includes(q)||item.keywords.some(k=>k.includes(q))).slice(0,8);
+  gsRender(hits);
 }
 
 go('home');
