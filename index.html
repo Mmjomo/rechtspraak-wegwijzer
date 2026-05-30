@@ -3,11 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <title>Wegwijzer rechtspraak.nl</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--purple:#534AB7;--purple-dark:#26215C;--purple-light:#EEEDFE;--teal:#0F6E56;--teal-light:#E1F5EE;--green:#3B6D11;--green-light:#EAF3DE;--amber:#854F0B;--amber-light:#FAEEDA;--blue:#185FA5;--blue-light:#E6F1FB;--red:#A32D2D;--red-light:#FCEBEB;--gray:#5f5e5a;--border:#e3e0d9;--bg:#f0eeea;}
+/* FA icon sizing */
+.sc-ico i{font-size:28px;color:var(--purple);}
+.nav-ic i{font-size:17px;}
+.kh-opt-ic i{font-size:22px;color:var(--purple);}
+.tl-circle i{font-size:17px;}
+.mn-ic i{font-size:18px;}
+.fb-btn i{font-size:16px;}
+.spoed-fab i,.spoed-btn-top i{font-size:inherit;}
+.bel i{font-size:inherit;}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:#2c2c2a;font-size:16px;}
 body.groot{font-size:19px;}
 body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh-opt{font-size:17px!important;}
@@ -236,12 +246,12 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 <!-- SPOED MODAL -->
 <div class="modal-bg" id="spoed-modal">
   <div class="modal">
-    <button class="modal-close" onclick="document.getElementById('spoed-modal').classList.remove('open')">✕</button>
-    <h2>🚨 Spoed — wat nu?</h2>
-    <div class="spoed-item"><span class="si">⚖️</span><p><strong>Morgen voor de rechter?</strong> Neem je ID mee, ga op tijd, meld je bij de portier. Je advocaat staat al ingeschreven — overleg nog even met hem/haar.</p></div>
-    <div class="spoed-item"><span class="si">📞</span><p><strong>Vandaag hulp nodig?</strong> Bel het Juridisch Loket: <strong>0900-8020</strong> (gratis, ma–vr 9–17u). Zij kunnen je direct doorverwijzen.</p></div>
-    <div class="spoed-item"><span class="si">📋</span><p><strong>Bezwaar loopt af?</strong> Je hebt 6 weken na het besluit. Stuur een brief per aangetekende post of via e-mail naar de betreffende instantie.</p></div>
-    <div class="spoed-item"><span class="si">🔐</span><p><strong>Dossier inzien?</strong> Log in op mijn.rechtspraak.nl met DigiD. Je ziet direct alle documenten en de datum van je zitting.</p></div>
+    <button class="modal-close" onclick="document.getElementById('spoed-modal').classList.remove('open')"><i class="fa-solid fa-xmark"></i></button>
+    <h2><i class="fa-solid fa-triangle-exclamation"></i> Spoed — wat nu?</h2>
+    <div class="spoed-item"><span class="si"><i class="fa-solid fa-scale-balanced"></i></span><p><strong>Morgen voor de rechter?</strong> Neem je ID mee, ga op tijd, meld je bij de portier. Je advocaat staat al ingeschreven — overleg nog even met hem/haar.</p></div>
+    <div class="spoed-item"><span class="si"><i class="fa-solid fa-phone"></i></span><p><strong>Vandaag hulp nodig?</strong> Bel het Juridisch Loket: <strong>0900-8020</strong> (gratis, ma–vr 9–17u). Zij kunnen je direct doorverwijzen.</p></div>
+    <div class="spoed-item"><span class="si"><i class="fa-solid fa-clipboard-list"></i></span><p><strong>Bezwaar loopt af?</strong> Je hebt 6 weken na het besluit. Stuur een brief per aangetekende post of via e-mail naar de betreffende instantie.</p></div>
+    <div class="spoed-item"><span class="si"><i class="fa-solid fa-lock"></i></span><p><strong>Dossier inzien?</strong> Log in op mijn.rechtspraak.nl met DigiD. Je ziet direct alle documenten en de datum van je zitting.</p></div>
   </div>
 </div>
 
@@ -249,28 +259,28 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 <div class="a11y">
   <span>Toegankelijkheid:</span>
   <button class="a11y-btn" id="btn-groot" onclick="document.body.classList.toggle('groot');this.classList.toggle('on')">A+ Grotere tekst</button>
-  <button class="spoed-btn-top" onclick="document.getElementById('spoed-modal').classList.add('open')">🚨 Spoed?</button>
-  <button class="a11y-speak" onclick="speakPage()">🔊 Lees voor</button>
+  <button class="spoed-btn-top" onclick="document.getElementById('spoed-modal').classList.add('open')"><i class="fa-solid fa-triangle-exclamation"></i> Spoed?</button>
+  <button class="a11y-speak" onclick="speakPage()"><i class="fa-solid fa-volume-high"></i> Lees voor</button>
 </div>
 
 <div class="shell">
   <!-- SIDEBAR -->
   <nav class="sidebar">
-    <div class="sb-logo">⚖️<div>rechtspraak.nl<small>Interactieve wegwijzer</small></div></div>
+    <div class="sb-logo"><i class="fa-solid fa-scale-balanced"></i><div>rechtspraak.nl<small>Interactieve wegwijzer</small></div></div>
     <div class="sb-sec">Wat wil je doen?</div>
-    <div class="nav on" onclick="go('home')" id="nav-home"><span class="nav-ic">🏠</span>Home</div>
-    <div class="nav" onclick="go('keuzehulp')" id="nav-keuzehulp"><span class="nav-ic">🧭</span>Wat moet ik doen?</div>
-    <div class="nav" onclick="go('uitspraken')" id="nav-uitspraken"><span class="nav-ic">📄</span>Uitspraken zoeken</div>
-    <div class="nav" onclick="go('zittingen')" id="nav-zittingen"><span class="nav-ic">📅</span>Zittingsrooster</div>
-    <div class="nav" onclick="go('mijn')" id="nav-mijn"><span class="nav-ic">🔐</span>Mijn Rechtspraak</div>
+    <div class="nav on" onclick="go('home')" id="nav-home"><span class="nav-ic"><i class="fa-solid fa-house"></i></span>Home</div>
+    <div class="nav" onclick="go('keuzehulp')" id="nav-keuzehulp"><span class="nav-ic"><i class="fa-solid fa-compass"></i></span>Wat moet ik doen?</div>
+    <div class="nav" onclick="go('uitspraken')" id="nav-uitspraken"><span class="nav-ic"><i class="fa-solid fa-file-lines"></i></span>Uitspraken zoeken</div>
+    <div class="nav" onclick="go('zittingen')" id="nav-zittingen"><span class="nav-ic"><i class="fa-solid fa-calendar-days"></i></span>Zittingsrooster</div>
+    <div class="nav" onclick="go('mijn')" id="nav-mijn"><span class="nav-ic"><i class="fa-solid fa-lock"></i></span>Mijn Rechtspraak</div>
     <div class="sb-sec">Meer</div>
-    <div class="nav" onclick="go('tijdlijn')" id="nav-tijdlijn"><span class="nav-ic">📊</span>Hoe lang duurt het?</div>
-    <div class="nav" onclick="go('rechtbanken')" id="nav-rechtbanken"><span class="nav-ic">🗺️</span>Rechtbank bij mij</div>
-    <div class="nav" onclick="go('checklist')" id="nav-checklist"><span class="nav-ic">✅</span>Checklist zitting</div>
-    <div class="nav" onclick="go('faq')" id="nav-faq"><span class="nav-ic">❓</span>Vragen</div>
+    <div class="nav" onclick="go('tijdlijn')" id="nav-tijdlijn"><span class="nav-ic"><i class="fa-solid fa-chart-bar"></i></span>Hoe lang duurt het?</div>
+    <div class="nav" onclick="go('rechtbanken')" id="nav-rechtbanken"><span class="nav-ic"><i class="fa-solid fa-map"></i></span>Rechtbank bij mij</div>
+    <div class="nav" onclick="go('checklist')" id="nav-checklist"><span class="nav-ic"><i class="fa-solid fa-circle-check"></i></span>Checklist zitting</div>
+    <div class="nav" onclick="go('faq')" id="nav-faq"><span class="nav-ic"><i class="fa-solid fa-circle-question"></i></span>Vragen</div>
     <div class="sb-foot">
       <button class="bel" onclick="alert('Bel gratis:\n0900-8020\nMaandag t/m vrijdag\n9:00 – 17:00 uur')">
-        <span>📞</span><div style="text-align:left"><div>Hulp nodig?</div><div style="font-size:11px;opacity:.85">Juridisch Loket: 0900-8020</div></div>
+        <span><i class="fa-solid fa-phone"></i></span><div style="text-align:left"><div>Hulp nodig?</div><div style="font-size:11px;opacity:.85">Juridisch Loket: 0900-8020</div></div>
       </button>
       <p>Interactieve uitleg. Geen juridisch advies.</p>
     </div>
@@ -279,7 +289,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
   <div class="main">
     <div class="topbar">
       <div class="bc" id="bc"><b>Home</b></div>
-      <div class="tb-url" id="tb-url">🌐 rechtspraak.nl</div>
+      <div class="tb-url" id="tb-url"><i class="fa-solid fa-globe"></i> rechtspraak.nl</div>
     </div>
 
     <div class="content">
@@ -295,19 +305,19 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <div style="font-size:16px;font-weight:800;color:#1a1a18;margin-bottom:4px;">Herken jij jezelf hierin?</div>
           <div style="font-size:13px;color:#888780;margin-bottom:12px;">Klik op jouw situatie voor direct advies</div>
           <div class="g2">
-            <div class="sc" onclick="kiesSc(this,0)"><div class="sc-ico">🏠</div><div class="sc-ttl">Verhuurder lost problemen niet op</div><div class="sc-sub">Lekkage, geen onderhoud, huurverhoging</div><div class="sc-det" id="sc0">Ga naar de <strong>kantonrechter</strong> — je hebt geen advocaat nodig! Stap 1: stuur de verhuurder een officiële brief. Reageert die niet? Dan naar de rechter.<br><button class="sc-go" onclick="go('keuzehulp')">🧭 Mijn stappenplan →</button></div></div>
-            <div class="sc" onclick="kiesSc(this,1)"><div class="sc-ico">🚗</div><div class="sc-ttl">Ik heb een boete gekregen</div><div class="sc-sub">Verkeersboete, gemeenteboete</div><div class="sc-det" id="sc1">Bij een gemeenteboete maak je <span class="w" data-tip="Officieel protest bij de overheid, binnen 6 weken">bezwaar</span>. Bij een verkeersboete ga je in beroep via het CJIB.<br><button class="sc-go" onclick="go('keuzehulp')">🧭 Mijn stappenplan →</button></div></div>
-            <div class="sc" onclick="kiesSc(this,2)"><div class="sc-ico">💼</div><div class="sc-ttl">Mijn baas betaalt me niet</div><div class="sc-sub">Achterstallig loon, ontslag</div><div class="sc-det" id="sc2">Stuur eerst een officiële brief. Reageert je baas niet? Dan naar de <span class="w" data-tip="Rechter voor kleine zaken tot €25.000 — geen advocaat nodig">kantonrechter</span> — zonder advocaat!<br><button class="sc-go" onclick="go('keuzehulp')">🧭 Mijn stappenplan →</button></div></div>
-            <div class="sc" onclick="kiesSc(this,3)"><div class="sc-ico">👀</div><div class="sc-ttl">Ik wil een zitting bijwonen</div><div class="sc-sub">Uit nieuwsgierigheid of voor school</div><div class="sc-det" id="sc3">Gewoon binnenlopen met je ID! Kijk eerst op het zittingsrooster van jouw rechtbank.<br><button class="sc-go" onclick="go('zittingen')">📅 Bekijk het rooster →</button></div></div>
-            <div class="sc" onclick="kiesSc(this,4)"><div class="sc-ico">📰</div><div class="sc-ttl">Ik wil een uitspraak opzoeken</div><div class="sc-sub">Nieuws gelezen, benieuwd naar de beslissing</div><div class="sc-det" id="sc4">Meer dan 800.000 uitspraken staan gratis online. Zoek op trefwoord of <span class="w" data-tip="Uniek nummer van elke uitspraak, bijv. ECLI:NL:RBAMS:2024:1234">ECLI-nummer</span>.<br><button class="sc-go" onclick="go('uitspraken')">📄 Uitspraken zoeken →</button></div></div>
-            <div class="sc" onclick="kiesSc(this,5)"><div class="sc-ico">🔐</div><div class="sc-ttl">Ik heb zelf een rechtszaak</div><div class="sc-sub">Mijn dossier bekijken of stukken sturen</div><div class="sc-det" id="sc5">Log in via <strong>Mijn Rechtspraak</strong> met <span class="w" data-tip="Digitaal identiteitsbewijs voor overheidssites — aanvragen op digid.nl">DigiD</span>. Bekijk je dossier, berichten en stuur stukken in.<br><button class="sc-go" onclick="go('mijn')">🔐 Naar mijn dossier →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,0)"><div class="sc-ico"><i class="fa-solid fa-house"></i></div><div class="sc-ttl">Verhuurder lost problemen niet op</div><div class="sc-sub">Lekkage, geen onderhoud, huurverhoging</div><div class="sc-det" id="sc0">Ga naar de <strong>kantonrechter</strong> — je hebt geen advocaat nodig! Stap 1: stuur de verhuurder een officiële brief. Reageert die niet? Dan naar de rechter.<br><button class="sc-go" onclick="go('keuzehulp')"><i class="fa-solid fa-compass"></i> Mijn stappenplan →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,1)"><div class="sc-ico"><i class="fa-solid fa-car"></i></div><div class="sc-ttl">Ik heb een boete gekregen</div><div class="sc-sub">Verkeersboete, gemeenteboete</div><div class="sc-det" id="sc1">Bij een gemeenteboete maak je <span class="w" data-tip="Officieel protest bij de overheid, binnen 6 weken">bezwaar</span>. Bij een verkeersboete ga je in beroep via het CJIB.<br><button class="sc-go" onclick="go('keuzehulp')"><i class="fa-solid fa-compass"></i> Mijn stappenplan →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,2)"><div class="sc-ico"><i class="fa-solid fa-briefcase"></i></div><div class="sc-ttl">Mijn baas betaalt me niet</div><div class="sc-sub">Achterstallig loon, ontslag</div><div class="sc-det" id="sc2">Stuur eerst een officiële brief. Reageert je baas niet? Dan naar de <span class="w" data-tip="Rechter voor kleine zaken tot €25.000 — geen advocaat nodig">kantonrechter</span> — zonder advocaat!<br><button class="sc-go" onclick="go('keuzehulp')"><i class="fa-solid fa-compass"></i> Mijn stappenplan →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,3)"><div class="sc-ico"><i class="fa-solid fa-eye"></i></div><div class="sc-ttl">Ik wil een zitting bijwonen</div><div class="sc-sub">Uit nieuwsgierigheid of voor school</div><div class="sc-det" id="sc3">Gewoon binnenlopen met je ID! Kijk eerst op het zittingsrooster van jouw rechtbank.<br><button class="sc-go" onclick="go('zittingen')"><i class="fa-solid fa-calendar-days"></i> Bekijk het rooster →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,4)"><div class="sc-ico"><i class="fa-solid fa-newspaper"></i></div><div class="sc-ttl">Ik wil een uitspraak opzoeken</div><div class="sc-sub">Nieuws gelezen, benieuwd naar de beslissing</div><div class="sc-det" id="sc4">Meer dan 800.000 uitspraken staan gratis online. Zoek op trefwoord of <span class="w" data-tip="Uniek nummer van elke uitspraak, bijv. ECLI:NL:RBAMS:2024:1234">ECLI-nummer</span>.<br><button class="sc-go" onclick="go('uitspraken')"><i class="fa-solid fa-file-lines"></i> Uitspraken zoeken →</button></div></div>
+            <div class="sc" onclick="kiesSc(this,5)"><div class="sc-ico"><i class="fa-solid fa-lock"></i></div><div class="sc-ttl">Ik heb zelf een rechtszaak</div><div class="sc-sub">Mijn dossier bekijken of stukken sturen</div><div class="sc-det" id="sc5">Log in via <strong>Mijn Rechtspraak</strong> met <span class="w" data-tip="Digitaal identiteitsbewijs voor overheidssites — aanvragen op digid.nl">DigiD</span>. Bekijk je dossier, berichten en stuur stukken in.<br><button class="sc-go" onclick="go('mijn')"><i class="fa-solid fa-lock"></i> Naar mijn dossier →</button></div></div>
           </div>
         </div>
         <div class="card" style="background:var(--green-light);border-color:#97C459;">
-          <div class="card-title" style="color:#27500A;">📞 Gratis hulp — Juridisch Loket</div>
+          <div class="card-title" style="color:#27500A;"><i class="fa-solid fa-phone"></i> Gratis hulp — Juridisch Loket</div>
           <div class="card-text" style="color:var(--green);">Bel <strong>0900-8020</strong> (gratis, ma–vr 9–17u) of ga naar <strong>juridischloket.nl</strong>. Zij geven persoonlijk juridisch advies en helpen je verder.</div>
         </div>
-        <div class="feedback"><p>Was deze pagina duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-home">Bedankt!</span></div>
+        <div class="feedback"><p>Was deze pagina duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-home">Bedankt!</span></div>
       </div>
 
       <!-- ══ KEUZEHULP ══ -->
@@ -320,33 +330,33 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="kh-prog" id="kh-prog"><div class="kh-dot active"></div><div class="kh-dot"></div><div class="kh-dot"></div><div class="kh-dot"></div></div>
         <div class="kh-stap active" id="kh0">
           <div class="kh-vraag">Wat is jouw situatie?</div>
-          <div class="kh-opt" onclick="khGo(1,'ruzie')"><span class="kh-opt-ic">🤝</span><div><strong>Ik heb ruzie met iemand</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Buurman, verhuurder, werkgever of schuldeiser</div></div></div>
-          <div class="kh-opt" onclick="khGo(1,'boete')"><span class="kh-opt-ic">📋</span><div><strong>Brief of boete van de overheid</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Gemeente, belastingdienst, verkeersboete</div></div></div>
-          <div class="kh-opt" onclick="khGo(1,'kijken')"><span class="kh-opt-ic">👀</span><div><strong>Ik wil alleen informatie</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Zitting bijwonen of uitspraak opzoeken</div></div></div>
+          <div class="kh-opt" onclick="khGo(1,'ruzie')"><span class="kh-opt-ic"><i class="fa-solid fa-handshake"></i></span><div><strong>Ik heb ruzie met iemand</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Buurman, verhuurder, werkgever of schuldeiser</div></div></div>
+          <div class="kh-opt" onclick="khGo(1,'boete')"><span class="kh-opt-ic"><i class="fa-solid fa-clipboard-list"></i></span><div><strong>Brief of boete van de overheid</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Gemeente, belastingdienst, verkeersboete</div></div></div>
+          <div class="kh-opt" onclick="khGo(1,'kijken')"><span class="kh-opt-ic"><i class="fa-solid fa-eye"></i></span><div><strong>Ik wil alleen informatie</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Zitting bijwonen of uitspraak opzoeken</div></div></div>
         </div>
         <div class="kh-stap" id="kh1-ruzie">
           <div class="kh-vraag">Om hoeveel geld gaat het?</div>
-          <div class="kh-opt" onclick="khResult('kanton')"><span class="kh-opt-ic">💶</span><div><strong>Minder dan €25.000</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Huur, werk, of kleine geschillen</div></div></div>
-          <div class="kh-opt" onclick="khResult('rechtbank')"><span class="kh-opt-ic">💰</span><div><strong>Meer dan €25.000</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Grote geschillen of bedrijfsconflicten</div></div></div>
-          <div class="kh-opt" onclick="khResult('mediator')"><span class="kh-opt-ic">🕊️</span><div><strong>We zijn er bijna uit</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Liever oplossen dan naar de rechter</div></div></div>
+          <div class="kh-opt" onclick="khResult('kanton')"><span class="kh-opt-ic"><i class="fa-solid fa-euro-sign"></i></span><div><strong>Minder dan €25.000</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Huur, werk, of kleine geschillen</div></div></div>
+          <div class="kh-opt" onclick="khResult('rechtbank')"><span class="kh-opt-ic"><i class="fa-solid fa-sack-dollar"></i></span><div><strong>Meer dan €25.000</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Grote geschillen of bedrijfsconflicten</div></div></div>
+          <div class="kh-opt" onclick="khResult('mediator')"><span class="kh-opt-ic"><i class="fa-solid fa-dove"></i></span><div><strong>We zijn er bijna uit</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Liever oplossen dan naar de rechter</div></div></div>
         </div>
         <div class="kh-stap" id="kh1-boete">
           <div class="kh-vraag">Van wie heb je de boete of brief?</div>
-          <div class="kh-opt" onclick="khResult('bezwaar')"><span class="kh-opt-ic">🏛️</span><div><strong>Van de gemeente of provincie</strong></div></div>
-          <div class="kh-opt" onclick="khResult('cjib')"><span class="kh-opt-ic">🚗</span><div><strong>Verkeersboete via het CJIB</strong></div></div>
-          <div class="kh-opt" onclick="khResult('belasting')"><span class="kh-opt-ic">📊</span><div><strong>Van de belastingdienst</strong></div></div>
+          <div class="kh-opt" onclick="khResult('bezwaar')"><span class="kh-opt-ic"><i class="fa-solid fa-landmark"></i></span><div><strong>Van de gemeente of provincie</strong></div></div>
+          <div class="kh-opt" onclick="khResult('cjib')"><span class="kh-opt-ic"><i class="fa-solid fa-car"></i></span><div><strong>Verkeersboete via het CJIB</strong></div></div>
+          <div class="kh-opt" onclick="khResult('belasting')"><span class="kh-opt-ic"><i class="fa-solid fa-chart-bar"></i></span><div><strong>Van de belastingdienst</strong></div></div>
         </div>
         <div class="kh-stap" id="kh1-kijken">
           <div class="kh-vraag">Wat wil je precies?</div>
-          <div class="kh-opt" onclick="khResult('zitting-kijken')"><span class="kh-opt-ic">📅</span><div><strong>Een zitting bijwonen</strong></div></div>
-          <div class="kh-opt" onclick="khResult('uitspraak-lezen')"><span class="kh-opt-ic">📄</span><div><strong>Een uitspraak opzoeken</strong></div></div>
-          <div class="kh-opt" onclick="khResult('dossier')"><span class="kh-opt-ic">🔐</span><div><strong>Mijn eigen zaak volgen</strong></div></div>
+          <div class="kh-opt" onclick="khResult('zitting-kijken')"><span class="kh-opt-ic"><i class="fa-solid fa-calendar-days"></i></span><div><strong>Een zitting bijwonen</strong></div></div>
+          <div class="kh-opt" onclick="khResult('uitspraak-lezen')"><span class="kh-opt-ic"><i class="fa-solid fa-file-lines"></i></span><div><strong>Een uitspraak opzoeken</strong></div></div>
+          <div class="kh-opt" onclick="khResult('dossier')"><span class="kh-opt-ic"><i class="fa-solid fa-lock"></i></span><div><strong>Mijn eigen zaak volgen</strong></div></div>
         </div>
         <div class="kh-stap" id="kh-resultaat">
           <div class="kh-res" id="kh-res-tekst"></div>
           <button class="kh-reset" onclick="khReset()">↩ Opnieuw beginnen</button>
         </div>
-        <div class="feedback"><p>Was dit advies duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-keuzehulp">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit advies duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-keuzehulp">Bedankt!</span></div>
       </div>
 
       <!-- ══ UITSPRAKEN ══ -->
@@ -357,7 +367,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <p>Meer dan 800.000 uitspraken gratis online. Alle namen zijn vervangen door codes.</p>
         </div>
         <div class="card" style="background:var(--blue-light);border-color:#85B7EB;margin-bottom:14px;">
-          <div class="card-title" style="color:#042C53;">💡 Wat kun je met een uitspraak?</div>
+          <div class="card-title" style="color:#042C53;"><i class="fa-solid fa-lightbulb"></i> Wat kun je met een uitspraak?</div>
           <div class="card-text" style="color:var(--blue);">Een uitspraak laat zien hoe een rechter eerder oordeelde. Het is <strong>geen garantie</strong> voor jouw zaak — elke situatie is anders. Gebruik het als achtergrondinformatie.</div>
         </div>
         <div class="search-bar">
@@ -367,7 +377,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div style="margin-bottom:10px;" id="filters-wrap"></div>
         <div style="font-size:13px;color:#888780;margin-bottom:10px;font-weight:700;" id="result-count"></div>
         <div id="resultaten"></div>
-        <div class="feedback"><p>Was dit onderdeel duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-uitspraken">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit onderdeel duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-uitspraken">Bedankt!</span></div>
       </div>
 
       <!-- ══ ZITTINGEN ══ -->
@@ -378,7 +388,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <p>Bijna alle zittingen zijn openbaar. Kies jouw rechtbank voor het echte rooster, of bekijk het voorbeeldrooster hieronder.</p>
         </div>
         <div class="card" style="background:var(--green-light);border-color:#97C459;margin-bottom:14px;">
-          <div class="card-title" style="color:#27500A;">👣 Zo ga je naar een zitting</div>
+          <div class="card-title" style="color:#27500A;"><i class="fa-solid fa-shoe-prints"></i> Zo ga je naar een zitting</div>
           <div class="card-text" style="color:var(--green);">Neem een <strong>geldig ID</strong> mee. Meld je bij de portier. Ga naar de publieke tribune. <strong>Gratis</strong>, geen reservering. Kinderen onder 12 niet bij strafzittingen.</div>
         </div>
         <div style="font-size:15px;font-weight:800;color:#1a1a18;margin-bottom:4px;">Stap 1 — Kies jouw rechtbank</div>
@@ -387,7 +397,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div id="zit-rb-info" style="display:none;background:var(--purple-light);border:2px solid var(--purple);border-radius:16px;padding:1.25rem;margin-bottom:1.25rem;">
           <div style="font-size:15px;font-weight:800;color:var(--purple-dark);margin-bottom:6px;" id="zit-rb-naam"></div>
           <div style="font-size:13px;color:var(--purple);line-height:1.7;margin-bottom:12px;" id="zit-rb-details"></div>
-          <a id="zit-rb-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;font-size:14px;font-weight:800;padding:10px 20px;border-radius:10px;text-decoration:none;">📅 Bekijk het echte rooster op rechtspraak.nl →</a>
+          <a id="zit-rb-link" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:var(--purple);color:#fff;font-size:14px;font-weight:800;padding:10px 20px;border-radius:10px;text-decoration:none;"><i class="fa-solid fa-calendar-days"></i> Bekijk het echte rooster op rechtspraak.nl →</a>
         </div>
         <div style="font-size:15px;font-weight:800;color:#1a1a18;margin-bottom:4px;">Stap 2 — Zo ziet een rooster eruit</div>
         <div style="font-size:13px;color:#888780;margin-bottom:12px;">Klik op een zitting voor uitleg</div>
@@ -397,7 +407,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <button class="week-btn" onclick="changeWeek(1)">Volgende →</button>
         </div>
         <div id="zittingen-list"></div>
-        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-zittingen">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-zittingen">Bedankt!</span></div>
       </div>
 
       <!-- ══ MIJN RECHTSPRAAK ══ -->
@@ -408,18 +418,18 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <p>Alleen voor mensen met een lopende zaak. Inloggen met <span class="w" data-tip="Digitaal identiteitsbewijs voor overheidssites — aanvragen op digid.nl">DigiD</span>.</p>
         </div>
         <div class="login-box" id="login-box">
-          <div style="font-size:44px;margin-bottom:8px;">🔐</div>
+          <div style="font-size:44px;margin-bottom:8px;"><i class="fa-solid fa-lock"></i></div>
           <div style="font-size:17px;font-weight:800;color:#1a1a18;margin-bottom:6px;">Inloggen vereist</div>
           <div style="font-size:14px;color:var(--gray);max-width:340px;margin:0 auto;line-height:1.7;">Je hebt DigiD nodig — hetzelfde account als voor MijnOverheid of de Belastingdienst. Nog geen DigiD? Vraag het gratis aan op <strong>digid.nl</strong>.</div>
-          <button class="digid-btn" onclick="doLogin()">🔑 Inloggen met DigiD (simulatie)</button>
+          <button class="digid-btn" onclick="doLogin()"><i class="fa-solid fa-key"></i> Inloggen met DigiD (simulatie)</button>
         </div>
         <div class="dossier" id="dossier">
           <div class="dos-header"><div class="avatar">JD</div><div><div style="font-size:16px;font-weight:800;">Jan de Vries</div><div style="font-size:13px;opacity:.8;">Zaak AMS-24-1042 · Civiel recht</div></div></div>
           <div style="margin-bottom:10px;">
-            <span class="dtab on" onclick="dTab(this,'berichten')">📬 Berichten</span>
-            <span class="dtab" onclick="dTab(this,'documenten')">📁 Documenten</span>
-            <span class="dtab" onclick="dTab(this,'zitting')">📅 Mijn zitting</span>
-            <span class="dtab" onclick="dTab(this,'upload')">📤 Stuk insturen</span>
+            <span class="dtab on" onclick="dTab(this,'berichten')"><i class="fa-solid fa-envelope-open-text"></i> Berichten</span>
+            <span class="dtab" onclick="dTab(this,'documenten')"><i class="fa-solid fa-folder-open"></i> Documenten</span>
+            <span class="dtab" onclick="dTab(this,'zitting')"><i class="fa-solid fa-calendar-days"></i> Mijn zitting</span>
+            <span class="dtab" onclick="dTab(this,'upload')"><i class="fa-solid fa-upload"></i> Stuk insturen</span>
           </div>
           <div class="dtab-c on" id="dtab-berichten">
             <div class="bericht"><div class="bdot"></div><div><div style="font-size:13px;font-weight:800;color:#1a1a18;">Uitnodiging voor zitting op 12 juni</div><div style="font-size:11px;color:#888780;">Van: Rechtbank Amsterdam · 2 juni 2025</div></div></div>
@@ -427,26 +437,26 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
             <div class="bericht"><div class="bdot read"></div><div><div style="font-size:13px;font-weight:700;color:var(--gray);">Zaak geregistreerd onder nr. AMS-24-1042</div><div style="font-size:11px;color:#888780;">Van: Rechtbank Amsterdam · 3 april 2025</div></div></div>
           </div>
           <div class="dtab-c" id="dtab-documenten">
-            <div class="card"><div class="card-title">📄 <span class="w" data-tip="Officiële oproep om voor de rechter te verschijnen">Dagvaarding</span></div><div class="card-text">Ontvangen 3 april 2025 · PDF · 4 pagina's</div></div>
-            <div class="card"><div class="card-title">📄 <span class="w" data-tip="Jouw officiële reactie op de aanklacht of eis">Verweerschrift</span></div><div class="card-text">Ingediend 15 mei 2025 · PDF · 7 pagina's</div></div>
+            <div class="card"><div class="card-title"><i class="fa-solid fa-file-lines"></i> <span class="w" data-tip="Officiële oproep om voor de rechter te verschijnen">Dagvaarding</span></div><div class="card-text">Ontvangen 3 april 2025 · PDF · 4 pagina's</div></div>
+            <div class="card"><div class="card-title"><i class="fa-solid fa-file-lines"></i> <span class="w" data-tip="Jouw officiële reactie op de aanklacht of eis">Verweerschrift</span></div><div class="card-text">Ingediend 15 mei 2025 · PDF · 7 pagina's</div></div>
           </div>
           <div class="dtab-c" id="dtab-zitting">
             <div class="card" style="border-color:var(--purple);background:#f8f7ff;">
-              <div class="card-title" style="color:var(--purple);">📅 Uw zitting is gepland</div>
+              <div class="card-title" style="color:var(--purple);"><i class="fa-solid fa-calendar-days"></i> Uw zitting is gepland</div>
               <div class="card-text"><strong>Datum:</strong> 12 juni 2025, 10:30 uur<br><strong>Locatie:</strong> Rechtbank Amsterdam, zaal 4<br><strong>Adres:</strong> Parnassusweg 220, Amsterdam<br><br>Neem een geldig identiteitsbewijs mee. Kom op tijd.</div>
             </div>
           </div>
           <div class="dtab-c" id="dtab-upload">
             <div class="upload-zone" id="upload-zone" onclick="simuleerUpload()">
-              <div style="font-size:34px;">📎</div>
+              <div style="font-size:34px;"><i class="fa-solid fa-paperclip"></i></div>
               <p style="font-size:14px;color:var(--purple);font-weight:700;margin-top:8px;">Klik hier om een document te uploaden</p>
               <p style="font-size:12px;color:#888780;margin-top:4px;">PDF, Word of afbeelding · max 25 MB</p>
             </div>
-            <div class="upload-done" id="upload-done">✅ Document succesvol verzonden naar Rechtbank Amsterdam</div>
-            <div class="card"><div class="card-title">💡 Wat kun je insturen?</div><div class="card-text">Bewijs, verklaringen of andere documenten voor jouw zaak. De rechtbank bevestigt ontvangst binnen 2 werkdagen.</div></div>
+            <div class="upload-done" id="upload-done"><i class="fa-solid fa-circle-check"></i> Document succesvol verzonden naar Rechtbank Amsterdam</div>
+            <div class="card"><div class="card-title"><i class="fa-solid fa-lightbulb"></i> Wat kun je insturen?</div><div class="card-text">Bewijs, verklaringen of andere documenten voor jouw zaak. De rechtbank bevestigt ontvangst binnen 2 werkdagen.</div></div>
           </div>
         </div>
-        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-mijn">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-mijn">Bedankt!</span></div>
       </div>
 
       <!-- ══ TIJDLIJN ══ -->
@@ -457,14 +467,14 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <p>Klik op een type zaak om de gemiddelde doorlooptijd te zien. Dit zijn realistische schattingen.</p>
         </div>
         <div class="g3" style="margin-bottom:1.5rem;">
-          <div class="sc" onclick="toonTijdlijn('kanton')"><div class="sc-ico">⚖️</div><div class="sc-ttl">Kantonzaak</div><div class="sc-sub">Huur, werk, klein conflict</div></div>
-          <div class="sc" onclick="toonTijdlijn('civiel')"><div class="sc-ico">🏛️</div><div class="sc-ttl">Grote civiele zaak</div><div class="sc-sub">Boven €25.000</div></div>
-          <div class="sc" onclick="toonTijdlijn('straf')"><div class="sc-ico">🚨</div><div class="sc-ttl">Strafzaak</div><div class="sc-sub">Misdrijf of overtreding</div></div>
-          <div class="sc" onclick="toonTijdlijn('bestuur')"><div class="sc-ico">🏢</div><div class="sc-ttl">Bestuursrechtszaak</div><div class="sc-sub">Overheid vs burger</div></div>
-          <div class="sc" onclick="toonTijdlijn('beroep')"><div class="sc-ico">⬆️</div><div class="sc-ttl">Hoger beroep</div><div class="sc-sub">Na een verloren zaak</div></div>
+          <div class="sc" onclick="toonTijdlijn('kanton')"><div class="sc-ico"><i class="fa-solid fa-scale-balanced"></i></div><div class="sc-ttl">Kantonzaak</div><div class="sc-sub">Huur, werk, klein conflict</div></div>
+          <div class="sc" onclick="toonTijdlijn('civiel')"><div class="sc-ico"><i class="fa-solid fa-landmark"></i></div><div class="sc-ttl">Grote civiele zaak</div><div class="sc-sub">Boven €25.000</div></div>
+          <div class="sc" onclick="toonTijdlijn('straf')"><div class="sc-ico"><i class="fa-solid fa-triangle-exclamation"></i></div><div class="sc-ttl">Strafzaak</div><div class="sc-sub">Misdrijf of overtreding</div></div>
+          <div class="sc" onclick="toonTijdlijn('bestuur')"><div class="sc-ico"><i class="fa-solid fa-building"></i></div><div class="sc-ttl">Bestuursrechtszaak</div><div class="sc-sub">Overheid vs burger</div></div>
+          <div class="sc" onclick="toonTijdlijn('beroep')"><div class="sc-ico"><i class="fa-solid fa-arrow-up"></i></div><div class="sc-ttl">Hoger beroep</div><div class="sc-sub">Na een verloren zaak</div></div>
         </div>
         <div id="tijdlijn-container" style="display:none;animation:fi .2s ease;"></div>
-        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-tijdlijn">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-tijdlijn">Bedankt!</span></div>
       </div>
 
       <!-- ══ RECHTBANKEN ══ -->
@@ -481,7 +491,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div id="pc-result" style="margin-bottom:12px;"></div>
         <div id="rb-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin-bottom:1rem;"></div>
         <div id="rb-detail"></div>
-        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-rechtbanken">Bedankt!</span></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-rechtbanken">Bedankt!</span></div>
       </div>
 
       <!-- ══ CHECKLIST ══ -->
@@ -495,11 +505,11 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="cl-progress"><div class="cl-bar" id="cl-bar" style="width:0%"></div></div>
         <div class="checklist" id="checklist-items"></div>
         <div id="cl-done" style="display:none;background:var(--teal-light);border:2px solid #5DCAA5;border-radius:14px;padding:1.25rem;text-align:center;animation:fi .2s ease;">
-          <div style="font-size:36px;margin-bottom:8px;">🎉</div>
+          <div style="font-size:36px;margin-bottom:8px;"><i class="fa-solid fa-circle-check"></i></div>
           <div style="font-size:16px;font-weight:800;color:#27500A;">Je bent helemaal klaar!</div>
           <div style="font-size:13px;color:var(--teal);margin-top:4px;">Succes bij de zitting. Vergeet niet op tijd te zijn.</div>
         </div>
-        <div class="feedback"><p>Was deze checklist nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-checklist">Bedankt!</span></div>
+        <div class="feedback"><p>Was deze checklist nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-checklist">Bedankt!</span></div>
       </div>
 
       <!-- ══ FAQ ══ -->
@@ -511,10 +521,10 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         </div>
         <div id="faq-list"></div>
         <div class="card" style="background:var(--green-light);border-color:#97C459;margin-top:1rem;">
-          <div class="card-title" style="color:#27500A;">📞 Vraag niet gevonden?</div>
+          <div class="card-title" style="color:#27500A;"><i class="fa-solid fa-phone"></i> Vraag niet gevonden?</div>
           <div class="card-text" style="color:var(--green);">Bel het <strong>Juridisch Loket: 0900-8020</strong> (gratis, ma–vr 9–17u) of ga naar <strong>juridischloket.nl</strong>.</div>
         </div>
-        <div class="feedback"><p>Stond jouw vraag erbij?</p><button class="fb-btn" onclick="geefFeedback(this,'👍')">👍</button><button class="fb-btn" onclick="geefFeedback(this,'👎')">👎</button><span class="fb-thanks" id="fb-faq">Bedankt!</span></div>
+        <div class="feedback"><p>Stond jouw vraag erbij?</p><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-up"></i>')"><i class="fa-solid fa-thumbs-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'<i class="fa-solid fa-thumbs-down"></i>')"><i class="fa-solid fa-thumbs-down"></i></button><span class="fb-thanks" id="fb-faq">Bedankt!</span></div>
       </div>
 
     </div>
@@ -524,14 +534,14 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 <!-- MOBIELE NAVIGATIE -->
 <nav class="mob-nav">
   <div class="mob-nav-inner">
-    <div class="mob-nav-item on" onclick="go('home')" id="mnav-home"><span class="mn-ic">🏠</span>Home</div>
-    <div class="mob-nav-item" onclick="go('keuzehulp')" id="mnav-keuzehulp"><span class="mn-ic">🧭</span>Hulp</div>
-    <div class="mob-nav-item" onclick="go('uitspraken')" id="mnav-uitspraken"><span class="mn-ic">📄</span>Zoeken</div>
-    <div class="mob-nav-item" onclick="go('zittingen')" id="mnav-zittingen"><span class="mn-ic">📅</span>Rooster</div>
-    <div class="mob-nav-item" onclick="go('faq')" id="mnav-faq"><span class="mn-ic">❓</span>Vragen</div>
+    <div class="mob-nav-item on" onclick="go('home')" id="mnav-home"><span class="mn-ic"><i class="fa-solid fa-house"></i></span>Home</div>
+    <div class="mob-nav-item" onclick="go('keuzehulp')" id="mnav-keuzehulp"><span class="mn-ic"><i class="fa-solid fa-compass"></i></span>Hulp</div>
+    <div class="mob-nav-item" onclick="go('uitspraken')" id="mnav-uitspraken"><span class="mn-ic"><i class="fa-solid fa-file-lines"></i></span>Zoeken</div>
+    <div class="mob-nav-item" onclick="go('zittingen')" id="mnav-zittingen"><span class="mn-ic"><i class="fa-solid fa-calendar-days"></i></span>Rooster</div>
+    <div class="mob-nav-item" onclick="go('faq')" id="mnav-faq"><span class="mn-ic"><i class="fa-solid fa-circle-question"></i></span>Vragen</div>
   </div>
 </nav>
-<button class="spoed-fab" onclick="document.getElementById('spoed-modal').classList.add('open')" title="Spoed?">🚨</button>
+<button class="spoed-fab" onclick="document.getElementById('spoed-modal').classList.add('open')" title="Spoed?"><i class="fa-solid fa-triangle-exclamation"></i></button>
 
 <script>
 // ── NAVIGATIE ──
@@ -543,7 +553,7 @@ function go(id){
   document.getElementById('page-'+id).classList.add('active');
   ['nav-'+id,'mnav-'+id].forEach(k=>{const el=document.getElementById(k);if(el)el.classList.add('on');});
   document.getElementById('bc').innerHTML='<b>'+bcMap[id]+'</b>';
-  document.getElementById('tb-url').textContent='🌐 '+urlMap[id];
+  document.getElementById('tb-url').textContent='<i class="fa-solid fa-globe"></i> '+urlMap[id];
   if(id==='uitspraken')renderU();
   if(id==='zittingen')renderZ();
   if(id==='faq')renderFAQ();
@@ -577,15 +587,15 @@ function kiesSc(el,i){
 
 // ── KEUZEHULP ──
 const khRes={
-  kanton:{ico:'⚖️',titel:'Kantonrechter — geen advocaat nodig!',tekst:'Voor zaken tot €25.000 kun je zelf een verzoekschrift indienen. Stap 1: stuur de ander een aangetekende brief. Stap 2: geen reactie binnen 14 dagen? Ga naar rechtspraak.nl → Naar de rechter → Kantonzaak starten.',kosten:'Griffierecht: ca. €85–€120',tijd:'Gemiddeld 6–10 weken'},
-  rechtbank:{ico:'🏛️',titel:'Rechtbank — advocaat verplicht',tekst:'Voor zaken boven €25.000 is een advocaat verplicht. Heb je weinig inkomen? Vraag gesubsidieerde rechtsbijstand aan bij het Juridisch Loket — de overheid betaalt dan (een deel van) de kosten.',kosten:'Griffierecht: ca. €300–€650 + advocaatkosten',tijd:'Gemiddeld 12–18 maanden'},
-  mediator:{ico:'🕊️',titel:'Overweeg een mediator',tekst:'Sneller en goedkoper dan de rechter. Een mediator helpt jullie samen tot een oplossing te komen. Kijk op rechtspraak.nl voor erkende mediators bij jou in de buurt.',kosten:'Ca. €100–€200 per uur, gedeeld',tijd:'Gemiddeld 2–6 weken'},
-  bezwaar:{ico:'📋',titel:'Maak bezwaar bij de overheid',tekst:'Stuur binnen 6 weken na het besluit een bezwaarschrift naar de gemeente. Dit mag per post of e-mail. Vermeld: jouw naam, het besluit, waarom je het er niet mee eens bent. Wordt het bezwaar afgewezen? Dan ga je naar de bestuursrechter.',kosten:'Gratis — geen griffierecht voor bezwaar',tijd:'Beslissing binnen 6–12 weken'},
-  cjib:{ico:'🚗',titel:'In beroep tegen verkeersboete',tekst:'Onterecht een flitspaalboete? Dien binnen 6 weken "administratief beroep" in via cjib.nl. Krijg je gelijk? Dan wordt de boete kwijtgescholden.',kosten:'Gratis',tijd:'Uitspraak binnen 8 weken'},
-  belasting:{ico:'📊',titel:'Bezwaar bij de belastingdienst',tekst:'Dien bezwaar in via Mijn Belastingdienst of per post, binnen 6 weken na de aanslag. Wordt dat afgewezen? Dan kun je in beroep bij de belastingrechter.',kosten:'Griffierecht belastingrechter: ca. €50',tijd:'Bezwaar: 6–12 weken. Beroep: 6–18 maanden'},
-  'zitting-kijken':{ico:'📅',titel:'Zitting bijwonen — gewoon binnenlopen!',tekst:'Ga naar het zittingsrooster van jouw rechtbank. Kies een openbare zitting. Loop op de dag zelf binnen met je ID. Gratis, geen reservering nodig.',kosten:'Gratis',tijd:'Direct'},
-  'uitspraak-lezen':{ico:'📄',titel:'Uitspraken zoeken is gratis',tekst:'Ga naar uitspraken.rechtspraak.nl. Typ een trefwoord in. Filter op rechtsgebied of datum. Klik op een uitspraak om hem te lezen.',kosten:'Gratis',tijd:'Direct'},
-  dossier:{ico:'🔐',titel:'Log in op Mijn Rechtspraak',tekst:'Ga naar mijn.rechtspraak.nl en log in met DigiD. Je ziet je berichten, documenten en zittingsdatum. Je kunt ook stukken digitaal insturen.',kosten:'Gratis',tijd:'Direct'},
+  kanton:{ico:'<i class="fa-solid fa-scale-balanced"></i>',titel:'Kantonrechter — geen advocaat nodig!',tekst:'Voor zaken tot €25.000 kun je zelf een verzoekschrift indienen. Stap 1: stuur de ander een aangetekende brief. Stap 2: geen reactie binnen 14 dagen? Ga naar rechtspraak.nl → Naar de rechter → Kantonzaak starten.',kosten:'Griffierecht: ca. €85–€120',tijd:'Gemiddeld 6–10 weken'},
+  rechtbank:{ico:'<i class="fa-solid fa-landmark"></i>',titel:'Rechtbank — advocaat verplicht',tekst:'Voor zaken boven €25.000 is een advocaat verplicht. Heb je weinig inkomen? Vraag gesubsidieerde rechtsbijstand aan bij het Juridisch Loket — de overheid betaalt dan (een deel van) de kosten.',kosten:'Griffierecht: ca. €300–€650 + advocaatkosten',tijd:'Gemiddeld 12–18 maanden'},
+  mediator:{ico:'<i class="fa-solid fa-dove"></i>',titel:'Overweeg een mediator',tekst:'Sneller en goedkoper dan de rechter. Een mediator helpt jullie samen tot een oplossing te komen. Kijk op rechtspraak.nl voor erkende mediators bij jou in de buurt.',kosten:'Ca. €100–€200 per uur, gedeeld',tijd:'Gemiddeld 2–6 weken'},
+  bezwaar:{ico:'<i class="fa-solid fa-clipboard-list"></i>',titel:'Maak bezwaar bij de overheid',tekst:'Stuur binnen 6 weken na het besluit een bezwaarschrift naar de gemeente. Dit mag per post of e-mail. Vermeld: jouw naam, het besluit, waarom je het er niet mee eens bent. Wordt het bezwaar afgewezen? Dan ga je naar de bestuursrechter.',kosten:'Gratis — geen griffierecht voor bezwaar',tijd:'Beslissing binnen 6–12 weken'},
+  cjib:{ico:'<i class="fa-solid fa-car"></i>',titel:'In beroep tegen verkeersboete',tekst:'Onterecht een flitspaalboete? Dien binnen 6 weken "administratief beroep" in via cjib.nl. Krijg je gelijk? Dan wordt de boete kwijtgescholden.',kosten:'Gratis',tijd:'Uitspraak binnen 8 weken'},
+  belasting:{ico:'<i class="fa-solid fa-chart-bar"></i>',titel:'Bezwaar bij de belastingdienst',tekst:'Dien bezwaar in via Mijn Belastingdienst of per post, binnen 6 weken na de aanslag. Wordt dat afgewezen? Dan kun je in beroep bij de belastingrechter.',kosten:'Griffierecht belastingrechter: ca. €50',tijd:'Bezwaar: 6–12 weken. Beroep: 6–18 maanden'},
+  'zitting-kijken':{ico:'<i class="fa-solid fa-calendar-days"></i>',titel:'Zitting bijwonen — gewoon binnenlopen!',tekst:'Ga naar het zittingsrooster van jouw rechtbank. Kies een openbare zitting. Loop op de dag zelf binnen met je ID. Gratis, geen reservering nodig.',kosten:'Gratis',tijd:'Direct'},
+  'uitspraak-lezen':{ico:'<i class="fa-solid fa-file-lines"></i>',titel:'Uitspraken zoeken is gratis',tekst:'Ga naar uitspraken.rechtspraak.nl. Typ een trefwoord in. Filter op rechtsgebied of datum. Klik op een uitspraak om hem te lezen.',kosten:'Gratis',tijd:'Direct'},
+  dossier:{ico:'<i class="fa-solid fa-lock"></i>',titel:'Log in op Mijn Rechtspraak',tekst:'Ga naar mijn.rechtspraak.nl en log in met DigiD. Je ziet je berichten, documenten en zittingsdatum. Je kunt ook stukken digitaal insturen.',kosten:'Gratis',tijd:'Direct'},
 };
 function khGo(stap,keuze){
   document.querySelectorAll('.kh-stap').forEach(s=>s.classList.remove('active'));
@@ -596,7 +606,7 @@ function khGo(stap,keuze){
 function khResult(key){
   document.querySelectorAll('.kh-stap').forEach(s=>s.classList.remove('active'));
   const r=khRes[key];
-  document.getElementById('kh-res-tekst').innerHTML=`<h3>${r.ico} ${r.titel}</h3><p style="margin-top:8px;">${r.tekst}</p><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;"><span class="kh-kosten">💶 ${r.kosten}</span><span class="kh-kosten" style="background:var(--teal-light);color:var(--teal);">⏱ ${r.tijd}</span></div>`;
+  document.getElementById('kh-res-tekst').innerHTML=`<h3>${r.ico} ${r.titel}</h3><p style="margin-top:8px;">${r.tekst}</p><div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;"><span class="kh-kosten"><i class="fa-solid fa-euro-sign"></i> ${r.kosten}</span><span class="kh-kosten" style="background:var(--teal-light);color:var(--teal);"><i class="fa-solid fa-stopwatch"></i> ${r.tijd}</span></div>`;
   document.getElementById('kh-resultaat').classList.add('active');
   document.querySelectorAll('.kh-dot').forEach(d=>{d.classList.remove('active');d.classList.add('done');});
 }
@@ -632,7 +642,7 @@ function filterU(){
   if(rc)rc.textContent=list.length+' uitspraken gevonden';
   const el=document.getElementById('resultaten');
   if(!el)return;
-  if(!list.length){el.innerHTML='<div style="text-align:center;padding:2rem;color:#888780;">😕 Geen uitspraken gevonden. Probeer een ander woord.</div>';return;}
+  if(!list.length){el.innerHTML='<div style="text-align:center;padding:2rem;color:#888780;"><i class="fa-solid fa-face-frown"></i> Geen uitspraken gevonden. Probeer een ander woord.</div>';return;}
   const gkl={Strafrecht:'background:#FCEBEB;color:#791F1F',Civiel:'background:#E6F1FB;color:#0C447C',Bestuursrecht:'background:#EAF3DE;color:#27500A'};
   el.innerHTML=list.map(u=>`
     <div class="result" onclick="toggleR('${u.ecli.replace(/:/g,'_')}')">
@@ -643,7 +653,7 @@ function filterU(){
       <div class="result-body" id="rb_${u.ecli.replace(/:/g,'_')}">
         <strong>In gewone taal:</strong> ${u.kort}<br><br>
         <strong>Officiële samenvatting:</strong> ${u.tekst}
-        <div class="result-tip">💡 <strong>Let op:</strong> Dit is hoe de rechter in <em>deze zaak</em> oordeelde. Jouw situatie kan anders zijn. Geen advies, maar achtergrondinformatie.</div>
+        <div class="result-tip"><i class="fa-solid fa-lightbulb"></i> <strong>Let op:</strong> Dit is hoe de rechter in <em>deze zaak</em> oordeelde. Jouw situatie kan anders zijn. Geen advies, maar achtergrondinformatie.</div>
       </div>
     </div>`).join('');
 }
@@ -667,14 +677,14 @@ function renderZitRB(){
   document.getElementById('zit-rb-grid').innerHTML=zitRB.map((r,i)=>`
     <div class="rb-btn" onclick="selectZitRB(${i})" id="zitrb${i}">
       <div class="rb-btn-name">${r.n}</div>
-      <div class="rb-btn-loc">📍 ${r.loc}</div>
+      <div class="rb-btn-loc"><i class="fa-solid fa-location-dot"></i> ${r.loc}</div>
     </div>`).join('');
 }
 function selectZitRB(i){
   document.querySelectorAll('.rb-btn').forEach(el=>el.classList.remove('on'));
   document.getElementById('zitrb'+i).classList.add('on');
   const r=zitRB[i];
-  document.getElementById('zit-rb-naam').textContent='📍 '+r.n;
+  document.getElementById('zit-rb-naam').textContent='<i class="fa-solid fa-location-dot"></i> '+r.n;
   document.getElementById('zit-rb-details').innerHTML=`<strong>Adres:</strong> ${r.adres} · <strong>Tel:</strong> ${r.tel}<br>${r.info}`;
   document.getElementById('zit-rb-link').href=r.url;
   document.getElementById('zit-rb-info').style.display='block';
@@ -701,7 +711,7 @@ function renderZ(){
         <div class="zit-info">
           <div class="zit-naam">${z.n}</div>
           <div class="zit-sub">${z.s}</div>
-          <div class="zit-det">${z.o?'<strong style="color:#0F6E56">✅ Openbaar</strong> — '+z.info:'<strong style="color:#A32D2D">🔒 Besloten</strong> — '+z.info}</div>
+          <div class="zit-det">${z.o?'<strong style="color:#0F6E56"><i class="fa-solid fa-circle-check"></i> Openbaar</strong> — '+z.info:'<strong style="color:#A32D2D"><i class="fa-solid fa-lock"></i> Besloten</strong> — '+z.info}</div>
         </div>
         <span class="badge ${z.o?'ob':'db'}">${z.o?'Openbaar':'Besloten'}</span>
       </div>`).join('')}`).join('');
@@ -715,39 +725,39 @@ function simuleerUpload(){document.getElementById('upload-zone').style.display='
 // ── TIJDLIJN ──
 const tijdlijnData={
   kanton:{titel:'Kantonzaak (huur, werk, klein geschil)',stappen:[
-    {ic:'📝',t:'Brief sturen',d:'Stuur de ander een officiële aangetekende brief.',duur:'Week 1',status:'done'},
-    {ic:'⏳',t:'Wachten op reactie',d:'14 dagen de tijd voor reactie. Geen reactie? Dan naar de rechter.',duur:'Weken 2–3',status:'done'},
-    {ic:'📋',t:'Verzoekschrift indienen',d:'Vul het formulier in op rechtspraak.nl en betaal griffierecht (ca. €85–€120).',duur:'Week 4',status:'huidig'},
-    {ic:'📅',t:'Oproeping ontvangen',d:'De rechtbank plant een zittingsdatum.',duur:'Weken 5–7',status:''},
-    {ic:'🏛️',t:'Zitting bij de rechter',d:'Beide kanten vertellen hun verhaal. Duurt meestal 30–60 minuten.',duur:'Week 8–10',status:''},
-    {ic:'⚖️',t:'Uitspraak',d:'Dezelfde dag of binnen 4 weken daarna.',duur:'Week 8–12',status:''},
+    {ic:'<i class="fa-solid fa-pen-to-square"></i>',t:'Brief sturen',d:'Stuur de ander een officiële aangetekende brief.',duur:'Week 1',status:'done'},
+    {ic:'<i class="fa-solid fa-hourglass-half"></i>',t:'Wachten op reactie',d:'14 dagen de tijd voor reactie. Geen reactie? Dan naar de rechter.',duur:'Weken 2–3',status:'done'},
+    {ic:'<i class="fa-solid fa-clipboard-list"></i>',t:'Verzoekschrift indienen',d:'Vul het formulier in op rechtspraak.nl en betaal griffierecht (ca. €85–€120).',duur:'Week 4',status:'huidig'},
+    {ic:'<i class="fa-solid fa-calendar-days"></i>',t:'Oproeping ontvangen',d:'De rechtbank plant een zittingsdatum.',duur:'Weken 5–7',status:''},
+    {ic:'<i class="fa-solid fa-landmark"></i>',t:'Zitting bij de rechter',d:'Beide kanten vertellen hun verhaal. Duurt meestal 30–60 minuten.',duur:'Week 8–10',status:''},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Uitspraak',d:'Dezelfde dag of binnen 4 weken daarna.',duur:'Week 8–12',status:''},
   ]},
   civiel:{titel:'Grote civiele zaak (boven €25.000)',stappen:[
-    {ic:'⚖️',t:'Advocaat inschakelen',d:'Verplicht voor zaken boven €25.000. Vraag offertes bij meerdere advocaten.',duur:'Week 1–2',status:'done'},
-    {ic:'📄',t:'Dagvaarding laten opstellen',d:'Je advocaat stelt een dagvaarding op en laat die bezorgen aan de andere partij.',duur:'Week 3–4',status:'done'},
-    {ic:'🏛️',t:'Eerste zitting (comparitie)',d:'Beide partijen lichten hun standpunt toe. Rechter probeert soms een schikking.',duur:'Maand 3–6',status:'huidig'},
-    {ic:'📋',t:'Schriftelijke ronde',d:'Partijen wisselen schriftelijke stukken uit.',duur:'Maand 6–10',status:''},
-    {ic:'⚖️',t:'Vonnis',d:'Rechter doet uitspraak, meestal schriftelijk.',duur:'Maand 12–18',status:''},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Advocaat inschakelen',d:'Verplicht voor zaken boven €25.000. Vraag offertes bij meerdere advocaten.',duur:'Week 1–2',status:'done'},
+    {ic:'<i class="fa-solid fa-file-lines"></i>',t:'Dagvaarding laten opstellen',d:'Je advocaat stelt een dagvaarding op en laat die bezorgen aan de andere partij.',duur:'Week 3–4',status:'done'},
+    {ic:'<i class="fa-solid fa-landmark"></i>',t:'Eerste zitting (comparitie)',d:'Beide partijen lichten hun standpunt toe. Rechter probeert soms een schikking.',duur:'Maand 3–6',status:'huidig'},
+    {ic:'<i class="fa-solid fa-clipboard-list"></i>',t:'Schriftelijke ronde',d:'Partijen wisselen schriftelijke stukken uit.',duur:'Maand 6–10',status:''},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Vonnis',d:'Rechter doet uitspraak, meestal schriftelijk.',duur:'Maand 12–18',status:''},
   ]},
   straf:{titel:'Strafzaak',stappen:[
-    {ic:'🚔',t:'Aanhouding of aangifte',d:'Politie doet onderzoek. Openbaar Ministerie beslist of er vervolging komt.',duur:'Weken tot maanden',status:'done'},
-    {ic:'📋',t:'Dagvaarding ontvangen',d:'Je ontvangt een oproep om voor de rechter te verschijnen.',duur:'Variabel',status:'done'},
-    {ic:'🏛️',t:'Zitting',d:'Aanklager en verdachte (met advocaat) komen voor de rechter.',duur:'Enkele uren',status:'huidig'},
-    {ic:'⚖️',t:'Uitspraak',d:'Politierechter: dezelfde dag. Meervoudige kamer: 2 weken later.',duur:'Dezelfde dag of 2 weken',status:''},
-    {ic:'⬆️',t:'Eventueel hoger beroep',d:'Niet eens met de uitspraak? Je hebt 14 dagen om in hoger beroep te gaan.',duur:'+1–2 jaar',status:''},
+    {ic:'<i class="fa-solid fa-car-side"></i>',t:'Aanhouding of aangifte',d:'Politie doet onderzoek. Openbaar Ministerie beslist of er vervolging komt.',duur:'Weken tot maanden',status:'done'},
+    {ic:'<i class="fa-solid fa-clipboard-list"></i>',t:'Dagvaarding ontvangen',d:'Je ontvangt een oproep om voor de rechter te verschijnen.',duur:'Variabel',status:'done'},
+    {ic:'<i class="fa-solid fa-landmark"></i>',t:'Zitting',d:'Aanklager en verdachte (met advocaat) komen voor de rechter.',duur:'Enkele uren',status:'huidig'},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Uitspraak',d:'Politierechter: dezelfde dag. Meervoudige kamer: 2 weken later.',duur:'Dezelfde dag of 2 weken',status:''},
+    {ic:'<i class="fa-solid fa-arrow-up"></i>',t:'Eventueel hoger beroep',d:'Niet eens met de uitspraak? Je hebt 14 dagen om in hoger beroep te gaan.',duur:'+1–2 jaar',status:''},
   ]},
   bestuur:{titel:'Bestuursrechtszaak',stappen:[
-    {ic:'📋',t:'Bezwaar maken',d:'Binnen 6 weken een bezwaarschrift sturen naar de overheidsinstelling.',duur:'Week 1–6',status:'done'},
-    {ic:'⏳',t:'Beslissing op bezwaar',d:'De instelling heroverweegt haar besluit. Duurt 6–12 weken.',duur:'Weken 7–18',status:'done'},
-    {ic:'🏛️',t:'Beroep bij bestuursrechter',d:'Afgewezen? Dien beroep in bij de bestuursrechter. Griffierecht ca. €50.',duur:'Maand 5–8',status:'huidig'},
-    {ic:'⚖️',t:'Zitting en uitspraak',d:'Rechter doet uitspraak, vaak binnen 6 weken na de zitting.',duur:'Maand 9–14',status:''},
+    {ic:'<i class="fa-solid fa-clipboard-list"></i>',t:'Bezwaar maken',d:'Binnen 6 weken een bezwaarschrift sturen naar de overheidsinstelling.',duur:'Week 1–6',status:'done'},
+    {ic:'<i class="fa-solid fa-hourglass-half"></i>',t:'Beslissing op bezwaar',d:'De instelling heroverweegt haar besluit. Duurt 6–12 weken.',duur:'Weken 7–18',status:'done'},
+    {ic:'<i class="fa-solid fa-landmark"></i>',t:'Beroep bij bestuursrechter',d:'Afgewezen? Dien beroep in bij de bestuursrechter. Griffierecht ca. €50.',duur:'Maand 5–8',status:'huidig'},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Zitting en uitspraak',d:'Rechter doet uitspraak, vaak binnen 6 weken na de zitting.',duur:'Maand 9–14',status:''},
   ]},
   beroep:{titel:'Hoger beroep',stappen:[
-    {ic:'⚖️',t:'Uitspraak eerste aanleg',d:'Je hebt de zaak verloren bij de rechtbank.',duur:'—',status:'done'},
-    {ic:'📝',t:'Hoger beroep instellen',d:'Binnen 3 maanden (civiel) of 14 dagen (straf) na de uitspraak.',duur:'Week 1–2',status:'done'},
-    {ic:'📋',t:'Memorie van grieven',d:'Je advocaat schrijft op waarom de rechter het fout had.',duur:'Maand 2–4',status:'huidig'},
-    {ic:'🏛️',t:'Zitting gerechtshof',d:'Drie rechters (raadsheren) beoordelen de zaak opnieuw.',duur:'Maand 8–18',status:''},
-    {ic:'⚖️',t:'Arrest',d:'Uitspraak van het gerechtshof. Nog niet eens? Cassatie bij de Hoge Raad.',duur:'Maand 12–24',status:''},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Uitspraak eerste aanleg',d:'Je hebt de zaak verloren bij de rechtbank.',duur:'—',status:'done'},
+    {ic:'<i class="fa-solid fa-pen-to-square"></i>',t:'Hoger beroep instellen',d:'Binnen 3 maanden (civiel) of 14 dagen (straf) na de uitspraak.',duur:'Week 1–2',status:'done'},
+    {ic:'<i class="fa-solid fa-clipboard-list"></i>',t:'Memorie van grieven',d:'Je advocaat schrijft op waarom de rechter het fout had.',duur:'Maand 2–4',status:'huidig'},
+    {ic:'<i class="fa-solid fa-landmark"></i>',t:'Zitting gerechtshof',d:'Drie rechters (raadsheren) beoordelen de zaak opnieuw.',duur:'Maand 8–18',status:''},
+    {ic:'<i class="fa-solid fa-scale-balanced"></i>',t:'Arrest',d:'Uitspraak van het gerechtshof. Nog niet eens? Cassatie bij de Hoge Raad.',duur:'Maand 12–24',status:''},
   ]},
 };
 function toonTijdlijn(key){
@@ -756,14 +766,14 @@ function toonTijdlijn(key){
   const idx={kanton:0,civiel:1,straf:2,bestuur:3,beroep:4}[key];
   document.querySelectorAll('#page-tijdlijn .sc')[idx].classList.add('on');
   const html=`<div class="card" style="margin-bottom:1rem;">
-    <div class="card-title">📊 ${d.titel}</div>
+    <div class="card-title"><i class="fa-solid fa-chart-bar"></i> ${d.titel}</div>
     <div class="tijdlijn">${d.stappen.map((s,i)=>`
       <div class="tl-stap">
         <div class="tl-circle ${s.status}">${s.ic}</div>
         <div class="tl-body">
           <div class="tl-title">${s.t}</div>
           <div class="tl-desc">${s.d}</div>
-          <span class="tl-duur">⏱ ${s.duur}</span>
+          <span class="tl-duur"><i class="fa-solid fa-stopwatch"></i> ${s.duur}</span>
         </div>
       </div>`).join('')}
     </div>
@@ -790,14 +800,14 @@ function renderRB(){
   document.getElementById('rb-grid').innerHTML=rechtbanken.map((r,i)=>`
     <div class="rb-btn" onclick="selectRB(${i})" id="rbc${i}">
       <div class="rb-btn-name">${r.n}</div>
-      <div class="rb-btn-loc">📍 ${r.loc}</div>
+      <div class="rb-btn-loc"><i class="fa-solid fa-location-dot"></i> ${r.loc}</div>
     </div>`).join('');
 }
 function selectRB(i){
   document.querySelectorAll('.rb-btn').forEach(c=>c.classList.remove('on'));
   document.getElementById('rbc'+i).classList.add('on');
   const r=rechtbanken[i];
-  document.getElementById('rb-detail').innerHTML=`<div class="rb-detail open"><strong style="font-size:15px;color:#1a1a18;">📍 ${r.n}</strong><br><br><strong>Adres:</strong> ${r.adres}<br><strong>Telefoon:</strong> ${r.tel}<br><strong>Griffie open:</strong> ${r.open}<br><br><a href="${r.url}" target="_blank" style="color:var(--purple);font-weight:700;">→ Naar de website van deze rechtbank</a></div>`;
+  document.getElementById('rb-detail').innerHTML=`<div class="rb-detail open"><strong style="font-size:15px;color:#1a1a18;"><i class="fa-solid fa-location-dot"></i> ${r.n}</strong><br><br><strong>Adres:</strong> ${r.adres}<br><strong>Telefoon:</strong> ${r.tel}<br><strong>Griffie open:</strong> ${r.open}<br><br><a href="${r.url}" target="_blank" style="color:var(--purple);font-weight:700;">→ Naar de website van deze rechtbank</a></div>`;
 }
 const pcMap={'10':0,'11':0,'12':0,'13':4,'14':4,'15':4,'16':4,'17':4,'18':4,'19':4,'20':4,'21':4,'22':1,'23':1,'24':1,'25':1,'26':1,'30':2,'31':2,'32':2,'33':2,'34':3,'35':3,'36':3,'37':3,'38':3,'39':3,'43':9,'44':9,'45':9,'46':9,'47':9,'48':9,'49':9,'52':8,'53':8,'54':8,'55':8,'56':8,'57':8,'58':8,'59':10,'60':10,'61':10,'62':10,'63':10,'64':10,'65':10,'66':6,'67':6,'68':6,'69':6,'70':6,'71':6,'72':6,'73':6,'74':5,'75':5,'76':5,'77':5,'78':5,'79':5};
 function zoekPC(){
@@ -807,7 +817,7 @@ function zoekPC(){
   const idx=pcMap[twee];
   const el=document.getElementById('pc-result');
   if(idx!==undefined){
-    el.innerHTML=`<div class="card" style="border-color:var(--purple);background:var(--purple-light);"><div class="card-title" style="color:var(--purple);">📍 Jouw rechtbank</div><div class="card-text" style="color:var(--purple-dark);">Op basis van postcode <strong>${v}</strong>: <strong>${rechtbanken[idx].n}</strong> in ${rechtbanken[idx].loc}</div></div>`;
+    el.innerHTML=`<div class="card" style="border-color:var(--purple);background:var(--purple-light);"><div class="card-title" style="color:var(--purple);"><i class="fa-solid fa-location-dot"></i> Jouw rechtbank</div><div class="card-text" style="color:var(--purple-dark);">Op basis van postcode <strong>${v}</strong>: <strong>${rechtbanken[idx].n}</strong> in ${rechtbanken[idx].loc}</div></div>`;
     selectRB(idx);
   } else {
     el.innerHTML=`<div class="card"><div class="card-text">Postcode niet herkend. Klik op de rechtbank in jouw regio hieronder.</div></div>`;
@@ -829,7 +839,7 @@ let clState=new Array(clItems.length).fill(false);
 function renderChecklist(){
   document.getElementById('checklist-items').innerHTML=clItems.map((it,i)=>`
     <div class="cl-item${clState[i]?' checked':''}" onclick="toggleCl(${i})">
-      <div class="cl-box">${clState[i]?'✓':''}</div>
+      <div class="cl-box">${clState[i]?'<i class="fa-solid fa-check"></i>':''}</div>
       <div class="cl-label">${it.t}</div>
     </div>`).join('');
   updateClProgress();
@@ -861,7 +871,7 @@ const faqData=[
 function renderFAQ(){
   document.getElementById('faq-list').innerHTML=faqData.map((f,i)=>`
     <div>
-      <div class="acc-h" onclick="toggleA(this,${i})">💬 ${f.v}<span class="acc-arr">▼</span></div>
+      <div class="acc-h" onclick="toggleA(this,${i})"><i class="fa-solid fa-comment"></i> ${f.v}<span class="acc-arr">▼</span></div>
       <div class="acc-b" id="acb${i}">${f.a}</div>
     </div>`).join('');
 }
