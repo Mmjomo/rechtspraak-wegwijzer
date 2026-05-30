@@ -633,19 +633,26 @@ const woordenboek={
 };
 function vervangWoorden(container){
   if(!container)return;
+  const gevonden=new Set(); // alleen eerste voorkomen per term
   const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null,false);
   const nodes=[];
   while(walker.nextNode())nodes.push(walker.currentNode);
   nodes.forEach(node=>{
     const pe=node.parentElement;
     if(!pe)return;
-    if(pe.classList.contains('w')||pe.tagName==='SCRIPT'||pe.tagName==='STYLE'||pe.tagName==='INPUT'||pe.tagName==='TEXTAREA'||pe.closest('.global-search')||pe.closest('.search-bar')||pe.closest('.postcode-bar'))return;
+    // Skip: bestaande tooltips, scripts, inputs, knoppen, zoekbalken
+    if(pe.classList.contains('w')||pe.tagName==='SCRIPT'||pe.tagName==='STYLE'||pe.tagName==='INPUT'||pe.tagName==='TEXTAREA'||pe.tagName==='BUTTON'||pe.closest('button')||pe.closest('.digid-btn')||pe.closest('.btn-primary')||pe.closest('.btn-hulp')||pe.closest('.btn-secondary')||pe.closest('.global-search')||pe.closest('.search-bar')||pe.closest('.postcode-bar')||pe.closest('.dtab')||pe.closest('.nav')||pe.closest('.mob-nav'))return;
     let html=node.textContent;
     let changed=false;
     for(const[term,tip] of Object.entries(woordenboek)){
+      if(gevonden.has(term.toLowerCase()))continue; // al eerder getoond
       const regex=new RegExp('\\b('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','gi');
       if(regex.test(html)){
-        html=html.replace(regex,'<span class="w" data-tip="'+tip+'" tabindex="0">$1</span>');
+        html=html.replace(regex,(m)=>{
+          if(gevonden.has(term.toLowerCase()))return m; // alleen eerste match
+          gevonden.add(term.toLowerCase());
+          return '<span class="w" data-tip="'+tip+'" tabindex="0">'+m+'</span>';
+        });
         changed=true;
       }
     }
