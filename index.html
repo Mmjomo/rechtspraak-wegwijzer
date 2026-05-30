@@ -353,9 +353,9 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <div class="g2">
             <div class="sc" onclick="kiesSc(this,0)"><div class="sc-ico"><i class="ti ti-home"></i></div><div class="sc-ttl">Verhuurder lost problemen niet op</div><div class="sc-sub">Lekkage, geen onderhoud, huurverhoging</div><div class="sc-det" id="sc0">Ga naar de <strong>kantonrechter</strong> — je hebt geen advocaat nodig! Stap 1: stuur de verhuurder een officiële brief. Reageert die niet? Dan naar de rechter.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('keuzehulp')"><i class="ti ti-compass"></i> Mijn stappenplan</button></div></div>
             <div class="sc" onclick="kiesSc(this,1)"><div class="sc-ico"><i class="ti ti-car"></i></div><div class="sc-ttl">Ik heb een boete gekregen</div><div class="sc-sub">Verkeersboete, gemeenteboete</div><div class="sc-det" id="sc1">Bij een gemeenteboete maak je bezwaar. Bij een verkeersboete ga je in beroep via het CJIB.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('keuzehulp')"><i class="ti ti-compass"></i> Mijn stappenplan</button></div></div>
-            <div class="sc" onclick="kiesSc(this,2)"><div class="sc-ico"><i class="ti ti-briefcase"></i></div><div class="sc-ttl">Mijn baas betaalt me niet</div><div class="sc-sub">Achterstallig loon, ontslag</div><div class="sc-det" id="sc2">Stuur eerst een officiële brief. Reageert je baas niet? Dan naar de kantonrechter — zonder advocaat!<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('keuzehulp')"><i class="ti ti-compass"></i> Mijn stappenplan</button></div></div>
+            <div class="sc" onclick="kiesSc(this,2)"><div class="sc-ico"><i class="ti ti-briefcase"></i></div><div class="sc-ttl">Mijn baas betaalt me niet</div><div class="sc-sub">Achterstallig loon, ontslag</div><div class="sc-det" id="sc2">Stuur eerst een officiële brief. Reageert je baas niet? Dan naar de <span class="w" data-tip="Rechter voor kleine zaken tot €25.000 — geen advocaat nodig">kantonrechter</span> — zonder advocaat!<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('keuzehulp')"><i class="ti ti-compass"></i> Mijn stappenplan</button></div></div>
             <div class="sc" onclick="kiesSc(this,3)"><div class="sc-ico"><i class="ti ti-eye"></i></div><div class="sc-ttl">Ik wil een zitting bijwonen</div><div class="sc-sub">Uit nieuwsgierigheid of voor school</div><div class="sc-det" id="sc3">Gewoon binnenlopen met je ID! Kijk eerst op het zittingsrooster van jouw rechtbank.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('zittingen')"><i class="ti ti-calendar"></i> Bekijk het rooster</button></div></div>
-            <div class="sc" onclick="kiesSc(this,4)"><div class="sc-ico"><i class="ti ti-file-search"></i></div><div class="sc-ttl">Ik wil een uitspraak opzoeken</div><div class="sc-sub">Nieuws gelezen, benieuwd naar de beslissing</div><div class="sc-det" id="sc4">Meer dan 800.000 uitspraken staan gratis online. Zoek op trefwoord of ECLI-nummer.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('uitspraken')"><i class="ti ti-file-text"></i> Uitspraken zoeken</button></div></div>
+            <div class="sc" onclick="kiesSc(this,4)"><div class="sc-ico"><i class="ti ti-file-search"></i></div><div class="sc-ttl">Ik wil een uitspraak opzoeken</div><div class="sc-sub">Nieuws gelezen, benieuwd naar de beslissing</div><div class="sc-det" id="sc4">Meer dan 800.000 uitspraken staan gratis online. Zoek op trefwoord of <span class="w" data-tip="Uniek Europees nummer voor elke rechterlijke uitspraak">ECLI-nummer</span>.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('uitspraken')"><i class="ti ti-file-text"></i> Uitspraken zoeken</button></div></div>
             <div class="sc" onclick="kiesSc(this,5)"><div class="sc-ico"><i class="ti ti-lock"></i></div><div class="sc-ttl">Ik heb zelf een rechtszaak</div><div class="sc-sub">Mijn dossier bekijken of stukken sturen</div><div class="sc-det" id="sc5">Log in via <strong>Mijn Rechtspraak</strong> met DigiD. Bekijk je dossier, berichten en stuur stukken in.<br><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="go('mijn')"><i class="ti ti-lock"></i> Naar mijn dossier</button></div></div>
           </div>
         </div>
@@ -389,7 +389,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         </div>
         <div class="kh-stap active" id="kh0">
           <div class="kh-vraag">Wat is jouw situatie?</div>
-          <div class="kh-opt" onclick="khGo(1,'ruzie')"><span class="kh-opt-ic"><i class="ti ti-handshake"></i></span><div><strong>Ik heb ruzie met iemand</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Buurman, verhuurder, werkgever of schuldeiser</div></div></div>
+          <div class="kh-opt" onclick="khGo(1,'ruzie')"><span class="kh-opt-ic"><i class="ti ti-users"></i></span><div><strong>Ik heb ruzie met iemand</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Buurman, verhuurder, werkgever of schuldeiser</div></div></div>
           <div class="kh-opt" onclick="khGo(1,'boete')"><span class="kh-opt-ic"><i class="ti ti-clipboard-list"></i></span><div><strong>Brief of boete van de overheid</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Gemeente, belastingdienst, verkeersboete</div></div></div>
           <div class="kh-opt" onclick="khGo(1,'kijken')"><span class="kh-opt-ic"><i class="ti ti-eye"></i></span><div><strong>Ik wil alleen informatie</strong><div style="font-size:12px;color:var(--gray);margin-top:2px;">Zitting bijwonen of uitspraak opzoeken</div></div></div>
         </div>
@@ -476,7 +476,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="ph">
           <div class="ptag" style="background:var(--teal-light);color:var(--teal);">Mijn Rechtspraak</div>
           <h1>Mijn Rechtspraak</h1>
-          <p>Alleen voor mensen met een lopende zaak. Inloggen met DigiD.</p>
+          <p>Alleen voor mensen met een lopende zaak. Inloggen met <span class="w" data-tip="Digitaal identiteitsbewijs voor Nederlandse overheidssites — aanvragen op digid.nl">DigiD</span>.</p>
         </div>
         <div class="page-intro">Log in met DigiD om je dossier te bekijken en stukken in te sturen.</div>
         <div class="login-box" id="login-box">
@@ -500,8 +500,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
             <div class="bericht"><div class="bdot read"></div><div><div style="font-size:13px;font-weight:700;color:var(--gray);">Zaak geregistreerd onder nr. AMS-24-1042</div><div style="font-size:11px;color:#888780;">Van: Rechtbank Amsterdam · 3 april 2025</div></div></div>
           </div>
           <div class="dtab-c" id="dtab-documenten">
-            <div class="card"><div class="card-title"><i class="ti ti-file-text"></i> Dagvaarding</div><div class="card-text">Ontvangen 3 april 2025 · PDF · 4 pagina's</div></div>
-            <div class="card"><div class="card-title"><i class="ti ti-file-text"></i> Verweerschrift</div><div class="card-text">Ingediend 15 mei 2025 · PDF · 7 pagina's</div></div>
+            <div class="card"><div class="card-title"><i class="ti ti-file-text"></i> <span class="w" data-tip="Officiële oproep om voor de rechter te verschijnen">Dagvaarding</span></div><div class="card-text">Ontvangen 3 april 2025 · PDF · 4 pagina's</div></div>
+            <div class="card"><div class="card-title"><i class="ti ti-file-text"></i> <span class="w" data-tip="Jouw officiële reactie op de aanklacht of eis">Verweerschrift</span></div><div class="card-text">Ingediend 15 mei 2025 · PDF · 7 pagina's</div></div>
           </div>
           <div class="dtab-c" id="dtab-zitting">
             <div class="card" style="border-color:var(--purple);background:#f8f7ff;">
@@ -532,7 +532,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="page-intro">Kies een type zaak en zie hoe lang elke stap gemiddeld duurt.</div>
         <div class="g3" style="margin-bottom:1.5rem;">
           <div class="sc" onclick="toonTijdlijn('kanton')"><div class="sc-ico"><i class="ti ti-scale"></i></div><div class="sc-ttl">Kantonzaak</div><div class="sc-sub">Huur, werk, klein conflict</div></div>
-          <div class="sc" onclick="toonTijdlijn('civiel')"><div class="sc-ico"><i class="ti ti-building-courthouse"></i></div><div class="sc-ttl">Grote civiele zaak</div><div class="sc-sub">Boven &euro;25.000</div></div>
+          <div class="sc" onclick="toonTijdlijn('civiel')"><div class="sc-ico"><i class="ti ti-gavel"></i></div><div class="sc-ttl">Grote civiele zaak</div><div class="sc-sub">Boven &euro;25.000</div></div>
           <div class="sc" onclick="toonTijdlijn('straf')"><div class="sc-ico"><i class="ti ti-alert-triangle"></i></div><div class="sc-ttl">Strafzaak</div><div class="sc-sub">Misdrijf of overtreding</div></div>
           <div class="sc" onclick="toonTijdlijn('bestuur')"><div class="sc-ico"><i class="ti ti-building"></i></div><div class="sc-ttl">Bestuursrechtszaak</div><div class="sc-sub">Overheid vs burger</div></div>
           <div class="sc" onclick="toonTijdlijn('beroep')"><div class="sc-ico"><i class="ti ti-arrow-up"></i></div><div class="sc-ttl">Hoger beroep</div><div class="sc-sub">Na een verloren zaak</div></div>
@@ -611,59 +611,6 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 <button class="spoed-fab" onclick="document.getElementById('spoed-modal').classList.add('open')" title="Spoed?"><i class="ti ti-alert-triangle"></i></button>
 
 <script>
-// ── VP2: WOORDENBOEK ──
-const woordenboek={
-  'kantonrechter':'Rechter voor kleine zaken tot €25.000 — geen advocaat nodig',
-  'dagvaarding':'Officiële oproep om voor de rechter te verschijnen',
-  'griffierecht':'Vergoeding die je betaalt aan de rechtbank om je zaak te behandelen',
-  'ECLI':'Uniek Europees nummer voor elke rechterlijke uitspraak',
-  'bestuursrecht':'Recht dat geschillen tussen burger en overheid regelt',
-  'civiel recht':'Recht dat geschillen tussen burgers of bedrijven onderling regelt',
-  'strafrecht':'Recht dat misdrijven en overtredingen regelt',
-  'hoger beroep':'Je zaak opnieuw laten beoordelen door een hogere rechter',
-  'cassatie':'Beroep bij de Hoge Raad om te toetsen of het recht correct is toegepast',
-  'transitievergoeding':'Vergoeding die een werkgever betaalt bij ontslag',
-  'DigiD':'Digitaal identiteitsbewijs voor Nederlandse overheidssites',
-  'meervoudige kamer':'Zitting met drie rechters in plaats van één',
-  'vonnis':'Schriftelijke beslissing van een rechter in een civiele zaak',
-  'arrest':'Schriftelijke beslissing van een hof of de Hoge Raad',
-  'kort geding':'Spoedprocedure waarbij de rechter snel een voorlopige beslissing neemt',
-  'bezwaar':'Officieel protest bij een overheidsinstelling tegen een besluit',
-  'verweerschrift':'Jouw officiële reactie op de aanklacht of eis van de andere partij',
-};
-function vervangWoorden(container){
-  if(!container)return;
-  const gevonden=new Set(); // alleen eerste voorkomen per term
-  const walker=document.createTreeWalker(container,NodeFilter.SHOW_TEXT,null,false);
-  const nodes=[];
-  while(walker.nextNode())nodes.push(walker.currentNode);
-  nodes.forEach(node=>{
-    const pe=node.parentElement;
-    if(!pe)return;
-    // Skip: bestaande tooltips, scripts, inputs, knoppen, zoekbalken
-    if(pe.classList.contains('w')||pe.tagName==='SCRIPT'||pe.tagName==='STYLE'||pe.tagName==='INPUT'||pe.tagName==='TEXTAREA'||pe.tagName==='BUTTON'||pe.closest('button')||pe.closest('.digid-btn')||pe.closest('.btn-primary')||pe.closest('.btn-hulp')||pe.closest('.btn-secondary')||pe.closest('.global-search')||pe.closest('.search-bar')||pe.closest('.postcode-bar')||pe.closest('.dtab')||pe.closest('.nav')||pe.closest('.mob-nav'))return;
-    let html=node.textContent;
-    let changed=false;
-    for(const[term,tip] of Object.entries(woordenboek)){
-      if(gevonden.has(term.toLowerCase()))continue; // al eerder getoond
-      const regex=new RegExp('\\b('+term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')\\b','gi');
-      if(regex.test(html)){
-        html=html.replace(regex,(m)=>{
-          if(gevonden.has(term.toLowerCase()))return m; // alleen eerste match
-          gevonden.add(term.toLowerCase());
-          return '<span class="w" data-tip="'+tip+'" tabindex="0">'+m+'</span>';
-        });
-        changed=true;
-      }
-    }
-    if(changed){
-      const span=document.createElement('span');
-      span.innerHTML=html;
-      node.parentElement.replaceChild(span,node);
-    }
-  });
-}
-
 // ── NAVIGATIE ──
 const urlMap={home:'rechtspraak.nl',keuzehulp:'rechtspraak.nl/wat-moet-ik-doen',uitspraken:'uitspraken.rechtspraak.nl',zittingen:'rechtspraak.nl/zittingsrooster',mijn:'mijn.rechtspraak.nl',tijdlijn:'rechtspraak.nl/doorlooptijden',rechtbanken:'rechtspraak.nl/rechtbank-vinden',checklist:'rechtspraak.nl/checklist-zitting',faq:'rechtspraak.nl/vragen'};
 const bcMap={home:'Home',keuzehulp:'Home › Wat moet ik doen?',uitspraken:'Home › Uitspraken',zittingen:'Home › Zittingsrooster',mijn:'Home › Mijn Rechtspraak',tijdlijn:'Home › Doorlooptijden',rechtbanken:'Home › Rechtbank vinden',checklist:'Home › Checklist',faq:'Home › Vragen'};
@@ -693,8 +640,6 @@ function go(id){
   if(id==='rechtbanken')renderRB();
   if(id==='checklist')renderChecklist();
   if(id==='home')renderHomeFAQ();
-  // VP2: woorden vervangen (delay to let dynamic content render first)
-  setTimeout(()=>vervangWoorden(document.getElementById('page-'+id)),150);
   window.scrollTo(0,0);
 }
 
@@ -724,7 +669,7 @@ function kiesSc(el,i){
 // ── VP5: KEUZEHULP met stappenbalk ──
 const khRes={
   kanton:{ico:'<i class="ti ti-scale"></i>',titel:'Kantonrechter — geen advocaat nodig!',tekst:'Voor zaken tot €25.000 kun je zelf een verzoekschrift indienen. Stap 1: stuur de ander een aangetekende brief. Stap 2: geen reactie binnen 14 dagen? Ga naar rechtspraak.nl → Naar de rechter → Kantonzaak starten.',kosten:'Griffierecht: ca. €85–€120',tijd:'Gemiddeld 6–10 weken'},
-  rechtbank:{ico:'<i class="ti ti-building-courthouse"></i>',titel:'Rechtbank — advocaat verplicht',tekst:'Voor zaken boven €25.000 is een advocaat verplicht. Heb je weinig inkomen? Vraag gesubsidieerde rechtsbijstand aan bij het Juridisch Loket — de overheid betaalt dan (een deel van) de kosten.',kosten:'Griffierecht: ca. €300–€650 + advocaatkosten',tijd:'Gemiddeld 12–18 maanden'},
+  rechtbank:{ico:'<i class="ti ti-gavel"></i>',titel:'Rechtbank — advocaat verplicht',tekst:'Voor zaken boven €25.000 is een advocaat verplicht. Heb je weinig inkomen? Vraag gesubsidieerde rechtsbijstand aan bij het Juridisch Loket — de overheid betaalt dan (een deel van) de kosten.',kosten:'Griffierecht: ca. €300–€650 + advocaatkosten',tijd:'Gemiddeld 12–18 maanden'},
   mediator:{ico:'<i class="ti ti-heart-handshake"></i>',titel:'Overweeg een mediator',tekst:'Sneller en goedkoper dan de rechter. Een mediator helpt jullie samen tot een oplossing te komen. Kijk op rechtspraak.nl voor erkende mediators bij jou in de buurt.',kosten:'Ca. €100–€200 per uur, gedeeld',tijd:'Gemiddeld 2–6 weken'},
   bezwaar:{ico:'<i class="ti ti-clipboard-list"></i>',titel:'Maak bezwaar bij de overheid',tekst:'Stuur binnen 6 weken na het besluit een bezwaarschrift naar de gemeente. Dit mag per post of e-mail. Vermeld: jouw naam, het besluit, waarom je het er niet mee eens bent. Wordt het bezwaar afgewezen? Dan ga je naar de bestuursrechter.',kosten:'Gratis — geen griffierecht voor bezwaar',tijd:'Beslissing binnen 6–12 weken'},
   cjib:{ico:'<i class="ti ti-car"></i>',titel:'In beroep tegen verkeersboete',tekst:'Onterecht een flitspaalboete? Dien binnen 6 weken "administratief beroep" in via cjib.nl. Krijg je gelijk? Dan wordt de boete kwijtgescholden.',kosten:'Gratis',tijd:'Uitspraak binnen 8 weken'},
@@ -883,34 +828,34 @@ const tijdlijnData={
     {ic:'ti ti-hourglass',t:'Wachten op reactie',d:'14 dagen de tijd voor reactie. Geen reactie? Dan naar de rechter.',duur:'Weken 2–3',status:'done'},
     {ic:'ti ti-clipboard-list',t:'Verzoekschrift indienen',d:'Vul het formulier in op rechtspraak.nl en betaal griffierecht.',duur:'Week 4',status:'huidig'},
     {ic:'ti ti-calendar',t:'Oproeping ontvangen',d:'De rechtbank plant een zittingsdatum.',duur:'Weken 5–7',status:''},
-    {ic:'ti ti-building-courthouse',t:'Zitting bij de rechter',d:'Beide kanten vertellen hun verhaal.',duur:'Week 8–10',status:''},
+    {ic:'ti ti-gavel',t:'Zitting bij de rechter',d:'Beide kanten vertellen hun verhaal.',duur:'Week 8–10',status:''},
     {ic:'ti ti-scale',t:'Uitspraak',d:'Dezelfde dag of binnen 4 weken daarna.',duur:'Week 8–12',status:''},
   ]},
   civiel:{titel:'Grote civiele zaak (boven €25.000)',stappen:[
     {ic:'ti ti-scale',t:'Advocaat inschakelen',d:'Verplicht voor zaken boven €25.000.',duur:'Week 1–2',status:'done'},
     {ic:'ti ti-file-text',t:'Dagvaarding laten opstellen',d:'Je advocaat stelt een dagvaarding op.',duur:'Week 3–4',status:'done'},
-    {ic:'ti ti-building-courthouse',t:'Eerste zitting (comparitie)',d:'Beide partijen lichten hun standpunt toe.',duur:'Maand 3–6',status:'huidig'},
+    {ic:'ti ti-gavel',t:'Eerste zitting (comparitie)',d:'Beide partijen lichten hun standpunt toe.',duur:'Maand 3–6',status:'huidig'},
     {ic:'ti ti-clipboard-list',t:'Schriftelijke ronde',d:'Partijen wisselen schriftelijke stukken uit.',duur:'Maand 6–10',status:''},
     {ic:'ti ti-scale',t:'Vonnis',d:'Rechter doet uitspraak, meestal schriftelijk.',duur:'Maand 12–18',status:''},
   ]},
   straf:{titel:'Strafzaak',stappen:[
     {ic:'ti ti-badge',t:'Aanhouding of aangifte',d:'Politie doet onderzoek. OM beslist of er vervolging komt.',duur:'Weken tot maanden',status:'done'},
     {ic:'ti ti-clipboard-list',t:'Dagvaarding ontvangen',d:'Je ontvangt een oproep om te verschijnen.',duur:'Variabel',status:'done'},
-    {ic:'ti ti-building-courthouse',t:'Zitting',d:'Aanklager en verdachte komen voor de rechter.',duur:'Enkele uren',status:'huidig'},
+    {ic:'ti ti-gavel',t:'Zitting',d:'Aanklager en verdachte komen voor de rechter.',duur:'Enkele uren',status:'huidig'},
     {ic:'ti ti-scale',t:'Uitspraak',d:'Politierechter: dezelfde dag. Meervoudige kamer: 2 weken.',duur:'Dezelfde dag of 2 weken',status:''},
     {ic:'ti ti-arrow-up',t:'Eventueel hoger beroep',d:'Niet eens? Je hebt 14 dagen om in hoger beroep te gaan.',duur:'+1–2 jaar',status:''},
   ]},
   bestuur:{titel:'Bestuursrechtszaak',stappen:[
     {ic:'ti ti-clipboard-list',t:'Bezwaar maken',d:'Binnen 6 weken een bezwaarschrift sturen.',duur:'Week 1–6',status:'done'},
     {ic:'ti ti-hourglass',t:'Beslissing op bezwaar',d:'De instelling heroverweegt haar besluit.',duur:'Weken 7–18',status:'done'},
-    {ic:'ti ti-building-courthouse',t:'Beroep bij bestuursrechter',d:'Afgewezen? Dien beroep in. Griffierecht ca. €50.',duur:'Maand 5–8',status:'huidig'},
+    {ic:'ti ti-gavel',t:'Beroep bij bestuursrechter',d:'Afgewezen? Dien beroep in. Griffierecht ca. €50.',duur:'Maand 5–8',status:'huidig'},
     {ic:'ti ti-scale',t:'Zitting en uitspraak',d:'Rechter doet uitspraak, vaak binnen 6 weken.',duur:'Maand 9–14',status:''},
   ]},
   beroep:{titel:'Hoger beroep',stappen:[
     {ic:'ti ti-scale',t:'Uitspraak eerste aanleg',d:'Je hebt de zaak verloren bij de rechtbank.',duur:'—',status:'done'},
     {ic:'ti ti-pencil',t:'Hoger beroep instellen',d:'Binnen 3 maanden (civiel) of 14 dagen (straf).',duur:'Week 1–2',status:'done'},
     {ic:'ti ti-clipboard-list',t:'Memorie van grieven',d:'Je advocaat schrijft op waarom de rechter het fout had.',duur:'Maand 2–4',status:'huidig'},
-    {ic:'ti ti-building-courthouse',t:'Zitting gerechtshof',d:'Drie rechters beoordelen de zaak opnieuw.',duur:'Maand 8–18',status:''},
+    {ic:'ti ti-gavel',t:'Zitting gerechtshof',d:'Drie rechters beoordelen de zaak opnieuw.',duur:'Maand 8–18',status:''},
     {ic:'ti ti-scale',t:'Arrest',d:'Uitspraak van het hof. Nog niet eens? Cassatie bij de Hoge Raad.',duur:'Maand 12–24',status:''},
   ]},
 };
