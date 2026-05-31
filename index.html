@@ -793,6 +793,16 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="page-intro">Beantwoord vier vragen en zie direct wat jouw zaak ongeveer gaat kosten.</div>
         <div id="calc-vragen"></div>
         <div id="calc-result" style="display:none;"></div>
+        <div class="card" style="margin-top:1.5rem;">
+          <div class="card-title"><i class="ti ti-chart-line"></i> Griffierecht 2019–2024</div>
+          <div class="card-text" style="margin-bottom:10px;">Ontwikkeling van de tarieven per jaar.</div>
+          <canvas id="griffie-grafiek" width="500" height="220" style="width:100%;max-width:500px;border-radius:12px;"></canvas>
+          <div style="display:flex;gap:16px;margin-top:8px;font-size:12px;font-weight:700;">
+            <span><span style="display:inline-block;width:12px;height:12px;background:var(--purple);border-radius:3px;margin-right:4px;"></span>Kantonrechter</span>
+            <span><span style="display:inline-block;width:12px;height:12px;background:var(--red);border-radius:3px;margin-right:4px;"></span>Rechtbank</span>
+          </div>
+          <div style="font-size:12px;color:var(--gray);margin-top:8px;font-style:italic;">Griffierecht steeg 2019–2024 met gemiddeld 13% — sneller dan de inflatie.</div>
+        </div>
         <div class="feedback"><p>Was deze calculator nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-calculator">Bedankt!</span></div>
       </div>
 
@@ -914,6 +924,15 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
       <div class="page" id="page-zittingsimulatie">
         <div class="ph"><div class="ptag" style="background:var(--amber-light);color:var(--amber);">Simulatie</div><h1>Hoe verloopt een zitting?</h1><p>Loop stap voor stap door een echte zitting — zo weet je precies wat je kunt verwachten.</p></div>
         <div class="page-intro">Klik door de stappen en leer hoe een zitting verloopt.</div>
+        <div class="card" style="margin-bottom:1rem;"><div class="card-title"><i class="ti ti-layout"></i> Plattegrond rechtszaal</div>
+        <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;margin:10px auto 0;display:block;">
+          <rect x="150" y="20" width="100" height="40" rx="6" fill="#EEEDFE" stroke="#534AB7" stroke-width="2"/><text x="200" y="45" text-anchor="middle" font-size="12" fill="#26215C" font-weight="bold">Rechter</text>
+          <rect x="270" y="20" width="80" height="40" rx="6" fill="#f5f3ee" stroke="#e3e0d9" stroke-width="1.5"/><text x="310" y="45" text-anchor="middle" font-size="11" fill="#5f5e5a">Griffier</text>
+          <rect x="20" y="100" width="120" height="40" rx="6" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/><text x="80" y="125" text-anchor="middle" font-size="11" fill="#042C53">Eiser / Aanklager</text>
+          <rect x="260" y="100" width="120" height="40" rx="6" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1.5"/><text x="320" y="125" text-anchor="middle" font-size="11" fill="#791F1F">Gedaagde</text>
+          <rect x="50" y="200" width="300" height="50" rx="6" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.5"/><text x="200" y="230" text-anchor="middle" font-size="12" fill="#27500A" font-weight="bold">Publieke tribune (jij zit hier)</text>
+          <line x1="200" y1="60" x2="200" y2="100" stroke="#e3e0d9" stroke-width="1" stroke-dasharray="4"/>
+        </svg></div>
         <div id="zs-container"></div>
         <div style="display:flex;gap:8px;margin-top:12px;">
           <button class="btn-secondary" id="zs-vorige" onclick="zsNav(-1)"><i class="ti ti-chevron-left"></i> Vorige</button>
@@ -1118,6 +1137,7 @@ function renderU(){
   // Bij eerste laden, toon hardcoded + optie voor live zoeken
   if(!zoekState.query&&!zoekState.rechtsgebied)filterU();
 }
+const subjectMap={'Civiel':'http://psi.rechtspraak.nl/rechtsgebied#civielRecht','Strafrecht':'http://psi.rechtspraak.nl/rechtsgebied#strafrecht','Bestuursrecht':'http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht','Belastingrecht':'http://psi.rechtspraak.nl/rechtsgebied#belastingRecht'};
 function setF(el,v){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('on'));el.classList.add('on');activeF=v;zoekState.rechtsgebied=v==='Alles'?'':v;zoekEnRender();}
 async function zoekEnRender(){
   const q=document.getElementById('zoek-input')?.value||'';
@@ -1125,8 +1145,10 @@ async function zoekEnRender(){
   zoekState.query=q;zoekState.laden=true;
   document.getElementById('resultaten').innerHTML='<div class="laad-indicator"><div class="laad-spinner"></div><div>Uitspraken ophalen van rechtspraak.nl...</div></div>';
   try{
-    const params=new URLSearchParams({query:q,pagina:zoekState.pagina});
-    if(zoekState.rechtsgebied)params.append('rechtsgebied',zoekState.rechtsgebied);
+    const params=new URLSearchParams();
+    if(q)params.append('keyword',q);
+    if(zoekState.rechtsgebied&&subjectMap[zoekState.rechtsgebied])params.append('subject',subjectMap[zoekState.rechtsgebied]);
+    params.append('from',(zoekState.pagina-1)*10);params.append('max','10');
     const resp=await fetch('/api/uitspraken?'+params);
     if(!resp.ok)throw new Error('API fout');
     const data=await resp.json();
@@ -1463,9 +1485,28 @@ function renderWachttijd(naam){
 // ── CALCULATOR (toevoeging 2) ──
 const calcVragen=[{id:'zaaktype',vraag:'Wat voor zaak heb je?',opties:['Huurgeschil','Arbeidsconflict','Verkeersboete','Gemeentebesluit','Geldvordering','Iets anders']},{id:'bedrag',vraag:'Om hoeveel geld gaat het (ongeveer)?',opties:['Minder dan €500','€500 – €5.000','€5.000 – €25.000','Meer dan €25.000','Niet van toepassing']},{id:'inkomen',vraag:'Wat is jouw bruto maandinkomen?',opties:['Minder dan €1.600','€1.600 – €2.500','€2.500 – €4.000','Meer dan €4.000']},{id:'advocaat',vraag:'Heb je al een advocaat?',opties:['Ja','Nee, maar ik zoek er een','Nee, ik doe het zelf']}];
 let calcAntwoorden={};
+const griffieData={jaren:[2019,2020,2021,2022,2023,2024],kanton:[81,83,85,87,89,91],rechtbank:[304,309,314,320,327,334]};
+function tekenGrafiek(){
+  const canvas=document.getElementById('griffie-grafiek');if(!canvas)return;
+  const ctx=canvas.getContext('2d');const W=canvas.width,H=canvas.height;
+  const pad={t:20,r:20,b:40,l:50};const maxY=400;
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle='#e3e0d9';ctx.beginPath();ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,H-pad.b);ctx.lineTo(W-pad.r,H-pad.b);ctx.stroke();
+  const xStep=(W-pad.l-pad.r)/(griffieData.jaren.length-1);const yScale=(H-pad.t-pad.b)/maxY;
+  function tekenLijn(data,kleur){
+    ctx.beginPath();ctx.strokeStyle=kleur;ctx.lineWidth=2.5;
+    data.forEach((v,i)=>{const x=pad.l+i*xStep,y=H-pad.b-v*yScale;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();
+    data.forEach((v,i)=>{ctx.beginPath();ctx.fillStyle=kleur;ctx.arc(pad.l+i*xStep,H-pad.b-v*yScale,4,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle='#1a1a18';ctx.font='bold 10px Nunito';ctx.textAlign='center';ctx.fillText('€'+v,pad.l+i*xStep,H-pad.b-v*yScale-10);});
+  }
+  tekenLijn(griffieData.kanton,'#534AB7');tekenLijn(griffieData.rechtbank,'#A32D2D');
+  ctx.fillStyle='#888780';ctx.font='11px Nunito, sans-serif';ctx.textAlign='center';
+  griffieData.jaren.forEach((j,i)=>{ctx.fillText(j,pad.l+i*xStep,H-pad.b+16);});
+}
 function renderCalc(){
   calcAntwoorden={};
   document.getElementById('calc-result').style.display='none';
+  setTimeout(tekenGrafiek,100);
   document.getElementById('calc-vragen').innerHTML=calcVragen.map((v,vi)=>'<div class="card"><div class="card-title">'+v.vraag+'</div><div style="margin-top:8px;">'+v.opties.map(o=>'<div class="kh-opt" onclick="calcKies('+vi+',this,\''+o.replace(/'/g,"\\'")+'\')" style="margin-bottom:6px;"><span class="kh-opt-ic"><i class="ti ti-circle"></i></span>'+o+'</div>').join('')+'</div></div>').join('')+'<button class="btn-primary" style="margin-top:8px;" onclick="berekenKosten()"><i class="ti ti-calculator"></i> Bereken kosten</button>';
 }
 function calcKies(vi,el,val){
@@ -1622,7 +1663,7 @@ function updateReisBalk(fase){
 }
 
 // ── TERMIJNEN TRACKER (feature 1) ──
-const termijnenData=[{id:'bezwaar',label:'Bezwaar indienen',termijn:42,start:'besluit ontvangen'},{id:'beroep',label:'Beroep bij bestuursrechter',termijn:42,start:'beslissing op bezwaar'},{id:'hogerBeroepCiviel',label:'Hoger beroep (civiel)',termijn:90,start:'vonnis'},{id:'hogerBeroepStraf',label:'Hoger beroep (straf)',termijn:14,start:'uitspraak'},{id:'cassatie',label:'Cassatie bij Hoge Raad',termijn:90,start:'arrest gerechtshof'},{id:'dagvaarding',label:'Reageren op dagvaarding',termijn:28,start:'ontvangst dagvaarding'}];
+const termijnenData=[{id:'bezwaar',label:'Bezwaar indienen',termijn:42,start:'besluit ontvangen'},{id:'beroep',label:'Beroep bij bestuursrechter',termijn:42,start:'beslissing op bezwaar'},{id:'hogerBeroepCiviel',label:'Hoger beroep (civiel)',termijn:90,start:'vonnis'},{id:'hogerBeroepStraf',label:'Hoger beroep (straf)',termijn:14,start:'uitspraak'},{id:'cassatie',label:'Cassatie bij Hoge Raad',termijn:90,start:'arrest gerechtshof'},{id:'dagvaarding',label:'Reageren op dagvaarding',termijn:28,start:'ontvangst dagvaarding'},{id:'belastingBezwaar',label:'Bezwaar belastingaanslag',termijn:42,start:'ontvangst aanslag'},{id:'cjibBeroep',label:'Beroep verkeersboete (CJIB)',termijn:42,start:'ontvangst boete'}];
 function renderTermijnen(){
   document.getElementById('termijnen-lijst').innerHTML=termijnenData.map(t=>{
     const saved=localStorage.getItem('termijn-'+t.id)||'';
@@ -1659,10 +1700,17 @@ function checkSituatie(){
 }
 
 // ── ADVOCATEN (feature 4) ──
-const advLinks={Huurrecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Huurrecht',Arbeidsrecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Arbeidsrecht',Strafrecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Strafrecht',Bestuursrecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Bestuursrecht',Familierecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Familierecht',Verkeersrecht:'https://www.advocatenorde.nl/zoek-een-advocaat?rechtsgebied=Verkeersrecht'};
-const advIcons={Huurrecht:'ti-home',Arbeidsrecht:'ti-briefcase',Strafrecht:'ti-alert-triangle',Bestuursrecht:'ti-building',Familierecht:'ti-users',Verkeersrecht:'ti-car'};
+const advData={Huurrecht:{ic:'ti-home',inst:'Selecteer "Huurrecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/wonen-en-buren/huurwoning/'},Arbeidsrecht:{ic:'ti-briefcase',inst:'Selecteer "Arbeidsrecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/werk-en-uitkering/ontslag/'},Strafrecht:{ic:'ti-alert-triangle',inst:'Selecteer "Strafrecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/misdaad-en-recht/'},Bestuursrecht:{ic:'ti-building',inst:'Selecteer "Bestuursrecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/overheid-en-belasting/bezwaar-en-beroep/'},Familierecht:{ic:'ti-users',inst:'Selecteer "Familierecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/familie-en-relaties/'},Verkeersrecht:{ic:'ti-car',inst:'Selecteer "Verkeersrecht" onder Rechtsgebieden',jl:'https://www.juridischloket.nl/verkeer/verkeersboete/'}};
 function renderAdvocaten(){
-  document.getElementById('adv-keuze').innerHTML=Object.entries(advLinks).map(([k,url])=>'<div class="sc" onclick="window.open(\''+url+'\',\'_blank\')"><div class="sc-ico"><i class="ti '+advIcons[k]+'"></i></div><div class="sc-ttl">'+k+'</div><div class="sc-sub">Zoek via advocatenorde.nl</div></div>').join('');
+  document.getElementById('adv-keuze').innerHTML=Object.entries(advData).map(([k,v])=>'<div class="sc" onclick="toonAdvDetail(\''+k+'\')"><div class="sc-ico"><i class="ti '+v.ic+'"></i></div><div class="sc-ttl">'+k+'</div><div class="sc-sub">Klik voor zoekopties</div></div>').join('');
+}
+function toonAdvDetail(k){
+  const v=advData[k];
+  const el=document.getElementById('adv-keuze');
+  const detail=document.getElementById('adv-detail')||document.createElement('div');
+  detail.id='adv-detail';
+  detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+k+'</div><div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;"><a href="https://zoekeenadvocaat.advocatenorde.nl/zoeken" target="_blank" class="btn-primary" style="text-decoration:none;"><i class="ti ti-search"></i> Zoek advocaat op NOvA</a><div style="font-size:12px;color:var(--gray);margin-top:-6px;"><i class="ti ti-info-circle"></i> '+v.inst+'</div><a href="'+v.jl+'" target="_blank" class="btn-secondary" style="text-decoration:none;"><i class="ti ti-external-link"></i> Juridisch Loket — '+k+'</a><a href="https://www.rvr.org" target="_blank" class="btn-hulp" style="text-decoration:none;"><i class="ti ti-heart-handshake"></i> Gratis advocaat via Raad voor Rechtsbijstand</a></div></div>';
+  if(!document.getElementById('adv-detail'))el.parentElement.insertBefore(detail,el.nextSibling);
 }
 
 // ── ZITTING SIMULATIE (feature 5) ──
@@ -1682,7 +1730,7 @@ function zsNav(dir){
 }
 
 // ── WOORDENBOEK (feature 6) ──
-const wbData={A:[{t:'Aanklager',d:'De officier van justitie die namens de staat een verdachte vervolgt.'},{t:'Arrest',d:'Schriftelijke uitspraak van een gerechtshof of de Hoge Raad.'}],B:[{t:'Bewijslast',d:'De verplichting om bewijs te leveren voor een stelling.'},{t:'Bezwaar',d:'Officieel protest bij een overheidsinstelling tegen een besluit, binnen 6 weken.'},{t:'Beschikking',d:'Officieel besluit van een rechter, vaak in familie- of bestuursrechtzaken.'}],C:[{t:'Cassatie',d:'Beroep bij de Hoge Raad om te toetsen of het recht correct is toegepast.'},{t:'CJIB',d:'Centraal Justitieel Incassobureau — int boetes en betalingen.'}],D:[{t:'Dagvaarding',d:'Officiële oproep om voor de rechter te verschijnen.'},{t:'Deurwaarder',d:'Officier die gerechtelijke documenten bezorgt en beslag kan leggen.'}],E:[{t:'ECLI',d:'European Case Law Identifier — uniek nummer voor elke uitspraak.'},{t:'Eisende partij',d:'Degene die de rechtszaak is begonnen.'}],G:[{t:'Gedaagde',d:'Degene tegen wie een rechtszaak is aangespannen.'},{t:'Griffie',d:'De administratieve afdeling van de rechtbank.'},{t:'Griffierecht',d:'Vergoeding aan de rechtbank om je zaak te behandelen.'}],H:[{t:'Hoger beroep',d:'Je zaak opnieuw laten beoordelen door een hogere rechter.'},{t:'Hoge Raad',d:'Het hoogste rechtscollege van Nederland.'}],K:[{t:'Kantonrechter',d:'Rechter voor kleine zaken tot €25.000 — geen advocaat nodig.'},{t:'Kort geding',d:'Spoedprocedure met snelle voorlopige beslissing.'}],M:[{t:'Mediator',d:'Onpartijdige bemiddelaar die helpt een geschil op te lossen.'},{t:'Meervoudige kamer',d:'Zitting met drie rechters.'}],O:[{t:'Officier van justitie',d:'De aanklager namens de staat in strafzaken.'},{t:'Ontbinding',d:'Het beëindigen van een overeenkomst via de rechter.'}],T:[{t:'Toevoeging',d:'Subsidie waarmee de overheid advocaatkosten vergoedt bij laag inkomen.'},{t:'Transitievergoeding',d:'Vergoeding bij ontslag: 1/3 maandsalaris per dienstjaar.'}],V:[{t:'Verdachte',d:'Degene die wordt verdacht van een strafbaar feit.'},{t:'Verweerschrift',d:'Jouw officiële reactie op de aanklacht.'},{t:'Vonnis',d:'Schriftelijke beslissing van een rechter.'}],Z:[{t:'Zitting',d:'Bijeenkomst bij de rechter waarbij de zaak mondeling wordt behandeld.'}]};
+const wbData={A:[{t:'Aanklager',d:'De officier van justitie die namens de staat een verdachte vervolgt.'},{t:'Arrest',d:'Schriftelijke uitspraak van een gerechtshof of de Hoge Raad.'}],B:[{t:'Bewijslast',d:'De verplichting om bewijs te leveren voor een stelling.'},{t:'Bezwaar',d:'Officieel protest bij een overheidsinstelling tegen een besluit, binnen 6 weken.'},{t:'Beschikking',d:'Officieel besluit van een rechter, vaak in familie- of bestuursrechtzaken.'}],C:[{t:'Cassatie',d:'Beroep bij de Hoge Raad om te toetsen of het recht correct is toegepast.'},{t:'CJIB',d:'Centraal Justitieel Incassobureau — int boetes en betalingen.'}],D:[{t:'Dagvaarding',d:'Officiële oproep om voor de rechter te verschijnen.'},{t:'Deurwaarder',d:'Officier die gerechtelijke documenten bezorgt en beslag kan leggen.'}],E:[{t:'ECLI',d:'European Case Law Identifier — uniek nummer voor elke uitspraak.'},{t:'Eisende partij',d:'Degene die de rechtszaak is begonnen.'}],G:[{t:'Gedaagde',d:'Degene tegen wie een rechtszaak is aangespannen.'},{t:'Griffie',d:'De administratieve afdeling van de rechtbank.'},{t:'Griffierecht',d:'Vergoeding aan de rechtbank om je zaak te behandelen.'}],H:[{t:'Hoger beroep',d:'Je zaak opnieuw laten beoordelen door een hogere rechter.'},{t:'Hoge Raad',d:'Het hoogste rechtscollege van Nederland.'}],K:[{t:'Kantonrechter',d:'Rechter voor kleine zaken tot €25.000 — geen advocaat nodig.'},{t:'Kort geding',d:'Spoedprocedure met snelle voorlopige beslissing.'}],M:[{t:'Mediator',d:'Onpartijdige bemiddelaar die helpt een geschil op te lossen.'},{t:'Meervoudige kamer',d:'Zitting met drie rechters.'}],O:[{t:'Officier van justitie',d:'De aanklager namens de staat in strafzaken — afgekort OvJ.'},{t:'Ontbinding',d:'Beëindigen van een contract (huur of arbeids) via de rechter.'},{t:'Openbaar Ministerie',d:'De organisatie van officieren van justitie die strafzaken vervolgt.'}],P:[{t:'Procespartij',d:'Iedereen die officieel betrokken is bij een rechtszaak: eiser, gedaagde, of benadeelde partij.'},{t:'Politierechter',d:'Rechter die enkelvoudig (alleen) eenvoudige strafzaken behandelt.'}],S:[{t:'Schikking',d:'Onderlinge afspraak om een zaak te beëindigen zonder dat de rechter uitspraak doet.'},{t:'Spreekrecht',d:'Het recht van slachtoffers van ernstige misdrijven om een verklaring af te leggen.'}],T:[{t:'Toevoeging',d:'Subsidie waarmee de overheid advocaatkosten vergoedt bij laag inkomen.'},{t:'Transitievergoeding',d:'Vergoeding bij ontslag: 1/3 maandsalaris per dienstjaar.'}],V:[{t:'Verdachte',d:'Degene die wordt verdacht van een strafbaar feit.'},{t:'Verweerschrift',d:'Jouw officiële reactie op de aanklacht.'},{t:'Vonnis',d:'Schriftelijke beslissing van een rechter.'}],W:[{t:'WAHV',d:'Wet administratiefrechtelijke handhaving verkeersvoorschriften — de wet op verkeersboetes.'},{t:'Wraking',d:'Een verzoek om een rechter te vervangen omdat je twijfelt aan zijn onpartijdigheid.'}],Z:[{t:'Zitting',d:'Bijeenkomst bij de rechter waarbij de zaak mondeling wordt behandeld.'}]};
 let wbLetter='A';
 function renderWB(){wbLetter='A';toonWBLetter();
   document.getElementById('wb-tabs').innerHTML=Object.keys(wbData).map(l=>'<div class="wb-tab'+(l===wbLetter?' on':'')+'" onclick="wbLetter=\''+l+'\';toonWBLetter()">'+l+'</div>').join('');
@@ -1700,9 +1748,14 @@ function filterWB(){
 }
 
 // ── SLACHTOFFER (feature 8) ──
-const slachtofferData=[{titel:'Recht op informatie',ic:'ti-info-circle',beschrijving:'Je hebt het recht om geïnformeerd te worden over de voortgang, de uitspraak en eventuele vrijlating.',hoe:'Meld je aan bij het Openbaar Ministerie als "slachtoffer met spreekrecht".',link:'https://www.slachtofferhulp.nl'},{titel:'Spreekrecht',ic:'ti-microphone',beschrijving:'Bij ernstige misdrijven mag je tijdens de zitting een verklaring afleggen over de impact.',hoe:'Meld je minimaal 3 weken voor de zitting bij het Openbaar Ministerie.',link:'https://www.om.nl/onderwerpen/slachtoffers/'},{titel:'Schadevergoeding',ic:'ti-currency-euro',beschrijving:'Je kunt je als benadeelde partij voegen in de strafzaak en schadevergoeding eisen.',hoe:'Vul een voegingsformulier in via slachtofferhulp.nl.',link:'https://www.slachtofferhulp.nl/schadevergoeding/'},{titel:'Slachtofferhulp Nederland',ic:'ti-heart-handshake',beschrijving:'Gratis hulp bij emotionele verwerking, praktische vragen en juridische begeleiding.',hoe:'Bel 0900-0101 (gratis) of ga naar slachtofferhulp.nl.',link:'https://www.slachtofferhulp.nl'}];
+const slachtofferData=[
+  {titel:'Recht op informatie',ic:'ti-info-circle',beschrijving:'Je hebt het recht om geïnformeerd te worden over de voortgang van de zaak, de uitspraak en eventuele vrijlating van de verdachte.',hoe:'Volg je zaak online via MijnSlachtofferzaak of meld je aan bij het Openbaar Ministerie.',links:[{url:'https://www.mijnslachtofferzaak.nl',label:'MijnSlachtofferzaak'},{url:'https://www.rechtspraak.nl/naar-de-rechter/rol-in-rechtszaak/slachtoffer',label:'Rechtspraak.nl — slachtoffer'}]},
+  {titel:'Spreekrecht',ic:'ti-microphone',beschrijving:'Bij ernstige misdrijven (8+ jaar gevangenisstraf, seksuele misdrijven, stalking, bedreiging) mag je tijdens de zitting een verklaring afleggen.',hoe:'Het OM stuurt je een brief als je spreekrecht hebt. Slachtofferhulp Nederland helpt bij de voorbereiding.',links:[{url:'https://www.slachtofferhulp.nl/strafproces/spreekrecht/',label:'Spreekrecht — Slachtofferhulp'},{url:'https://www.rechtspraak.nl/naar-de-rechter/rol-in-rechtszaak/slachtoffer/spreekrecht',label:'Spreekrecht — Rechtspraak.nl'},{url:'https://www.om.nl/onderwerpen/slachtofferrechten/spreekrecht',label:'Spreekrecht — Openbaar Ministerie'}]},
+  {titel:'Schadevergoeding',ic:'ti-currency-euro',beschrijving:'Je kunt je als benadeelde partij voegen in de strafzaak en schadevergoeding eisen. Bij ernstige misdrijven is een advocaat gratis.',hoe:'Vul een voegingsformulier in via slachtofferhulp.nl en stuur het naar de officier van justitie vóór de zitting.',links:[{url:'https://www.slachtofferhulp.nl/schadevergoeding/',label:'Schadevergoeding — Slachtofferhulp'},{url:'https://www.rijksoverheid.nl/onderwerpen/slachtofferbeleid/vraag-en-antwoord/spreekrecht-slachtoffer-of-nabestaande',label:'Rijksoverheid — slachtofferbeleid'}]},
+  {titel:'Slachtofferhulp Nederland',ic:'ti-heart-handshake',beschrijving:'Gratis hulp bij emotionele verwerking, praktische vragen en juridische begeleiding. Bel 0900-0101 (gratis, ma–vr 9–17u).',hoe:'Bel 0900-0101 (gratis) of ga naar slachtofferhulp.nl.',links:[{url:'https://www.slachtofferhulp.nl/strafproces/',label:'Strafproces — slachtofferhulp.nl'}]}
+];
 function renderSlachtoffer(){
-  document.getElementById('slachtoffer-lijst').innerHTML=slachtofferData.map((s,i)=>'<div class="slachtoffer-kaart" onclick="this.querySelector(\'.slachtoffer-detail\').classList.toggle(\'open\')"><div style="display:flex;gap:12px;align-items:center;"><div style="font-size:24px;color:var(--purple);"><i class="ti '+s.ic+'"></i></div><div style="flex:1;"><div style="font-size:15px;font-weight:800;color:#1a1a18;">'+s.titel+'</div><div style="font-size:13px;color:var(--gray);margin-top:2px;">'+s.beschrijving+'</div></div></div><div class="slachtoffer-detail"><div style="margin-bottom:8px;"><strong>Hoe?</strong> '+s.hoe+'</div><a href="'+s.link+'" target="_blank" class="btn-secondary" style="font-size:12px;padding:6px 12px;text-decoration:none;"><i class="ti ti-external-link"></i> Meer informatie</a></div></div>').join('');
+  document.getElementById('slachtoffer-lijst').innerHTML=slachtofferData.map((s,i)=>'<div class="slachtoffer-kaart" onclick="this.querySelector(\'.slachtoffer-detail\').classList.toggle(\'open\')"><div style="display:flex;gap:12px;align-items:center;"><div style="font-size:24px;color:var(--purple);"><i class="ti '+s.ic+'"></i></div><div style="flex:1;"><div style="font-size:15px;font-weight:800;color:#1a1a18;">'+s.titel+'</div><div style="font-size:13px;color:var(--gray);margin-top:2px;">'+s.beschrijving+'</div></div></div><div class="slachtoffer-detail"><div style="margin-bottom:8px;"><strong>Hoe?</strong> '+s.hoe+'</div><div style="display:flex;flex-wrap:wrap;gap:6px;">'+s.links.map(l=>'<a href="'+l.url+'" target="_blank" class="btn-secondary" style="font-size:11px;padding:5px 10px;text-decoration:none;"><i class="ti ti-external-link"></i> '+l.label+'</a>').join('')+'</div></div></div>').join('');
 }
 
 // ── Activeer reis-balk na keuzehulp ──
