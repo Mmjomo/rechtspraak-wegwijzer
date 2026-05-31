@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <title>Wegwijzer rechtspraak.nl</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
@@ -264,6 +265,94 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 .mob-nav-item .mn-ic{font-size:20px;}
 .spoed-fab{display:none;position:fixed;bottom:70px;right:16px;z-index:99;background:#E24B4A;color:#fff;border:none;border-radius:50%;width:52px;height:52px;font-size:22px;cursor:pointer;box-shadow:0 4px 12px rgba(226,75,74,.4);}
 
+/* ── WACHTTIJD ── */
+.wachttijd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+.wachttijd-item{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
+.wt-rechtsgebied{font-size:11px;font-weight:700;color:var(--gray);margin-bottom:4px;}
+.wt-weken{font-size:22px;font-weight:900;color:#1a1a18;margin-bottom:4px;}
+.wt-trend{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;display:inline-block;}
+.wt-stijgend{background:var(--red-light);color:var(--red);}
+.wt-stabiel{background:var(--bg);color:var(--gray);}
+.wt-dalend{background:var(--green-light);color:var(--green);}
+.wt-disclaimer{font-size:11px;color:var(--gray);margin-top:10px;font-style:italic;line-height:1.6;}
+
+/* ── CALCULATOR ── */
+.calculator-result{background:var(--purple-light);border:2px solid var(--purple);border-radius:16px;padding:1.5rem;margin-top:1rem;}
+.calc-item{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(83,74,183,.2);}
+.calc-label{font-size:14px;font-weight:700;color:var(--purple-dark);}
+.calc-bedrag{font-size:18px;font-weight:900;color:var(--purple-dark);text-align:right;}
+.calc-toelichting{font-size:11px;color:var(--purple);margin-top:2px;}
+.calc-totaal{border-bottom:none;padding-top:14px;margin-top:4px;border-top:2px solid var(--purple);}
+.calc-toevoeging{background:var(--green-light);color:var(--green);font-size:13px;font-weight:700;padding:10px 14px;border-radius:10px;margin-top:12px;}
+
+/* ── BRIEF DECODER ── */
+.brief-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:1rem;}
+.brief-tile{background:#fff;border:2px solid var(--border);border-radius:14px;padding:1rem;cursor:pointer;text-align:center;transition:all .18s;}
+.brief-tile:hover{border-color:var(--purple);transform:translateY(-2px);}
+.brief-tile.on{border-color:var(--purple);background:var(--purple-light);}
+.brief-icon{font-size:28px;margin-bottom:6px;}
+.brief-naam{font-size:13px;font-weight:800;color:#1a1a18;}
+.brief-stap{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border);}
+.brief-stap:last-child{border-bottom:none;}
+.brief-stap-num{width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
+
+/* ── VERGELIJKER ── */
+.verg-table{width:100%;border-collapse:separate;border-spacing:8px;margin-bottom:1rem;}
+.verg-table th{padding:14px 10px;border-radius:12px;font-size:13px;font-weight:800;text-align:center;vertical-align:top;}
+.verg-table td{background:#fff;padding:10px;border-radius:8px;font-size:13px;text-align:center;font-weight:600;border:1px solid var(--border);}
+.verg-table .verg-dim{background:transparent;text-align:left;font-weight:800;color:var(--gray);font-size:12px;border:none;}
+.verg-advies{border-radius:12px;padding:12px;font-size:12px;line-height:1.6;margin-top:8px;}
+
+/* ── KAART ── */
+#kaart-container{height:420px;border-radius:16px;border:1.5px solid var(--border);margin-bottom:1rem;}
+.reistijd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-top:10px;}
+.reistijd-item{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:10px;font-size:13px;}
+
+/* ── WET ── */
+.wet-artikel{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:14px;margin-bottom:8px;}
+.wet-artikel-nr{font-size:12px;font-weight:800;color:var(--purple);margin-bottom:4px;}
+.wet-artikel-wet{font-size:11px;color:var(--gray);margin-bottom:6px;}
+.wet-artikel-tekst{font-size:13px;color:#2c2c2a;line-height:1.7;}
+
+/* ── NOTIFICATIES ── */
+.notif-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:14px;outline:none;margin-top:6px;}
+.notif-input:focus{border-color:var(--purple);}
+.notif-select{width:100%;border:2px solid var(--border);border-radius:10px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:14px;outline:none;margin-top:6px;background:#fff;}
+.form-label{font-size:14px;font-weight:800;color:#1a1a18;}
+.notif-check{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:14px;font-weight:600;color:#2c2c2a;cursor:pointer;}
+.notif-check input{width:18px;height:18px;accent-color:var(--purple);}
+
+/* ── MIJN TIJDLIJN ── */
+.mt-input{display:flex;gap:8px;align-items:center;margin-bottom:10px;}
+.mt-input label{font-size:13px;font-weight:700;color:#1a1a18;min-width:180px;}
+.mt-input input{flex:1;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-family:'Nunito',sans-serif;font-size:13px;outline:none;}
+.mt-input input:focus{border-color:var(--purple);}
+.mt-deadline{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.mt-deadline:last-child{border-bottom:none;}
+.mt-status{font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px;}
+.mt-verlopen{background:var(--red-light);color:var(--red);}
+.mt-aankomend{background:var(--amber-light);color:var(--amber);}
+.mt-klaar{background:var(--green-light);color:var(--green);}
+
+/* ── PRINT HEADER ── */
+.print-header{display:none;}
+.print-footer{display:none;}
+
+/* ── PRINT ── */
+@media print{
+  .sidebar,.mob-nav,.a11y,.topbar,.spoed-fab,.feedback,.spoed-btn-top,.global-search,.tb-url,.bc,.modal-bg{display:none!important;}
+  body{background:#fff;font-size:12pt;}
+  .shell{display:block;}
+  .content{padding:0;}
+  .page{display:none!important;}
+  .page.active{display:block!important;}
+  .print-header{display:block!important;text-align:center;margin-bottom:24pt;}
+  .print-footer{display:block!important;text-align:center;font-size:9pt;color:#888;margin-top:24pt;border-top:1px solid #ccc;padding-top:8pt;}
+  .card{break-inside:avoid;border:1px solid #ccc;}
+  .tl-stap{break-inside:avoid;}
+  .btn-primary,.btn-secondary,.btn-hulp{display:none!important;}
+}
+
 @media(max-width:700px){
   .shell{grid-template-columns:1fr;}
   .sidebar{display:none;}
@@ -317,6 +406,15 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
     <div class="nav" onclick="go('rechtbanken')" id="nav-rechtbanken"><span class="nav-ic"><i class="ti ti-map-pin"></i></span>Rechtbank bij mij</div>
     <div class="nav" onclick="go('checklist')" id="nav-checklist"><span class="nav-ic"><i class="ti ti-circle-check"></i></span>Checklist zitting</div>
     <div class="nav" onclick="go('faq')" id="nav-faq"><span class="nav-ic"><i class="ti ti-help-circle"></i></span>Vragen</div>
+    <div class="sb-sec">Hulpmiddelen</div>
+    <div class="nav" onclick="go('calculator')" id="nav-calculator"><span class="nav-ic"><i class="ti ti-calculator"></i></span>Kosten berekenen</div>
+    <div class="nav" onclick="go('bewijs')" id="nav-bewijs"><span class="nav-ic"><i class="ti ti-paperclip"></i></span>Bewijs checklist</div>
+    <div class="nav" onclick="go('mijntijdlijn')" id="nav-mijntijdlijn"><span class="nav-ic"><i class="ti ti-timeline"></i></span>Mijn tijdlijn</div>
+    <div class="nav" onclick="go('vergelijker')" id="nav-vergelijker"><span class="nav-ic"><i class="ti ti-arrows-diff"></i></span>Rechter vs mediator</div>
+    <div class="nav" onclick="go('briefdecoder')" id="nav-briefdecoder"><span class="nav-ic"><i class="ti ti-mail"></i></span>Brief decoder</div>
+    <div class="nav" onclick="go('kaart')" id="nav-kaart"><span class="nav-ic"><i class="ti ti-map-2"></i></span>Rechtbank kaart</div>
+    <div class="nav" onclick="go('wet')" id="nav-wet"><span class="nav-ic"><i class="ti ti-book"></i></span>Wat zegt de wet?</div>
+    <div class="nav" onclick="go('notificaties')" id="nav-notificaties"><span class="nav-ic"><i class="ti ti-bell"></i></span>Meldingen instellen</div>
     <div class="sb-foot">
       <button class="btn-hulp" style="width:100%;margin-bottom:7px;animation:pulse 2.5s ease-in-out infinite;padding:11px 13px;font-size:13px;border-radius:11px;" onclick="alert('Bel gratis:\n0900-8020\nMaandag t/m vrijdag\n9:00 – 17:00 uur')">
         <i class="ti ti-phone"></i><div style="text-align:left"><div>Hulp nodig?</div><div style="font-size:11px;opacity:.85">Juridisch Loket: 0900-8020</div></div>
@@ -575,6 +673,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <div style="font-size:16px;font-weight:800;color:#27500A;">Je bent helemaal klaar!</div>
           <div style="font-size:13px;color:var(--teal);margin-top:4px;">Succes bij de zitting. Vergeet niet op tijd te zijn.</div>
         </div>
+        <button class="btn-secondary" onclick="window.print()" style="margin-top:1rem;"><i class="ti ti-printer"></i> Afdrukken of opslaan als PDF</button>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;">Kies in het printvenster "Opslaan als PDF" om een bestand te bewaren.</p>
         <div class="feedback"><p>Was deze checklist nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-checklist">Bedankt!</span></div>
       </div>
 
@@ -594,8 +694,135 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="feedback"><p>Stond jouw vraag erbij?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-faq">Bedankt!</span></div>
       </div>
 
+      <!-- ══ CALCULATOR ══ -->
+      <div class="page" id="page-calculator">
+        <div class="ph">
+          <div class="ptag" style="background:var(--amber-light);color:var(--amber);">Kosten</div>
+          <h1>Wat kost een rechtszaak?</h1>
+          <p>Vul je situatie in en krijg een realistische kostenraming.</p>
+        </div>
+        <div class="page-intro">Beantwoord vier vragen en zie direct wat jouw zaak ongeveer gaat kosten.</div>
+        <div id="calc-vragen"></div>
+        <div id="calc-result" style="display:none;"></div>
+        <div class="feedback"><p>Was deze calculator nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-calculator">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ BEWIJS ══ -->
+      <div class="page" id="page-bewijs">
+        <div class="ph">
+          <div class="ptag" style="background:var(--teal-light);color:var(--teal);">Bewijs</div>
+          <h1>Welke bewijsstukken heb je nodig?</h1>
+          <p>Kies jouw type zaak en zie welke documenten je moet verzamelen.</p>
+        </div>
+        <div class="page-intro">Kies je zaaktype en vink af welke bewijsstukken je al hebt.</div>
+        <div class="g2" id="bewijs-keuze"></div>
+        <div id="bewijs-lijst" style="display:none;"></div>
+        <div class="feedback"><p>Was dit nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-bewijs">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ MIJN TIJDLIJN ══ -->
+      <div class="page" id="page-mijntijdlijn">
+        <div class="ph">
+          <div class="ptag" style="background:var(--purple-light);color:var(--purple);">Mijn tijdlijn</div>
+          <h1>Mijn persoonlijke tijdlijn</h1>
+          <p>Vul je datums in en zie welke deadlines eraan komen.</p>
+        </div>
+        <div class="page-intro">Vul in welke stappen je al hebt gezet — wij berekenen je deadlines.</div>
+        <div class="card" id="mt-form">
+          <div class="card-title"><i class="ti ti-calendar"></i> Vul je datums in</div>
+          <div style="margin-top:10px;" id="mt-inputs"></div>
+          <button class="btn-primary" style="margin-top:14px;" onclick="berekenMijnTijdlijn()"><i class="ti ti-calculator"></i> Bereken deadlines</button>
+        </div>
+        <div id="mt-result" style="display:none;"></div>
+        <button class="btn-secondary" onclick="window.print()" style="margin-top:1rem;display:none;" id="mt-print"><i class="ti ti-printer"></i> Afdrukken of opslaan als PDF</button>
+        <p style="font-size:12px;color:var(--gray);margin-top:6px;display:none;" id="mt-print-hint">Kies in het printvenster "Opslaan als PDF" om een bestand te bewaren.</p>
+        <div class="feedback"><p>Was dit nuttig?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-mijntijdlijn">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ VERGELIJKER ══ -->
+      <div class="page" id="page-vergelijker">
+        <div class="ph">
+          <div class="ptag" style="background:var(--kleur-civiel-bg);color:var(--kleur-civiel);">Vergelijken</div>
+          <h1>Rechter, mediator of zelf oplossen?</h1>
+          <p>Vergelijk de opties naast elkaar en kies wat het beste bij jou past.</p>
+        </div>
+        <div class="page-intro">Bekijk de voor- en nadelen van elke aanpak naast elkaar.</div>
+        <div style="overflow-x:auto;" id="verg-container"></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-vergelijker">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ BRIEF DECODER ══ -->
+      <div class="page" id="page-briefdecoder">
+        <div class="ph">
+          <div class="ptag" style="background:var(--amber-light);color:var(--amber);">Brief decoder</div>
+          <h1>Wat betekent deze brief?</h1>
+          <p>Kies welk type brief je hebt ontvangen en lees de uitleg in gewone taal.</p>
+        </div>
+        <div class="page-intro">Klik op het type brief dat je hebt ontvangen voor uitleg en actie.</div>
+        <div class="brief-grid" id="brief-grid"></div>
+        <div id="brief-detail" style="display:none;"></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-briefdecoder">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ KAART ══ -->
+      <div class="page" id="page-kaart">
+        <div class="ph">
+          <div class="ptag" style="background:var(--green-light);color:var(--green);">Kaart</div>
+          <h1>Rechtbanken op de kaart</h1>
+          <p>Bekijk alle rechtbanken op de kaart en plan je reis.</p>
+        </div>
+        <div class="page-intro">Klik op een marker voor adres en contactgegevens.</div>
+        <div id="kaart-container"></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-kaart">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ WET ══ -->
+      <div class="page" id="page-wet">
+        <div class="ph">
+          <div class="ptag" style="background:var(--kleur-civiel-bg);color:var(--kleur-civiel);">Wetgeving</div>
+          <h1>Wat zegt de wet?</h1>
+          <p>Kies jouw situatie en lees welke wetsartikelen van toepassing zijn — in gewone taal.</p>
+        </div>
+        <div class="page-intro">Klik op jouw situatie voor de relevante wetsartikelen.</div>
+        <div class="g2" id="wet-keuze"></div>
+        <div id="wet-detail" style="display:none;"></div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-wet">Bedankt!</span></div>
+      </div>
+
+      <!-- ══ NOTIFICATIES ══ -->
+      <div class="page" id="page-notificaties">
+        <div class="ph">
+          <div class="ptag" style="background:var(--purple-light);color:var(--purple);">Meldingen</div>
+          <h1>Meldingen instellen</h1>
+          <p>Ontvang een melding bij nieuwe uitspraken in jouw categorie.</p>
+        </div>
+        <div class="page-intro">Kies je voorkeuren en blijf op de hoogte van relevante uitspraken.</div>
+        <div class="card" id="notif-form">
+          <div class="form-label">Jouw e-mailadres</div>
+          <input type="email" id="notif-email" class="notif-input" placeholder="naam@voorbeeld.nl">
+          <div class="form-label" style="margin-top:16px;">Stuur mij nieuwe uitspraken over:</div>
+          <div id="notif-checks" style="margin-top:8px;"></div>
+          <div class="form-label" style="margin-top:16px;">In welke rechtbank regio?</div>
+          <select class="notif-select" id="notif-rb"></select>
+          <button class="btn-primary" style="margin-top:20px;width:100%;" onclick="slaNotifOp()"><i class="ti ti-bell"></i> Meldingen instellen</button>
+        </div>
+        <div id="notif-bevestiging" style="display:none;" class="card">
+          <div style="font-size:36px;text-align:center;margin-bottom:12px;color:var(--teal);"><i class="ti ti-circle-check"></i></div>
+          <div style="font-weight:800;text-align:center;font-size:16px;">Ingesteld!</div>
+          <div style="font-size:13px;color:var(--gray);text-align:center;margin-top:6px;">Je ontvangt een melding zodra er nieuwe uitspraken zijn in jouw categorie.<br><em>(Dit is een prototype — in de echte versie wordt een bevestigingsmail gestuurd.)</em></div>
+        </div>
+        <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-notificaties">Bedankt!</span></div>
+      </div>
+
     </div>
   </div>
+</div>
+
+<!-- Print header -->
+<div class="print-header">
+  <div style="font-size:24pt;"><i class="ti ti-scale"></i></div>
+  <h1>rechtspraak.nl — Persoonlijk overzicht</h1>
+  <p style="font-size:10pt;color:#888;" id="print-datum"></p>
 </div>
 
 <!-- MOBIELE NAVIGATIE -->
@@ -612,8 +839,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 
 <script>
 // ── NAVIGATIE ──
-const urlMap={home:'rechtspraak.nl',keuzehulp:'rechtspraak.nl/wat-moet-ik-doen',uitspraken:'uitspraken.rechtspraak.nl',zittingen:'rechtspraak.nl/zittingsrooster',mijn:'mijn.rechtspraak.nl',tijdlijn:'rechtspraak.nl/doorlooptijden',rechtbanken:'rechtspraak.nl/rechtbank-vinden',checklist:'rechtspraak.nl/checklist-zitting',faq:'rechtspraak.nl/vragen'};
-const bcMap={home:'Home',keuzehulp:'Home › Wat moet ik doen?',uitspraken:'Home › Uitspraken',zittingen:'Home › Zittingsrooster',mijn:'Home › Mijn Rechtspraak',tijdlijn:'Home › Doorlooptijden',rechtbanken:'Home › Rechtbank vinden',checklist:'Home › Checklist',faq:'Home › Vragen'};
+const urlMap={home:'rechtspraak.nl',keuzehulp:'rechtspraak.nl/wat-moet-ik-doen',uitspraken:'uitspraken.rechtspraak.nl',zittingen:'rechtspraak.nl/zittingsrooster',mijn:'mijn.rechtspraak.nl',tijdlijn:'rechtspraak.nl/doorlooptijden',rechtbanken:'rechtspraak.nl/rechtbank-vinden',checklist:'rechtspraak.nl/checklist-zitting',faq:'rechtspraak.nl/vragen',calculator:'rechtspraak.nl/kosten-calculator',bewijs:'rechtspraak.nl/bewijs-checklist',mijntijdlijn:'rechtspraak.nl/mijn-tijdlijn',vergelijker:'rechtspraak.nl/vergelijker',briefdecoder:'rechtspraak.nl/brief-decoder',kaart:'rechtspraak.nl/rechtbank-kaart',wet:'rechtspraak.nl/wat-zegt-de-wet',notificaties:'rechtspraak.nl/notificaties'};
+const bcMap={home:'Home',keuzehulp:'Home › Wat moet ik doen?',uitspraken:'Home › Uitspraken',zittingen:'Home › Zittingsrooster',mijn:'Home › Mijn Rechtspraak',tijdlijn:'Home › Doorlooptijden',rechtbanken:'Home › Rechtbank vinden',checklist:'Home › Checklist',faq:'Home › Vragen',calculator:'Home › Kosten berekenen',bewijs:'Home › Bewijs checklist',mijntijdlijn:'Home › Mijn tijdlijn',vergelijker:'Home › Rechter vs mediator',briefdecoder:'Home › Brief decoder',kaart:'Home › Rechtbank kaart',wet:'Home › Wat zegt de wet?',notificaties:'Home › Meldingen'};
 
 // VP8: Klikbare breadcrumb
 function setBreadcrumb(id){
@@ -640,6 +867,14 @@ function go(id){
   if(id==='rechtbanken')renderRB();
   if(id==='checklist')renderChecklist();
   if(id==='home')renderHomeFAQ();
+  if(id==='calculator')renderCalc();
+  if(id==='bewijs')renderBewijs();
+  if(id==='mijntijdlijn')renderMijnTijdlijn();
+  if(id==='vergelijker')renderVergelijker();
+  if(id==='briefdecoder')renderBriefDecoder();
+  if(id==='kaart')initKaart();
+  if(id==='wet')renderWet();
+  if(id==='notificaties')renderNotif();
   window.scrollTo(0,0);
 }
 
@@ -1013,8 +1248,179 @@ function globaalZoeken(query){
   gsRender(hits);
 }
 
+// ── WACHTTIJD-INDICATOR (toevoeging 1) ──
+const wachttijden={'Rechtbank Amsterdam':{civiel:{weken:14,trend:'stijgend'},straf:{weken:8,trend:'stabiel'},bestuur:{weken:20,trend:'dalend'}},'Rechtbank Den Haag':{civiel:{weken:12,trend:'stabiel'},straf:{weken:6,trend:'dalend'},bestuur:{weken:18,trend:'stabiel'}},'Rechtbank Rotterdam':{civiel:{weken:16,trend:'stijgend'},straf:{weken:10,trend:'stabiel'},bestuur:{weken:22,trend:'stijgend'}},'Rechtbank Midden-Nederland':{civiel:{weken:11,trend:'stabiel'},straf:{weken:7,trend:'stabiel'},bestuur:{weken:16,trend:'dalend'}},'Rechtbank Noord-Holland':{civiel:{weken:13,trend:'stabiel'},straf:{weken:9,trend:'stabiel'},bestuur:{weken:19,trend:'stabiel'}},'Rechtbank Overijssel':{civiel:{weken:10,trend:'dalend'},straf:{weken:7,trend:'stabiel'},bestuur:{weken:15,trend:'dalend'}},'Rechtbank Gelderland':{civiel:{weken:12,trend:'stabiel'},straf:{weken:8,trend:'stabiel'},bestuur:{weken:17,trend:'stabiel'}},'Rechtbank Noord-Nederland':{civiel:{weken:11,trend:'dalend'},straf:{weken:6,trend:'dalend'},bestuur:{weken:14,trend:'dalend'}},'Rechtbank Oost-Brabant':{civiel:{weken:13,trend:'stabiel'},straf:{weken:9,trend:'stijgend'},bestuur:{weken:18,trend:'stabiel'}},'Rechtbank Zeeland-West-Brabant':{civiel:{weken:14,trend:'stijgend'},straf:{weken:8,trend:'stabiel'},bestuur:{weken:19,trend:'stabiel'}},'Rechtbank Limburg':{civiel:{weken:12,trend:'stabiel'},straf:{weken:7,trend:'dalend'},bestuur:{weken:16,trend:'dalend'}}};
+function renderWachttijd(naam){
+  const w=wachttijden[naam];if(!w)return'';
+  const tIc={stijgend:'<i class="ti ti-trending-up"></i>',stabiel:'<i class="ti ti-minus"></i>',dalend:'<i class="ti ti-trending-down"></i>'};
+  return '<div style="margin-top:12px;"><div style="font-size:13px;font-weight:800;color:#1a1a18;margin-bottom:6px;"><i class="ti ti-clock"></i> Gemiddelde wachttijd</div><div class="wachttijd-grid">'+
+    ['civiel','straf','bestuur'].map(g=>{const d=w[g];return'<div class="wachttijd-item"><div class="wt-rechtsgebied">'+(g==='civiel'?'Civiel recht':g==='straf'?'Strafrecht':'Bestuursrecht')+'</div><div class="wt-weken">'+d.weken+' wk</div><div class="wt-trend wt-'+d.trend+'">'+tIc[d.trend]+' '+d.trend+'</div></div>';}).join('')+
+    '</div><p class="wt-disclaimer">Gemiddelden op basis van Raad voor de rechtspraak Jaarverslag 2023. Actuele wachttijden kunnen afwijken.</p></div>';
+}
+
+// ── CALCULATOR (toevoeging 2) ──
+const calcVragen=[{id:'zaaktype',vraag:'Wat voor zaak heb je?',opties:['Huurgeschil','Arbeidsconflict','Verkeersboete','Gemeentebesluit','Geldvordering','Iets anders']},{id:'bedrag',vraag:'Om hoeveel geld gaat het (ongeveer)?',opties:['Minder dan €500','€500 – €5.000','€5.000 – €25.000','Meer dan €25.000','Niet van toepassing']},{id:'inkomen',vraag:'Wat is jouw bruto maandinkomen?',opties:['Minder dan €1.600','€1.600 – €2.500','€2.500 – €4.000','Meer dan €4.000']},{id:'advocaat',vraag:'Heb je al een advocaat?',opties:['Ja','Nee, maar ik zoek er een','Nee, ik doe het zelf']}];
+let calcAntwoorden={};
+function renderCalc(){
+  calcAntwoorden={};
+  document.getElementById('calc-result').style.display='none';
+  document.getElementById('calc-vragen').innerHTML=calcVragen.map((v,vi)=>'<div class="card"><div class="card-title">'+v.vraag+'</div><div style="margin-top:8px;">'+v.opties.map(o=>'<div class="kh-opt" onclick="calcKies('+vi+',this,\''+o.replace(/'/g,"\\'")+'\')" style="margin-bottom:6px;"><span class="kh-opt-ic"><i class="ti ti-circle"></i></span>'+o+'</div>').join('')+'</div></div>').join('')+'<button class="btn-primary" style="margin-top:8px;" onclick="berekenKosten()"><i class="ti ti-calculator"></i> Bereken kosten</button>';
+}
+function calcKies(vi,el,val){
+  calcAntwoorden[calcVragen[vi].id]=val;
+  el.parentElement.querySelectorAll('.kh-opt').forEach(o=>{o.style.borderColor='var(--border)';o.style.background='#fff';});
+  el.style.borderColor='var(--purple)';el.style.background='var(--purple-light)';
+}
+function berekenKosten(){
+  const i=calcAntwoorden;if(!i.zaaktype){alert('Beantwoord alle vragen.');return;}
+  let griff=85,advMin=0,advMax=0,toev=false,advies='';
+  if(i.bedrag==='€5.000 – €25.000')griff=120;
+  else if(i.bedrag==='Meer dan €25.000')griff=650;
+  if(i.advocaat!=='Nee, ik doe het zelf'){advMin=1500;advMax=5000;}
+  if(i.inkomen==='Minder dan €1.600'){toev=true;advMin=143;advMax=143;advies='Je hebt waarschijnlijk recht op een gratis advocaat via gesubsidieerde rechtsbijstand. Bel het Juridisch Loket: 0900-8020.';}
+  else if(i.inkomen==='€1.600 – €2.500'){toev=true;advMin=286;advMax=286;advies='Je hebt mogelijk recht op gesubsidieerde rechtsbijstand. Vraag dit na bij het Juridisch Loket: 0900-8020.';}
+  const totMin=griff+advMin,totMax=griff+advMax;
+  let html='<div class="calculator-result"><div class="calc-item"><div><div class="calc-label">Griffierecht</div><div class="calc-toelichting">Eenmalige vergoeding aan de rechtbank</div></div><div class="calc-bedrag">€'+griff+'</div></div>';
+  if(advMin>0)html+='<div class="calc-item"><div><div class="calc-label">Advocaatkosten</div><div class="calc-toelichting">Afhankelijk van complexiteit en uren</div></div><div class="calc-bedrag">€'+advMin+(advMax!==advMin?' – €'+advMax:'')+'</div></div>';
+  html+='<div class="calc-item calc-totaal"><div class="calc-label">Totaal geschat</div><div class="calc-bedrag">€'+totMin+(totMax!==totMin?' – €'+totMax:'')+'</div></div>';
+  if(toev)html+='<div class="calc-toevoeging"><i class="ti ti-circle-check"></i> '+advies+'</div>';
+  html+='</div>';
+  const el=document.getElementById('calc-result');el.innerHTML=html;el.style.display='block';
+}
+
+// ── BEWIJS CHECKLIST (toevoeging 3) ──
+const bewijsData={huur:{titel:'Huurgeschil',icon:'ti-home',items:[{t:'Huurcontract (origineel of kopie)',v:true},{t:'Bankafschriften met huurbetalingen',v:true},{t:'Correspondentie met verhuurder',v:true},{t:"Foto's van gebreken of schade",v:false},{t:'Rapporten van onderhoudsbedrijf',v:false},{t:'Verklaringen van buren of getuigen',v:false}]},arbeid:{titel:'Arbeidsconflict',icon:'ti-briefcase',items:[{t:'Arbeidsovereenkomst',v:true},{t:'Loonstroken afgelopen 3 maanden',v:true},{t:'Ontslagbrief of vaststellingsovereenkomst',v:true},{t:'E-mails over het conflict',v:true},{t:'Beoordelingsgesprekken',v:false},{t:'Getuigenverklaringen',v:false}]},verkeersboete:{titel:'Verkeersboete',icon:'ti-car',items:[{t:'Boetebeschikking van het CJIB',v:true},{t:'Rijbewijs',v:true},{t:'Bewijs dat je niet de bestuurder was',v:false},{t:'Foto van de verkeerssituatie',v:false}]},gemeente:{titel:'Conflict met gemeente',icon:'ti-building',items:[{t:'Het oorspronkelijke besluit',v:true},{t:'Jouw bezwaarschrift en reactie',v:true},{t:'Alle correspondentie met de gemeente',v:true},{t:'Bouwtekeningen (bij vergunning)',v:false},{t:'Taxatierapport',v:false}]}};
+let bewijsState={};
+function renderBewijs(){
+  bewijsState={};
+  document.getElementById('bewijs-lijst').style.display='none';
+  document.getElementById('bewijs-keuze').innerHTML=Object.entries(bewijsData).map(([k,v])=>'<div class="sc" onclick="toonBewijs(\''+k+'\')"><div class="sc-ico"><i class="ti '+v.icon+'"></i></div><div class="sc-ttl">'+v.titel+'</div></div>').join('');
+}
+function toonBewijs(key){
+  const d=bewijsData[key];bewijsState[key]=bewijsState[key]||new Array(d.items.length).fill(false);
+  const el=document.getElementById('bewijs-lijst');
+  el.innerHTML='<div class="card"><div class="card-title"><i class="ti '+d.icon+'"></i> '+d.titel+' — benodigde bewijsstukken</div><div style="margin-top:10px;">'+d.items.map((it,i)=>'<div class="cl-item'+(bewijsState[key][i]?' checked':'')+'" onclick="toggleBewijs(\''+key+'\','+i+')"><div class="cl-box">'+(bewijsState[key][i]?'<i class="ti ti-check"></i>':'')+'</div><div class="cl-label">'+it.t+'</div><span style="font-size:10px;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:auto;'+(it.v?'background:var(--red-light);color:var(--red);':'background:var(--bg);color:var(--gray);')+'">'+(it.v?'Verplicht':'Aanbevolen')+'</span></div>').join('')+'</div><button class="btn-primary" style="margin-top:12px;" onclick="go(\'mijn\')"><i class="ti ti-upload"></i> Stukken digitaal insturen</button></div>';
+  el.style.display='block';
+}
+function toggleBewijs(key,i){bewijsState[key][i]=!bewijsState[key][i];toonBewijs(key);}
+
+// ── MIJN TIJDLIJN (toevoeging 4) ──
+const mtFasen=[{id:'brief',label:'Officiële brief verstuurd'},{id:'bezwaar',label:'Bezwaar ingediend'},{id:'zitting',label:'Zitting gepland'},{id:'uitspraak',label:'Uitspraak ontvangen'}];
+function renderMijnTijdlijn(){
+  document.getElementById('mt-result').style.display='none';
+  document.getElementById('mt-print').style.display='none';
+  document.getElementById('mt-print-hint').style.display='none';
+  document.getElementById('mt-inputs').innerHTML=mtFasen.map(f=>'<div class="mt-input"><label>'+f.label+'</label><input type="date" id="mt-'+f.id+'"></div>').join('');
+}
+function berekenMijnTijdlijn(){
+  const deadlines=[];const nu=new Date();
+  const brief=document.getElementById('mt-brief').value;
+  const bezwaar=document.getElementById('mt-bezwaar').value;
+  const zitting=document.getElementById('mt-zitting').value;
+  const uitspraak=document.getElementById('mt-uitspraak').value;
+  if(brief){const d=new Date(brief);const dl=new Date(d);dl.setDate(dl.getDate()+14);deadlines.push({datum:dl,label:'Deadline reactie andere partij (14 dagen)',fase:'brief'});}
+  if(bezwaar){const d=new Date(bezwaar);const dl=new Date(d);dl.setDate(dl.getDate()+42);deadlines.push({datum:dl,label:'Uiterste beslistermijn overheid (6 weken)',fase:'bezwaar'});}
+  if(zitting){deadlines.push({datum:new Date(zitting),label:'Zittingsdatum',fase:'zitting'});}
+  if(uitspraak){const d=new Date(uitspraak);const dl=new Date(d);dl.setDate(dl.getDate()+90);deadlines.push({datum:dl,label:'Uiterste datum hoger beroep (3 maanden)',fase:'uitspraak'});}
+  if(!deadlines.length){alert('Vul minstens één datum in.');return;}
+  deadlines.sort((a,b)=>a.datum-b.datum);
+  const html='<div class="card" style="margin-top:1rem;"><div class="card-title"><i class="ti ti-timeline"></i> Jouw deadlines</div>'+deadlines.map(dl=>{
+    const diff=Math.ceil((dl.datum-nu)/(1000*60*60*24));
+    const status=diff<0?'verlopen':diff<7?'aankomend':'klaar';
+    const statusTxt=diff<0?'Verlopen':diff<7?'Over '+diff+' dagen':'Over '+Math.ceil(diff/7)+' weken';
+    return'<div class="mt-deadline"><div style="flex:1;"><div style="font-size:14px;font-weight:800;color:#1a1a18;">'+dl.label+'</div><div style="font-size:12px;color:var(--gray);">'+dl.datum.toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long',year:'numeric'})+'</div></div><span class="mt-status mt-'+status+'">'+statusTxt+'</span></div>';
+  }).join('')+'</div>';
+  document.getElementById('mt-result').innerHTML=html;document.getElementById('mt-result').style.display='block';
+  document.getElementById('mt-print').style.display='inline-flex';document.getElementById('mt-print-hint').style.display='block';
+}
+
+// ── VERGELIJKER (toevoeging 5) ──
+const vergData={dimensies:['Kosten','Doorlooptijd','Kans op succes','Relatie bewaard','Bindende uitspraak','Privacy'],opties:[{naam:'Zelf oplossen',ic:'ti-users',kleur:'#27500A',bg:'#EAF3DE',waarden:['Gratis','1–4 weken','Wisselend','Ja','Nee','Ja'],advies:'Beste keuze als de relatie belangrijk is en het geschil klein.'},{naam:'Mediator',ic:'ti-heart-handshake',kleur:'#185FA5',bg:'#E6F1FB',waarden:['€100–€200/uur','2–8 weken','70–80%','Vaak wel','Nee*','Ja'],advies:'Sneller en goedkoper dan de rechter. *Afspraken niet automatisch afdwingbaar.'},{naam:'Kantonrechter',ic:'ti-scale',kleur:'#534AB7',bg:'#EEEDFE',waarden:['€85–€120','6–12 weken','Afhankelijk','Zelden','Ja','Nee'],advies:'Voor zaken tot €25.000. Geen advocaat nodig. Uitspraak is bindend.'},{naam:'Rechtbank',ic:'ti-gavel',kleur:'#854F0B',bg:'#FAEEDA',waarden:['€300–€650 + advocaat','12–24 maanden','Afhankelijk','Zelden','Ja','Nee'],advies:'Noodzakelijk boven €25.000. Advocaat verplicht.'}]};
+function renderVergelijker(){
+  let html='<table class="verg-table"><thead><tr><th></th>'+vergData.opties.map(o=>'<th style="background:'+o.bg+';color:'+o.kleur+';"><i class="ti '+o.ic+'" style="font-size:24px;display:block;margin-bottom:4px;"></i>'+o.naam+'</th>').join('')+'</tr></thead><tbody>';
+  vergData.dimensies.forEach((d,i)=>{html+='<tr><td class="verg-dim">'+d+'</td>'+vergData.opties.map(o=>'<td>'+o.waarden[i]+'</td>').join('')+'</tr>';});
+  html+='<tr><td class="verg-dim">Advies</td>'+vergData.opties.map(o=>'<td style="font-size:12px;color:'+o.kleur+';background:'+o.bg+';font-weight:600;">'+o.advies+'</td>').join('')+'</tr>';
+  html+='</tbody></table>';
+  document.getElementById('verg-container').innerHTML=html;
+}
+
+// ── BRIEF DECODER (toevoeging 6) ──
+const briefTypes=[{id:'dagvaarding',naam:'Dagvaarding',ic:'ti-file-text',uitleg:'Je bent opgeroepen om voor de rechter te verschijnen. Iemand heeft een rechtszaak tegen je aangespannen.',stappen:['Lees de dagvaarding zorgvuldig door','Schakel een advocaat in (verplicht boven €25.000)','Schrijf een verweerschrift','Dien het in vóór de genoemde datum'],termijn:'Reactietermijn: vaak 4 weken',kleur:'var(--red)',bg:'var(--red-light)'},{id:'oproeping',naam:'Oproeping voor zitting',ic:'ti-calendar',uitleg:'De rechtbank nodigt je uit om aanwezig te zijn bij een zitting.',stappen:['Noteer datum, tijd en locatie','Informeer je advocaat','Verzamel alle documenten','Kom minstens 15 minuten te vroeg'],termijn:'Je moet aanwezig zijn op de zitting',kleur:'var(--purple)',bg:'var(--purple-light)'},{id:'vonnis',naam:'Vonnis',ic:'ti-scale',uitleg:'De rechter heeft een beslissing genomen in jouw zaak.',stappen:['Lees wat de rechter heeft beslist','Check wat je moet doen of betalen','Niet eens? Hoger beroep binnen 3 maanden (civiel) of 14 dagen (straf)','Schakel advocaat in voor hoger beroep'],termijn:'Hoger beroep: 3 maanden (civiel) of 14 dagen (straf)',kleur:'var(--teal)',bg:'var(--teal-light)'},{id:'beschikking',naam:'Beschikking',ic:'ti-gavel',uitleg:'Een officieel besluit van een rechter, meestal in familie- of bestuursrechtzaken.',stappen:['Lees wat er beslist is','Check verplichtingen en ingangsdatum','Hoger beroep mogelijk binnen 3 maanden'],termijn:'Hoger beroep: 3 maanden',kleur:'var(--amber)',bg:'var(--amber-light)'},{id:'dwangbevel',naam:'Dwangbevel / aanmaning',ic:'ti-alert-triangle',uitleg:'Je moet iets doen of betalen. Dit is een officiële waarschuwing — negeer het niet.',stappen:['Betaal binnen de gestelde termijn','Niet eens? Maak bezwaar via de genoemde procedure','Bel het Juridisch Loket: 0900-8020'],termijn:'Termijn: vaak 14 dagen',kleur:'var(--red)',bg:'var(--red-light)'},{id:'beslissing',naam:'Beslissing op bezwaar',ic:'ti-clipboard-list',uitleg:'De overheid heeft jouw bezwaar beoordeeld.',stappen:['Lees of je bezwaar is toegewezen of afgewezen','Afgewezen? Beroep binnen 6 weken bij bestuursrechter','Bel het Juridisch Loket: 0900-8020'],termijn:'Beroep: binnen 6 weken',kleur:'var(--blue)',bg:'var(--blue-light)'}];
+function renderBriefDecoder(){
+  document.getElementById('brief-grid').innerHTML=briefTypes.map(b=>'<div class="brief-tile" onclick="toonBrief(\''+b.id+'\')" id="bt-'+b.id+'"><div class="brief-icon" style="color:'+b.kleur+';"><i class="ti '+b.ic+'" style="font-size:28px;"></i></div><div class="brief-naam">'+b.naam+'</div></div>').join('');
+  document.getElementById('brief-detail').style.display='none';
+}
+function toonBrief(id){
+  const b=briefTypes.find(x=>x.id===id);
+  document.querySelectorAll('.brief-tile').forEach(t=>t.classList.remove('on'));
+  document.getElementById('bt-'+id).classList.add('on');
+  document.getElementById('brief-detail').innerHTML='<div class="card" style="border-color:'+b.kleur+';"><div class="card-title" style="color:'+b.kleur+';"><i class="ti '+b.ic+'"></i> '+b.naam+'</div><div class="card-text" style="margin-bottom:12px;">'+b.uitleg+'</div><div style="font-size:14px;font-weight:800;color:#1a1a18;margin-bottom:8px;">Wat moet je doen?</div>'+b.stappen.map((s,i)=>'<div class="brief-stap"><div class="brief-stap-num">'+(i+1)+'</div><div style="font-size:13px;color:#2c2c2a;line-height:1.6;">'+s+'</div></div>').join('')+'<div style="margin-top:12px;padding:10px 14px;border-radius:10px;background:'+b.bg+';color:'+b.kleur+';font-size:13px;font-weight:700;"><i class="ti ti-clock"></i> '+b.termijn+'</div></div>';
+  document.getElementById('brief-detail').style.display='block';
+}
+
+// ── KAART (toevoeging 7) ──
+const rbCoords=[{n:'Rechtbank Amsterdam',lat:52.3402,lng:4.8979,a:'Parnassusweg 220'},{n:'Rechtbank Den Haag',lat:52.0681,lng:4.2820,a:'Prins Clauslaan 60'},{n:'Rechtbank Rotterdam',lat:51.9065,lng:4.4695,a:'Wilhelminaplein 100'},{n:'Rechtbank Midden-Nederland',lat:52.0915,lng:5.1146,a:'Vrouwe Justitiaplein 1'},{n:'Rechtbank Noord-Holland',lat:52.3874,lng:4.6462,a:'Jansstraat 81'},{n:'Rechtbank Overijssel',lat:52.5168,lng:6.0830,a:'Hanzelaan 351, Zwolle'},{n:'Rechtbank Gelderland',lat:51.9851,lng:5.8987,a:'Walburgstraat 2-4, Arnhem'},{n:'Rechtbank Noord-Nederland',lat:53.2194,lng:6.5665,a:'Guyotplein 1, Groningen'},{n:'Rechtbank Oost-Brabant',lat:51.6978,lng:5.3037,a:"Leeghwaterlaan 8, 's-Hertogenbosch"},{n:'Rechtbank Zeeland-West-Brabant',lat:51.5851,lng:4.7997,a:'Sluissingel 20, Breda'},{n:'Rechtbank Limburg',lat:50.8514,lng:5.6910,a:'Sint Annadal 1, Maastricht'}];
+let kaartObj=null;
+function initKaart(){
+  if(kaartObj)return;
+  setTimeout(()=>{
+    kaartObj=L.map('kaart-container').setView([52.3,5.3],7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(kaartObj);
+    rbCoords.forEach(rb=>{L.marker([rb.lat,rb.lng]).addTo(kaartObj).bindPopup('<strong>'+rb.n+'</strong><br>'+rb.a);});
+    kaartObj.invalidateSize();
+  },100);
+}
+
+// ── WET UITGELEGD (toevoeging 8) ──
+const wetData=[{situatie:'Verhuurder lost gebreken niet op',ic:'ti-home',artikelen:[{wet:'Burgerlijk Wetboek',art:'Art. 7:204 BW',tekst:'De verhuurder is verplicht gebreken te verhelpen, tenzij dit onmogelijk is of kosten vergt die niet redelijk zijn.'},{wet:'Burgerlijk Wetboek',art:'Art. 7:207 BW',tekst:'Bij gebreken heeft de huurder recht op huurvermindering naar evenredigheid.'}],url:'https://www.juridischloket.nl/wonen-en-buren/huurwoning/'},{situatie:'Ontslag of arbeidsconflict',ic:'ti-briefcase',artikelen:[{wet:'Burgerlijk Wetboek',art:'Art. 7:669 BW',tekst:'De werkgever kan alleen opzeggen bij een redelijke grond (disfunctioneren, bedrijfseconomisch, etc.).'},{wet:'Burgerlijk Wetboek',art:'Art. 7:673 BW',tekst:'Bij ontslag heeft de werknemer recht op een transitievergoeding van 1/3 maandsalaris per dienstjaar.'}],url:'https://www.juridischloket.nl/werk-en-uitkering/ontslag/'},{situatie:'Verkeersboete aanvechten',ic:'ti-car',artikelen:[{wet:'WAHV',art:'Art. 6 WAHV',tekst:'De bestuurder kan binnen 6 weken beroep instellen bij de officier van justitie tegen een verkeersboete.'}],url:'https://www.juridischloket.nl/verkeer/verkeersboete/'},{situatie:'Besluit van gemeente aanvechten',ic:'ti-building',artikelen:[{wet:'Algemene wet bestuursrecht',art:'Art. 7:1 Awb',tekst:'Bezwaar maken tegen een overheidsbesluit moet binnen 6 weken na bekendmaking.'},{wet:'Algemene wet bestuursrecht',art:'Art. 8:1 Awb',tekst:'Na een beslissing op bezwaar kan beroep worden ingesteld bij de bestuursrechter, binnen 6 weken.'}],url:'https://www.juridischloket.nl/overheid-en-belasting/bezwaar-en-beroep/'}];
+function renderWet(){
+  document.getElementById('wet-detail').style.display='none';
+  document.getElementById('wet-keuze').innerHTML=wetData.map((w,i)=>'<div class="sc" onclick="toonWet('+i+')"><div class="sc-ico"><i class="ti '+w.ic+'"></i></div><div class="sc-ttl">'+w.situatie+'</div></div>').join('');
+}
+function toonWet(i){
+  const w=wetData[i];
+  document.getElementById('wet-detail').innerHTML='<div class="card"><div class="card-title"><i class="ti '+w.ic+'"></i> '+w.situatie+'</div>'+w.artikelen.map(a=>'<div class="wet-artikel"><div class="wet-artikel-nr">'+a.art+'</div><div class="wet-artikel-wet">'+a.wet+'</div><div class="wet-artikel-tekst">'+a.tekst+'</div></div>').join('')+'<a href="'+w.url+'" target="_blank" class="btn-secondary" style="margin-top:12px;text-decoration:none;"><i class="ti ti-external-link"></i> Meer info op Juridisch Loket</a></div>';
+  document.getElementById('wet-detail').style.display='block';
+}
+
+// ── NOTIFICATIES (toevoeging 9) ──
+const notifCats=['Huurrecht','Arbeidsrecht','Strafrecht','Bestuursrecht','Familierecht','Verkeersrecht'];
+function renderNotif(){
+  document.getElementById('notif-checks').innerHTML=notifCats.map((c,i)=>'<label class="notif-check"><input type="checkbox" id="notif-check-'+i+'"> '+c+'</label>').join('');
+  document.getElementById('notif-rb').innerHTML='<option value="alle">Alle rechtbanken</option>'+zitRB.map(r=>'<option value="'+r.n+'">'+r.n+'</option>').join('');
+  const saved=localStorage.getItem('notif-voorkeuren');
+  if(saved){document.getElementById('notif-form').style.display='none';document.getElementById('notif-bevestiging').style.display='block';}
+  else{document.getElementById('notif-form').style.display='block';document.getElementById('notif-bevestiging').style.display='none';}
+}
+function slaNotifOp(){
+  const email=document.getElementById('notif-email').value;
+  if(!email||!email.includes('@')){alert('Vul een geldig e-mailadres in.');return;}
+  const voorkeuren={email,cats:notifCats.filter((_,i)=>document.getElementById('notif-check-'+i).checked),rb:document.getElementById('notif-rb').value};
+  localStorage.setItem('notif-voorkeuren',JSON.stringify(voorkeuren));
+  document.getElementById('notif-form').style.display='none';document.getElementById('notif-bevestiging').style.display='block';
+}
+
+// ── PRINT DATUM ──
+document.getElementById('print-datum').textContent='Gegenereerd op '+new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+
+// ── Update selectRB om wachttijden te tonen ──
+const _origSelectRB=selectRB;
+selectRB=function(i){
+  _origSelectRB(i);
+  const r=rechtbanken[i];
+  const detail=document.getElementById('rb-detail');
+  if(detail)detail.querySelector('.rb-detail').innerHTML+= renderWachttijd(r.n);
+};
+
+// ── Update zoekIndex voor nieuwe pagina's ──
+[{t:'Kosten berekenen',p:'calculator',k:['kosten','griffierecht','advocaat','calculator','prijs']},{t:'Bewijs checklist',p:'bewijs',k:['bewijs','document','checklist','stukken']},{t:'Mijn tijdlijn',p:'mijntijdlijn',k:['tijdlijn','deadline','datum','termijn','persoonlijk']},{t:'Rechter vs mediator',p:'vergelijker',k:['vergelijken','mediator','rechter','kosten','verschil']},{t:'Brief decoder',p:'briefdecoder',k:['brief','dagvaarding','vonnis','beschikking','dwangbevel']},{t:'Rechtbank kaart',p:'kaart',k:['kaart','locatie','reistijd','route']},{t:'Wat zegt de wet?',p:'wet',k:['wet','artikel','burgerlijk','bestuursrecht','wetsartikel']},{t:'Meldingen instellen',p:'notificaties',k:['melding','notificatie','email','alert']}].forEach(p=>zoekIndex.push({type:'pagina',titel:p.t,pagina:p.p,keywords:p.k}));
+
+// ── Update gsIcons voor nieuwe pagina's ──
+Object.assign(gsIcons,{calculator:'ti-calculator',bewijs:'ti-paperclip',mijntijdlijn:'ti-timeline',vergelijker:'ti-arrows-diff',briefdecoder:'ti-mail',kaart:'ti-map-2',wet:'ti-book',notificaties:'ti-bell'});
+
 go('home');
 </script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
