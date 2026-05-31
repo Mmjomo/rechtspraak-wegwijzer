@@ -1,0 +1,24 @@
+{
+  "name": "rechtspraak-wegwijzer",
+  "version": "1.0.0",
+  "description": "Wegwijzer rechtspraak.nl - Interactive legal guidance application",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo \"Static HTML project - no build needed\"",
+    "test": "echo \"No tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mmjomo/rechtspraak-wegwijzer.git"
+  },
+  "keywords": ["rechtspraak", "legal", "wegwijzer"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mmjomo/rechtspraak-wegwijzer/issues"
+  },
+  "homepage": "https://github.com/Mmjomo/rechtspraak-wegwijzer#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
