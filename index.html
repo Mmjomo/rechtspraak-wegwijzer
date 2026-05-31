@@ -38,6 +38,8 @@
 [data-theme="dark"] .gs-item:hover{background:var(--purple-light);}
 
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:#2c2c2a;font-size:16px;}
+body::before{content:'';position:fixed;left:0;top:38px;width:264px;height:100vh;background:var(--purple-dark);z-index:-1;}
+[data-theme="dark"] body::before{background:var(--purple-dark);}
 body.groot{font-size:19px;}
 body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh-opt{font-size:17px!important;}
 @keyframes fi{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
@@ -60,8 +62,8 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 .spoed-btn-top{background:#E24B4A;color:#fff;border:none;border-radius:6px;padding:5px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:5px;}
 
 /* ── LAYOUT ── */
-.shell{display:grid;grid-template-columns:264px 1fr;min-height:calc(100vh - 38px);}
-.sidebar{background:var(--purple-dark);color:#fff;padding:1.25rem 1rem;display:flex;flex-direction:column;gap:3px;position:sticky;top:0;height:calc(100vh - 38px);overflow-y:auto;}
+.shell{display:grid;grid-template-columns:264px 1fr;min-height:calc(100vh - 38px);align-items:stretch;}
+.sidebar{background:var(--purple-dark);color:#fff;padding:1.25rem 1rem;display:flex;flex-direction:column;gap:3px;position:sticky;top:0;max-height:100vh;overflow-y:auto;}
 .sb-logo{font-size:15px;font-weight:900;padding:0 8px 14px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
 .sb-logo small{opacity:.55;font-size:11px;font-weight:600;display:block;margin-top:1px;}
 .sb-sec{font-size:10px;font-weight:900;letter-spacing:1px;color:rgba(255,255,255,.3);padding:10px 12px 3px;text-transform:uppercase;}
@@ -414,6 +416,47 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
 .slachtoffer-detail{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:13px;color:var(--gray);line-height:1.7;}
 .slachtoffer-detail.open{display:block;animation:fi .15s ease;}
 
+/* ── ADVOCAAT CARDS ── */
+.advocaat-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:8px;}
+.adv-naam{font-size:15px;font-weight:800;color:#1a1a18;}
+.adv-kantoor{font-size:12px;color:var(--gray);margin-top:2px;}
+.adv-gebieden{font-size:11px;color:var(--purple);font-weight:700;margin-top:6px;}
+.toev-badge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--green-light);color:var(--green);display:inline-block;margin-top:4px;}
+.adv-acties{display:flex;gap:8px;margin-top:10px;}
+
+/* ── ZAAK STATUS ── */
+.zaak-status-balk{display:flex;align-items:center;margin-bottom:16px;gap:0;}
+.zsb-stap{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:700;color:var(--gray);flex-shrink:0;}
+.zsb-stap.done{color:var(--teal);}
+.zsb-stap.active{color:var(--purple);font-weight:800;}
+.zsb-lijn{flex:1;height:2px;background:var(--border);min-width:16px;}
+.zsb-lijn.done{background:var(--teal);}
+.zaak-info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:16px;}
+.zi-item{background:var(--bg);border-radius:10px;padding:10px 12px;}
+.zi-label{font-size:11px;font-weight:700;color:var(--gray);margin-bottom:2px;}
+.zi-waarde{font-size:14px;font-weight:800;color:#1a1a18;}
+.zaak-acties{display:flex;gap:8px;flex-wrap:wrap;}
+.partij-kaart{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:14px;margin-bottom:8px;}
+.pk-rol{font-size:11px;font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.pk-naam{font-size:15px;font-weight:800;color:#1a1a18;}
+.pk-info{font-size:12px;color:var(--gray);margin-top:2px;}
+.kosten-tabel{border-radius:12px;overflow:hidden;border:1.5px solid var(--border);}
+.kt-rij{display:grid;grid-template-columns:2fr 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;align-items:center;}
+.kt-rij:last-child{border-bottom:none;}
+.kt-header{font-weight:800;color:var(--gray);font-size:12px;background:var(--bg);}
+.kt-totaal{font-weight:800;background:var(--purple-light);color:var(--purple-dark);}
+.kt-status{font-size:11px;font-weight:700;}
+.kt-status.betaald{color:var(--green);}
+.verzoek-item{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;transition:all .15s;}
+.verzoek-item:hover{border-color:var(--purple);}
+
+/* ── FILTER UITGEBREID ── */
+.filter-uitgebreid{display:none;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;background:#f5f3ee;border-radius:12px;padding:12px;margin-bottom:12px;}
+.filter-label{font-size:11px;font-weight:800;color:var(--gray);margin-bottom:4px;display:block;}
+.filter-select,.filter-date{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:13px;background:#fff;outline:none;}
+.filter-select:focus,.filter-date:focus{border-color:var(--purple);}
+.page-btn.active{background:var(--purple);color:#fff;border-color:var(--purple);}
+
 /* ── PRINT HEADER ── */
 .print-header{display:none;}
 .print-footer{display:none;}
@@ -441,6 +484,7 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
   .mob-nav{display:block;}
   .spoed-fab{display:flex;align-items:center;justify-content:center;}
   .a11y-speak{display:none;}
+  body::before{display:none;}
   .ph h1{font-size:20px;}
   .tb-url{display:none;}
   .global-search{max-width:none;}
@@ -617,10 +661,16 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
           <div class="card-text" style="color:var(--kleur-civiel);">Een uitspraak laat zien hoe een rechter eerder oordeelde. Het is <strong>geen garantie</strong> voor jouw zaak — elke situatie is anders. Gebruik het als achtergrondinformatie.</div>
         </div>
         <div class="search-bar">
-          <input class="search-input" id="zoek-input" type="text" placeholder='Zoek bijv. "huurgeschil" of "ontslag"...' onkeydown="if(event.key==='Enter')zoekEnRender()">
-          <button class="btn-primary" onclick="zoekState.pagina=1;zoekEnRender()"><i class="ti ti-search"></i> Zoeken</button>
+          <input class="search-input" id="zoek-input" type="text" placeholder='Zoek op trefwoord of ECLI-nummer...' onkeydown="if(event.key==='Enter'){zoekState.pagina=1;zoekState.keyword=this.value;zoekEnRender();}">
+          <button class="btn-primary" onclick="zoekState.pagina=1;zoekState.keyword=document.getElementById('zoek-input').value;zoekEnRender()"><i class="ti ti-search"></i> Zoeken</button>
         </div>
         <div style="margin-bottom:10px;" id="filters-wrap"></div>
+        <button class="btn-secondary" style="font-size:12px;padding:5px 12px;margin-bottom:12px;" onclick="document.getElementById('filter-uitgebreid').style.display=document.getElementById('filter-uitgebreid').style.display==='grid'?'none':'grid'"><i class="ti ti-adjustments"></i> Uitgebreid zoeken</button>
+        <div class="filter-uitgebreid" id="filter-uitgebreid">
+          <div><label class="filter-label">Instantie</label><select class="filter-select" id="filter-creator" onchange="zoekState.creator=this.value;zoekState.pagina=1;zoekEnRender()"><option value="">Alle instanties</option></select></div>
+          <div><label class="filter-label">Datum vanaf</label><input type="date" class="filter-date" id="filter-dateFrom" onchange="zoekState.dateFrom=this.value;zoekState.pagina=1;zoekEnRender()"></div>
+          <div><label class="filter-label">Datum tot</label><input type="date" class="filter-date" id="filter-dateTo" onchange="zoekState.dateTo=this.value;zoekState.pagina=1;zoekEnRender()"></div>
+        </div>
         <div style="font-size:13px;color:#888780;margin-bottom:10px;font-weight:700;" id="result-count"></div>
         <div id="resultaten"></div>
         <div id="paginering"></div>
@@ -676,10 +726,16 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
         <div class="dossier" id="dossier">
           <div class="dos-header"><div class="avatar">JD</div><div><div style="font-size:16px;font-weight:800;">Jan de Vries</div><div style="font-size:13px;opacity:.8;">Zaak AMS-24-1042 · Civiel recht</div></div></div>
           <div style="margin-bottom:10px;">
+            <span class="dtab" onclick="dTab(this,'overzicht')"><i class="ti ti-layout-dashboard"></i> Overzicht</span>
             <span class="dtab on" onclick="dTab(this,'berichten')"><i class="ti ti-mail-opened"></i> Berichten</span>
             <span class="dtab" onclick="dTab(this,'documenten')"><i class="ti ti-folder"></i> Documenten</span>
             <span class="dtab" onclick="dTab(this,'zitting')"><i class="ti ti-calendar"></i> Mijn zitting</span>
             <span class="dtab" onclick="dTab(this,'upload')"><i class="ti ti-upload"></i> Stuk insturen</span>
+            <span class="dtab" onclick="dTab(this,'zaaktijdlijn')"><i class="ti ti-timeline"></i> Tijdlijn</span>
+            <span class="dtab" onclick="dTab(this,'partijen')"><i class="ti ti-users"></i> Partijen</span>
+            <span class="dtab" onclick="dTab(this,'kosten')"><i class="ti ti-currency-euro"></i> Kosten</span>
+            <span class="dtab" onclick="dTab(this,'verzoeken')"><i class="ti ti-clipboard-list"></i> Verzoeken</span>
+            <span class="dtab" onclick="dTab(this,'uitspraaktab')"><i class="ti ti-scale"></i> Uitspraak</span>
           </div>
           <div class="dtab-c on" id="dtab-berichten">
             <div class="bericht"><div class="bdot"></div><div><div style="font-size:13px;font-weight:800;color:#1a1a18;">Uitnodiging voor zitting op 12 juni</div><div style="font-size:11px;color:#888780;">Van: Rechtbank Amsterdam · 2 juni 2025</div></div></div>
@@ -704,6 +760,59 @@ body.groot .card-text,body.groot .tile-text,body.groot .step-desc,body.groot .kh
             </div>
             <div class="upload-done" id="upload-done"><i class="ti ti-circle-check"></i> Document succesvol verzonden naar Rechtbank Amsterdam</div>
             <div class="card"><div class="card-title"><i class="ti ti-bulb"></i> Wat kun je insturen?</div><div class="card-text">Bewijs, verklaringen of andere documenten voor jouw zaak. De rechtbank bevestigt ontvangst binnen 2 werkdagen.</div></div>
+          </div>
+          <!-- Overzicht tab -->
+          <div class="dtab-c" id="dtab-overzicht">
+            <div class="zaak-status-balk">
+              <div class="zsb-stap done"><i class="ti ti-pencil"></i><br>Ingediend</div><div class="zsb-lijn done"></div>
+              <div class="zsb-stap done"><i class="ti ti-mail"></i><br>Ontvangen</div><div class="zsb-lijn done"></div>
+              <div class="zsb-stap active"><i class="ti ti-calendar"></i><br>Zitting gepland</div><div class="zsb-lijn"></div>
+              <div class="zsb-stap"><i class="ti ti-scale"></i><br>Uitspraak</div>
+            </div>
+            <div class="zaak-info-grid">
+              <div class="zi-item"><div class="zi-label">Zaaknummer</div><div class="zi-waarde">AMS-24-1042</div></div>
+              <div class="zi-item"><div class="zi-label">Type zaak</div><div class="zi-waarde">Civiel · Kantonzaak</div></div>
+              <div class="zi-item"><div class="zi-label">Rechtbank</div><div class="zi-waarde">Rechtbank Amsterdam</div></div>
+              <div class="zi-item"><div class="zi-label">Ingediend op</div><div class="zi-waarde">3 april 2025</div></div>
+              <div class="zi-item"><div class="zi-label">Rechter</div><div class="zi-waarde">mr. J. de Boer</div></div>
+              <div class="zi-item"><div class="zi-label">Status</div><div class="zi-waarde" style="color:var(--purple);font-weight:800;">Zitting gepland</div></div>
+            </div>
+            <div class="zaak-acties">
+              <button class="btn-primary" onclick="dTab(document.querySelector('.dtab'),'upload')"><i class="ti ti-upload"></i> Stuk insturen</button>
+              <button class="btn-secondary" onclick="window.print()"><i class="ti ti-printer"></i> Afdrukken</button>
+            </div>
+          </div>
+          <!-- Tijdlijn zaak tab -->
+          <div class="dtab-c" id="dtab-zaaktijdlijn">
+            <div class="tijdlijn" id="zaak-tijdlijn-render"></div>
+          </div>
+          <!-- Partijen tab -->
+          <div class="dtab-c" id="dtab-partijen">
+            <div class="partij-kaart"><div class="pk-rol">Eisende partij (u)</div><div class="pk-naam">Jan de Vries</div><div class="pk-info">Procespartij · Bijgestaan door eigen advocaat</div></div>
+            <div class="partij-kaart"><div class="pk-rol">Gedaagde partij</div><div class="pk-naam">Woningcorporatie Amstel BV</div><div class="pk-info">Vertegenwoordigd door mr. P. Jansen</div></div>
+            <div class="partij-kaart"><div class="pk-rol">Rechter</div><div class="pk-naam">mr. J. de Boer</div><div class="pk-info">Kantonrechter · Rechtbank Amsterdam</div></div>
+            <div class="partij-kaart"><div class="pk-rol">Griffier</div><div class="pk-naam">M. Bakker</div><div class="pk-info">Bereikbaar via griffie: 020 541 2000</div></div>
+          </div>
+          <!-- Kosten tab -->
+          <div class="dtab-c" id="dtab-kosten">
+            <div class="kosten-tabel">
+              <div class="kt-rij kt-header"><span>Omschrijving</span><span>Bedrag</span><span>Status</span></div>
+              <div class="kt-rij"><span>Griffierecht kantonzaak</span><span>€ 85,00</span><span class="kt-status betaald"><i class="ti ti-circle-check"></i> Betaald</span></div>
+              <div class="kt-rij"><span>Deurwaarderskosten dagvaarding</span><span>€ 103,50</span><span class="kt-status betaald"><i class="ti ti-circle-check"></i> Betaald</span></div>
+              <div class="kt-rij kt-totaal"><span>Totaal proceskosten</span><span>€ 188,50</span><span></span></div>
+            </div>
+            <div class="card" style="margin-top:12px;"><div class="card-title"><i class="ti ti-bulb"></i> Proceskosten terugvragen</div><div class="card-text">Als je de zaak wint, kan de rechter de wederpartij veroordelen tot vergoeding van jouw proceskosten.</div></div>
+          </div>
+          <!-- Verzoeken tab -->
+          <div class="dtab-c" id="dtab-verzoeken" style=""></div>
+          <!-- Uitspraak tab -->
+          <div class="dtab-c" id="dtab-uitspraaktab">
+            <div style="text-align:center;padding:2rem;">
+              <div style="font-size:44px;margin-bottom:12px;color:var(--amber);"><i class="ti ti-hourglass"></i></div>
+              <div style="font-size:16px;font-weight:800;color:#1a1a18;margin-bottom:6px;">Uitspraak nog niet beschikbaar</div>
+              <div style="font-size:13px;color:var(--gray);max-width:300px;margin:0 auto;line-height:1.7;">De zitting is gepland op <strong>12 juni 2025</strong>. De uitspraak wordt verwacht binnen 4 weken daarna.</div>
+              <div style="margin-top:16px;font-size:13px;color:var(--purple);font-weight:700;">Niet eens met de uitspraak? Je hebt 3 maanden om in hoger beroep te gaan.</div>
+            </div>
           </div>
         </div>
         <div class="feedback"><p>Was dit duidelijk?</p><button class="fb-btn" onclick="geefFeedback(this,'up')"><i class="ti ti-thumb-up"></i></button><button class="fb-btn" onclick="geefFeedback(this,'down')"><i class="ti ti-thumb-down"></i></button><span class="fb-thanks" id="fb-mijn">Bedankt!</span></div>
@@ -1131,29 +1240,38 @@ const uitspraken=[
 ];
 const filters=['Alles','Strafrecht','Civiel','Bestuursrecht','Hoge Raad'];
 let activeF='Alles';
-const zoekState={query:'',rechtsgebied:'',pagina:1,totaal:0,resultaten:[],laden:false};
+const zoekState={keyword:'',subject:'',creator:'',dateFrom:'',dateTo:'',pagina:1,perPagina:10,totaal:0,resultaten:[],laden:false,rechtsgebied:''};
+const creatorOptions=[{l:'Alle instanties',v:''},{l:'Hoge Raad',v:'http://standaarden.overheid.nl/owms/terms/Hoge_Raad_der_Nederlanden'},{l:'Gerechtshof Amsterdam',v:'http://standaarden.overheid.nl/owms/terms/Gerechtshof_Amsterdam'},{l:'Rb. Amsterdam',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Amsterdam'},{l:'Rb. Den Haag',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Den_Haag'},{l:'Rb. Rotterdam',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Rotterdam'},{l:'Rb. Midden-Nederland',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Midden-Nederland'},{l:'Rb. Noord-Holland',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Noord-Holland'},{l:'Rb. Gelderland',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Gelderland'},{l:'Rb. Noord-Nederland',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Noord-Nederland'},{l:'Rb. Limburg',v:'http://standaarden.overheid.nl/owms/terms/Rechtbank_Limburg'}];
 function renderU(){
   document.getElementById('filters-wrap').innerHTML=filters.map(f=>'<span class="filter'+(f===activeF?' on':'')+'" onclick="setF(this,\''+f+'\')">'+f+'</span>').join('');
-  // Bij eerste laden, toon hardcoded + optie voor live zoeken
-  if(!zoekState.query&&!zoekState.rechtsgebied)filterU();
+  // Populate creator dropdown
+  const cs=document.getElementById('filter-creator');
+  if(cs&&!cs.options.length)cs.innerHTML=creatorOptions.map(o=>'<option value="'+o.v+'">'+o.l+'</option>').join('');
+  // Bij eerste laden, toon hardcoded
+  if(!zoekState.keyword&&!zoekState.rechtsgebied)filterU();
 }
 const subjectMap={'Civiel':'http://psi.rechtspraak.nl/rechtsgebied#civielRecht','Strafrecht':'http://psi.rechtspraak.nl/rechtsgebied#strafrecht','Bestuursrecht':'http://psi.rechtspraak.nl/rechtsgebied#bestuursrecht','Belastingrecht':'http://psi.rechtspraak.nl/rechtsgebied#belastingRecht'};
-function setF(el,v){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('on'));el.classList.add('on');activeF=v;zoekState.rechtsgebied=v==='Alles'?'':v;zoekEnRender();}
+function setF(el,v){document.querySelectorAll('.filter').forEach(f=>f.classList.remove('on'));el.classList.add('on');activeF=v;zoekState.rechtsgebied=v==='Alles'?'':v;zoekState.pagina=1;zoekEnRender();}
 async function zoekEnRender(){
-  const q=document.getElementById('zoek-input')?.value||'';
-  if(!q&&!zoekState.rechtsgebied){filterU();return;}
-  zoekState.query=q;zoekState.laden=true;
+  const q=zoekState.keyword||document.getElementById('zoek-input')?.value||'';
+  if(!q&&!zoekState.rechtsgebied&&!zoekState.creator){filterU();return;}
+  zoekState.keyword=q;zoekState.laden=true;
   document.getElementById('resultaten').innerHTML='<div class="laad-indicator"><div class="laad-spinner"></div><div>Uitspraken ophalen van rechtspraak.nl...</div></div>';
+  document.getElementById('paginering').innerHTML='';
   try{
     const params=new URLSearchParams();
     if(q)params.append('keyword',q);
     if(zoekState.rechtsgebied&&subjectMap[zoekState.rechtsgebied])params.append('subject',subjectMap[zoekState.rechtsgebied]);
-    params.append('from',(zoekState.pagina-1)*10);params.append('max','10');
+    if(zoekState.creator)params.append('creator',zoekState.creator);
+    if(zoekState.dateFrom)params.append('dateFrom',zoekState.dateFrom);
+    if(zoekState.dateTo)params.append('dateTo',zoekState.dateTo);
+    params.append('from',(zoekState.pagina-1)*zoekState.perPagina);params.append('max',zoekState.perPagina);
     const resp=await fetch('/api/uitspraken?'+params);
     if(!resp.ok)throw new Error('API fout');
     const data=await resp.json();
     zoekState.totaal=data.totaal;zoekState.resultaten=data.resultaten;zoekState.laden=false;
-    document.getElementById('result-count').textContent=data.totaal+' uitspraken gevonden op rechtspraak.nl';
+    const van=(zoekState.pagina-1)*zoekState.perPagina+1,tot=Math.min(zoekState.pagina*zoekState.perPagina,data.totaal);
+    document.getElementById('result-count').textContent=data.totaal===0?'Geen uitspraken gevonden':van+'–'+tot+' van '+data.totaal.toLocaleString('nl-NL')+' uitspraken';
     if(!data.resultaten.length){
       const sug=geefSuggesties(q);
       document.getElementById('resultaten').innerHTML='<div class="geen-resultaten"><div style="font-size:36px;color:var(--purple);"><i class="ti ti-search"></i></div><div style="margin-top:8px;font-weight:700;">Geen uitspraken gevonden voor "'+q+'"</div><div class="suggesties-label">Probeer ook:</div><div>'+sug.map(s=>'<span class="suggestie-chip" onclick="zoekOp(\''+s+'\')">'+s+'</span>').join('')+'</div></div>';
@@ -1172,9 +1290,11 @@ async function zoekEnRender(){
         +'</div></div>';
     }).join('');
     // Paginering
-    const totP=Math.ceil(data.totaal/10);
-    if(totP>1)document.getElementById('paginering').innerHTML='<div class="paginering"><button class="page-btn" onclick="gaNaarPagina('+(zoekState.pagina-1)+')"'+(zoekState.pagina<=1?' disabled':'')+'>← Vorige</button><span class="page-info">Pagina '+zoekState.pagina+' van '+totP+'</span><button class="page-btn" onclick="gaNaarPagina('+(zoekState.pagina+1)+')"'+(zoekState.pagina>=totP?' disabled':'')+'>Volgende →</button></div>';
-    else document.getElementById('paginering').innerHTML='';
+    const totP=Math.ceil(data.totaal/zoekState.perPagina);
+    if(totP>1){
+      const pgs=[];for(let i=Math.max(1,zoekState.pagina-2);i<=Math.min(totP,zoekState.pagina+2);i++)pgs.push(i);
+      document.getElementById('paginering').innerHTML='<div class="paginering"><button class="page-btn" onclick="gaNaarPagina('+(zoekState.pagina-1)+')"'+(zoekState.pagina<=1?' disabled':'')+'>← Vorige</button>'+pgs.map(p=>'<button class="page-btn'+(p===zoekState.pagina?' active':'')+'" onclick="gaNaarPagina('+p+')">'+p+'</button>').join('')+'<button class="page-btn" onclick="gaNaarPagina('+(zoekState.pagina+1)+')"'+(zoekState.pagina>=totP?' disabled':'')+'>Volgende →</button></div>';
+    }else document.getElementById('paginering').innerHTML='';
   }catch(e){
     document.getElementById('resultaten').innerHTML='<div class="fout-kaart"><div style="font-size:32px;margin-bottom:8px;"><i class="ti ti-alert-triangle"></i></div><div style="font-size:15px;font-weight:800;margin-bottom:6px;">Kon uitspraken niet laden</div><div style="font-size:13px;color:var(--gray);margin-bottom:14px;">Controleer je internetverbinding of zoek direct op <a href="https://uitspraken.rechtspraak.nl" target="_blank" style="color:var(--purple);font-weight:700;">uitspraken.rechtspraak.nl</a></div><button class="btn-primary" onclick="zoekEnRender()"><i class="ti ti-refresh"></i> Opnieuw proberen</button></div>';
     document.getElementById('paginering').innerHTML='';
@@ -1276,9 +1396,46 @@ function renderZ(){
 }
 
 // ── MIJN RECHTSPRAAK ──
-function doLogin(){document.getElementById('login-box').style.display='none';document.getElementById('dossier').classList.add('open');}
-function dTab(el,id){document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));document.querySelectorAll('.dtab-c').forEach(t=>t.classList.remove('on'));el.classList.add('on');document.getElementById('dtab-'+id).classList.add('on');}
+function doLogin(){
+  document.getElementById('login-box').style.display='none';
+  document.getElementById('dossier').classList.add('open');
+  renderZaakTijdlijn();renderVerzoeken();
+}
+function dTab(el,id){
+  document.querySelectorAll('.dtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.dtab-c').forEach(t=>t.classList.remove('on'));
+  if(el&&el.classList)el.classList.add('on');
+  document.getElementById('dtab-'+id).classList.add('on');
+}
 function simuleerUpload(){document.getElementById('upload-zone').style.display='none';document.getElementById('upload-done').classList.add('show');}
+
+// Zaak tijdlijn
+const zaakTijdlijn=[
+  {datum:'3 april 2025',label:'Zaak ingediend',status:'done',detail:'Verzoekschrift ontvangen en geregistreerd.'},
+  {datum:'8 april 2025',label:'Griffierecht ontvangen',status:'done',detail:'Betaling van €85 verwerkt.'},
+  {datum:'15 april 2025',label:'Dagvaarding betekend',status:'done',detail:'De wederpartij is officieel opgeroepen.'},
+  {datum:'18 mei 2025',label:'Verweerschrift ontvangen',status:'done',detail:'De wederpartij heeft gereageerd.'},
+  {datum:'2 juni 2025',label:'Zittingsdatum bekend',status:'huidig',detail:'Zitting op 12 juni 2025, 10:30 uur, zaal 4.'},
+  {datum:'12 juni 2025',label:'Zitting',status:'',detail:'Parnassusweg 220, Amsterdam. Kom op tijd.'},
+  {datum:'Binnen 4 weken',label:'Uitspraak verwacht',status:'',detail:'De rechter doet uitspraak.'},
+];
+function renderZaakTijdlijn(){
+  const el=document.getElementById('zaak-tijdlijn-render');if(!el)return;
+  el.innerHTML=zaakTijdlijn.map(s=>'<div class="tl-stap"><div class="tl-circle '+s.status+'"><i class="ti '+(s.status==='done'?'ti-check':s.status==='huidig'?'ti-calendar':'ti-clock')+'"></i></div><div class="tl-body"><div class="tl-title">'+s.label+'</div><div class="tl-desc">'+s.detail+'</div><span class="tl-duur"><i class="ti ti-calendar"></i> '+s.datum+'</span></div></div>').join('');
+}
+
+// Verzoeken
+const verzoekTypes=[
+  {id:'uitstel',label:'Uitstel van zitting aanvragen',uitleg:'Kun je niet op de geplande datum? Vraag uitstel aan, minimaal 48 uur van tevoren.'},
+  {id:'getuige',label:'Getuige opgeven',uitleg:'Wil je een getuige meenemen? Geef dit minimaal 1 week van tevoren op.'},
+  {id:'stukken',label:'Aanvullende stukken indienen',uitleg:'Je kunt tot 10 dagen voor de zitting aanvullende documenten indienen.'},
+  {id:'mediation',label:'Mediation verzoeken',uitleg:'De rechtbank kan mediation aanbieden als alternatief.'},
+  {id:'wraking',label:'Rechter wraken',uitleg:'Twijfel je aan de onpartijdigheid? Je kunt een wrakingsverzoek indienen.'},
+];
+function renderVerzoeken(){
+  const el=document.getElementById('dtab-verzoeken');if(!el)return;
+  el.innerHTML=verzoekTypes.map(v=>'<div class="verzoek-item" onclick="this.querySelector(\'.slachtoffer-detail\').classList.toggle(\'open\')"><div style="font-size:14px;font-weight:800;color:#1a1a18;">'+v.label+'</div><div style="font-size:12px;color:var(--gray);margin-top:2px;">'+v.uitleg+'</div><div class="slachtoffer-detail"><textarea style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:8px;font-family:Nunito,sans-serif;font-size:13px;margin-top:8px;" rows="3" placeholder="Typ je toelichting..."></textarea><button class="btn-primary" style="margin-top:8px;font-size:12px;padding:6px 14px;" onclick="event.stopPropagation();alert(\'Verzoek ingediend (simulatie)\')"><i class="ti ti-send"></i> Indienen (simulatie)</button></div></div>').join('');
+}
 
 // ── TIJDLIJN ──
 const tijdlijnData={
@@ -1704,13 +1861,23 @@ const advData={Huurrecht:{ic:'ti-home',inst:'Selecteer "Huurrecht" onder Rechtsg
 function renderAdvocaten(){
   document.getElementById('adv-keuze').innerHTML=Object.entries(advData).map(([k,v])=>'<div class="sc" onclick="toonAdvDetail(\''+k+'\')"><div class="sc-ico"><i class="ti '+v.ic+'"></i></div><div class="sc-ttl">'+k+'</div><div class="sc-sub">Klik voor zoekopties</div></div>').join('');
 }
-function toonAdvDetail(k){
+async function toonAdvDetail(k){
   const v=advData[k];
   const el=document.getElementById('adv-keuze');
-  const detail=document.getElementById('adv-detail')||document.createElement('div');
-  detail.id='adv-detail';
-  detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+k+'</div><div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;"><a href="https://zoekeenadvocaat.advocatenorde.nl/zoeken" target="_blank" class="btn-primary" style="text-decoration:none;"><i class="ti ti-search"></i> Zoek advocaat op NOvA</a><div style="font-size:12px;color:var(--gray);margin-top:-6px;"><i class="ti ti-info-circle"></i> '+v.inst+'</div><a href="'+v.jl+'" target="_blank" class="btn-secondary" style="text-decoration:none;"><i class="ti ti-external-link"></i> Juridisch Loket — '+k+'</a><a href="https://www.rvr.org" target="_blank" class="btn-hulp" style="text-decoration:none;"><i class="ti ti-heart-handshake"></i> Gratis advocaat via Raad voor Rechtsbijstand</a></div></div>';
-  if(!document.getElementById('adv-detail'))el.parentElement.insertBefore(detail,el.nextSibling);
+  let detail=document.getElementById('adv-detail');
+  if(!detail){detail=document.createElement('div');detail.id='adv-detail';el.parentElement.insertBefore(detail,el.nextSibling);}
+  detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+k+'</div><div class="laad-indicator" style="padding:1rem;"><div class="laad-spinner"></div><div>Advocaten zoeken...</div></div></div>';
+  try{
+    const resp=await fetch('/api/advocaten?rechtsgebied='+k.toLowerCase().replace('recht',''));
+    const data=await resp.json();
+    if(data.fallback||!data.advocaten.length){
+      detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+k+'</div><div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;"><a href="https://zoekeenadvocaat.advocatenorde.nl/zoeken" target="_blank" class="btn-primary" style="text-decoration:none;"><i class="ti ti-search"></i> Zoek advocaat op NOvA</a><div style="font-size:12px;color:var(--gray);"><i class="ti ti-info-circle"></i> '+v.inst+'</div><a href="'+v.jl+'" target="_blank" class="btn-secondary" style="text-decoration:none;"><i class="ti ti-external-link"></i> Juridisch Loket — '+k+'</a><a href="https://www.rvr.org" target="_blank" class="btn-hulp" style="text-decoration:none;"><i class="ti ti-heart-handshake"></i> Gratis advocaat (Raad voor Rechtsbijstand)</a></div></div>';
+    }else{
+      detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+data.rechtsgebied+' — '+data.totaal+' advocaten gevonden</div>'+data.advocaten.slice(0,5).map(a=>'<div class="advocaat-card"><div class="adv-naam">'+a.naam+'</div><div class="adv-kantoor">'+a.kantoor+(a.stad?' · '+a.stad:'')+'</div>'+(a.toevoeging?'<span class="toev-badge"><i class="ti ti-circle-check"></i> Werkt op toevoeging</span>':'')+'<div class="adv-acties">'+(a.telefoon?'<a href="tel:'+a.telefoon+'" class="btn-secondary" style="font-size:12px;padding:5px 10px;text-decoration:none;"><i class="ti ti-phone"></i> Bellen</a>':'')+(a.url?'<a href="'+a.url+'" target="_blank" class="btn-primary" style="font-size:12px;padding:5px 10px;text-decoration:none;"><i class="ti ti-external-link"></i> Profiel</a>':'')+'</div></div>').join('')+'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;"><a href="https://zoekeenadvocaat.advocatenorde.nl/zoeken" target="_blank" class="btn-secondary" style="font-size:12px;padding:6px 12px;text-decoration:none;">Meer op NOvA</a><a href="https://www.rvr.org" target="_blank" class="btn-hulp" style="font-size:12px;padding:6px 12px;text-decoration:none;">Gratis advocaat (RvR)</a></div></div>';
+    }
+  }catch(e){
+    detail.innerHTML='<div class="card" style="border-color:var(--purple);margin-top:1rem;"><div class="card-title" style="color:var(--purple);"><i class="ti '+v.ic+'"></i> '+k+'</div><div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;"><a href="https://zoekeenadvocaat.advocatenorde.nl/zoeken" target="_blank" class="btn-primary" style="text-decoration:none;"><i class="ti ti-search"></i> Zoek advocaat op NOvA</a><div style="font-size:12px;color:var(--gray);"><i class="ti ti-info-circle"></i> '+v.inst+'</div><a href="'+v.jl+'" target="_blank" class="btn-secondary" style="text-decoration:none;"><i class="ti ti-external-link"></i> Juridisch Loket</a></div></div>';
+  }
 }
 
 // ── ZITTING SIMULATIE (feature 5) ──

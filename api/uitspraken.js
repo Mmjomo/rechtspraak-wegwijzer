@@ -3,12 +3,14 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { keyword = '', subject = '', creator = '', from = 0, max = 10 } = req.query;
+  const { keyword = '', subject = '', creator = '', dateFrom = '', dateTo = '', from = 0, max = 10 } = req.query;
 
   const params = new URLSearchParams();
   if (keyword) params.append('keyword', keyword);
   if (subject) params.append('subject', subject);
   if (creator) params.append('creator', creator);
+  if (dateFrom) params.append('date', dateFrom);
+  if (dateTo) params.append('dateTo', dateTo);
   params.append('from', from);
   params.append('max', max);
   params.append('sort', 'DESC');
